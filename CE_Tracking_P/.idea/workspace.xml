@@ -19,7 +19,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -33,6 +33,7 @@
     </option>
   </component>
   <component name="ProjectId" id="2HsdvrIA5EL7Z8U6n704iRn83FC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -42,7 +43,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Alvaro Duarte/Downloads/CE_Tracking_P",
+    "last_opened_file_path": "C:/Users/Alvaro Duarte/Downloads/CE-Tracking_P",
     "nodejs_package_manager_path": "npm",
     "spring.configuration.checksum": "a69899d8d51cc1807e701a879c510225"
   }
@@ -57,6 +58,7 @@
       <updated>1669077975390</updated>
       <workItem from="1669077989153" duration="982000" />
       <workItem from="1669079151997" duration="295000" />
+      <workItem from="1669083351174" duration="325000" />
     </task>
     <servers />
   </component>
