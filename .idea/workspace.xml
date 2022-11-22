@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd8d7a6d-5000-4ff3-8c7e-a64d9093f77f" name="Changes" comment="" />
+    <list default="true" id="cd8d7a6d-5000-4ff3-8c7e-a64d9093f77f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/CE-Tracking_P/frontend/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CE-Tracking_P/frontend/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CE-Tracking_P/frontend/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CE-Tracking_P/src/main/java/com/example/application/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE-Tracking_P/LICENSE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE-Tracking_P/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE-Tracking_P/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/CE-Tracking_P/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE-Tracking_P/src/main/java/com/example/application/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE-Tracking_P/src/main/java/com/example/application/views/main/MainView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE-Tracking_P/src/main/resources/META-INF/resources/icons/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE-Tracking_P/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE-Tracking_P/src/main/resources/banner.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE_Tracking_P/.idea/CE_Tracking_P.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE_Tracking_P/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE_Tracking_P/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE_Tracking_P/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE_Tracking_P/CE_Tracking_P.iml" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,18 +29,19 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="2Hsog3j5ZNyZmjLplrEbdA893Md" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Alvaro Duarte/Documents/GitHub/CE-Tracking/CE_Tracking_P"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Alvaro Duarte/Documents/GitHub/CE-Tracking/CE_Tracking_P&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -32,6 +51,7 @@
       <option name="presentableId" value="Default" />
       <updated>1669083270752</updated>
       <workItem from="1669083278376" duration="67000" />
+      <workItem from="1669085448848" duration="595000" />
     </task>
     <servers />
   </component>
