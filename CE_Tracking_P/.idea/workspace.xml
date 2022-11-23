@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3e61b3f-0726-4f69-8344-7bcb6e9d6db4" name="Changes" comment="" />
+    <list default="true" id="44277a06-1300-4450-91bf-3c4e38da453c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/application/views/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/application/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/application/views/main/MainView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/resources/icons/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/banner.txt" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,13 +26,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Class" />
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -32,33 +47,43 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectId" id="2HsdvrIA5EL7Z8U6n704iRn83FC" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProjectId" id="2Hvbb8R2dlZhLLFFqkFPDQ87NnP" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "C:/Users/Alvaro Duarte/Downloads/CE-Tracking_P",
-    "nodejs_package_manager_path": "npm",
-    "spring.configuration.checksum": "a69899d8d51cc1807e701a879c510225"
+    "list.type.of.created.stylesheet": "CSS",
+    "nodejs_package_manager_path": "npm"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="CE_Tracking_P" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.application.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d3e61b3f-0726-4f69-8344-7bcb6e9d6db4" name="Changes" comment="" />
-      <created>1669077975390</created>
+      <changelist id="44277a06-1300-4450-91bf-3c4e38da453c" name="Changes" comment="" />
+      <created>1669168573957</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1669077975390</updated>
-      <workItem from="1669077989153" duration="982000" />
-      <workItem from="1669079151997" duration="295000" />
-      <workItem from="1669083351174" duration="325000" />
+      <updated>1669168573957</updated>
+      <workItem from="1669168577569" duration="843000" />
     </task>
     <servers />
   </component>

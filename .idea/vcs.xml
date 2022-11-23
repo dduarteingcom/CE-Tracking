@@ -2,5 +2,10 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+<<<<<<< Updated upstream
+    <mapping directory="$PROJECT_DIR$/CE-Tracking_P" vcs="Git" />
+=======
+    <mapping directory="$PROJECT_DIR$/CE_Tracking_P" vcs="Git" />
+>>>>>>> Stashed changes
   </component>
 </project>
