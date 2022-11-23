@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd8d7a6d-5000-4ff3-8c7e-a64d9093f77f" name="Changes" comment="">
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/CE-Tracking_P/frontend/index.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/CE-Tracking_P/frontend/script.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/CE-Tracking_P/frontend/style.css" afterDir="false" />
@@ -19,14 +20,33 @@
       <change beforePath="$PROJECT_DIR$/CE_Tracking_P/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CE_Tracking_P/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CE_Tracking_P/CE_Tracking_P.iml" beforeDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CE_Tracking_P/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/CE_Tracking_P/mvnw" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/CE_Tracking_P" />
+    <option name="RESET_MODE" value="MIXED" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2Hsog3j5ZNyZmjLplrEbdA893Md" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -34,12 +54,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< Updated upstream
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Alvaro Duarte/Documents/GitHub/CE-Tracking/CE_Tracking_P&quot;
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Alvaro Duarte/Documents/GitHub/CE-Tracking/CE_Tracking_P",
+    "nodejs_package_manager_path": "npm"
+>>>>>>> Stashed changes
   }
 }</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -51,11 +82,31 @@
       <option name="presentableId" value="Default" />
       <updated>1669083270752</updated>
       <workItem from="1669083278376" duration="67000" />
+<<<<<<< Updated upstream
       <workItem from="1669085448848" duration="595000" />
+=======
+      <workItem from="1669085448848" duration="7149000" />
+      <workItem from="1669166994550" duration="188000" />
+      <workItem from="1669167204513" duration="856000" />
+      <workItem from="1669168088222" duration="200000" />
+      <workItem from="1669168304053" duration="177000" />
+      <workItem from="1669168501219" duration="71000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
