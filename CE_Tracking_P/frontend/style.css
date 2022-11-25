@@ -1,18 +1,21 @@
-#reqPackages{
-    display: block;
-    text-align: start;
-    font-size: 30px;
+/*Label para el historial de los paquetes */
+.cTotalPackages{
+    top: 60%;
+    left: 50%;
+    position: absolute;
+    z-index: 0;
 }
 * {
     padding: 0;
     margin: 0;
     box-sizing:border-box;
 }
-
+/*Estilo para todo lo que esté dentro del body*/
 body {
     background: #fff;
     font-family: 'Open Sans', sans-serif;
 }
+/*Estilo para el botón de abrir pop up*/
 .btn-abrir-popup{
     padding: 0 20px;
     margin-bottom: 20px;
@@ -28,9 +31,11 @@ body {
     transition: .3s ease all;
     cursor: pointer;
 }
+/*Con esto se cambia la opacidad del botón cuando el cursor esté por encima*/
 .btn-abrir-popup:hover {
     background: rgba(94,125,227, .9);
 }
+/*El overlay hace que la pantalla se oscurezca cuando aparece la ventana emergida*/
 .overlay {
     background: rgba(0,0,0,.3);
     position: fixed;
@@ -44,9 +49,11 @@ body {
     visibility: hidden;
 
 }
+/*Se llama cuando se quiere que la ventana emergente sea visible*/
 .overlay.active {
     visibility: visible;
 }
+/*Es el cuadro blanco que aparece en la ventana emergente*/
 .popup {
     background: #F8F8F8;
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
@@ -57,6 +64,7 @@ body {
     width: 600px;
 
 }
+/*Botón para cerrar la ventana emergente*/
 .popup .btn-cerrar-popup {
     font-size: 16px;
     line-height: 16px;
@@ -65,14 +73,17 @@ body {
     transition: .3s ease all;
     color: #BBBBBB;
 }
+/*Esto sirve cuando se pone por encima el cursor de la equiz, este se vuelve más oscuro*/
 .popup .btn-cerrar-popup:hover {
     color: #000;
 }
-.popup h3 {
+/*Label de "Completa los datos"*/
+.popup h1 {
     font-size: 36px;
     font-weight: 600;
     margin-bottom: 10px;
 }
+/*Estilo para los entrys*/
 .popup form .contenedor-inputs input {
     width: 100%;
     margin-bottom: 20px;
@@ -82,8 +93,8 @@ body {
     text-align: center;
     border: 1px solid #BBBBBB;
 }
-
-.popup form .btn-submit {
+/*Estilo para el botón de ver rutas disponibles*/
+.popup form .btn-submit1 {
     padding: 0 20px;
     height: 40px;
     line-height: 40px;
@@ -96,7 +107,7 @@ body {
     cursor: pointer;
     transition: .3s ease all;
 }
-
-.popup form .btn-submit:hover {
+/*Sirve para se cambie la opacidad cuando el cursor se pase por encima*/
+.popup form .btn-submit1:hover {
     background: rgba(94,125,227, .9);
 }
