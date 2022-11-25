@@ -6,7 +6,6 @@ canvas.width = 750;
 canvas.height = 750;
 var ctx = canvas.getContext('2d');
 
-
 //Variable para los pedidos
 let reqPack = 0;
 let deliPack = 0;
@@ -28,6 +27,7 @@ function loadMap(){
 
     ctx.drawImage(mapImage, 0, 0);
 }
+
 /*
     Formulario de entrega y botones
     y los Pop Ups
@@ -54,6 +54,10 @@ btnCerrarPopup.addEventListener('click', function (e) {
     e.preventDefault();
     overlay.classList.remove('active');
     popup.classList.remove('active');
+});
+//Función de prueba cuando se le da al boton de ver Rutas disponibles.
+btnAvailableR.addEventListener('click',function(){
+    alert("Se cerró");
 });
 
 //Función de prueba cuando se le da al boton de ver Rutas disponibles.
