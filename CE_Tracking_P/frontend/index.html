@@ -3,13 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="with=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="frontend/style.css">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CE Tracking</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/4f8846e444.js" crossorigin="anonymous"></script>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+            background: purple;
+        }
 
+        body {
+            top:10%;
+            left:10%;
+            position: absolute;
+            z-index: 0;
+        }
+
+        .botonPrueba{
+            top: 20%;
+            left: 55%;
+            position: absolute;
+            z-index: 0;
+        }
+        .cReqPakages{
+            top: 60%;
+            left: 50%;
+            position: absolute;
+            z-index: 0;
+        }
+    </style>
 </head>
 <body>
-<canvas id="newCanvas" width="560" height="400" style="border: solid rebeccapurple"></canvas>
-<script src="script.js"></script>
+<div class="botonPrueba">
+    <button onclick="prueba()">Aquí</button>
+</div>
+<canvas></canvas>
+<div class="cReqPakages">
+    <label id="reqPackages">0</label><br>
+</div>
+
+<button id="btn-abrir-popup" class="btn-abrir-popup">Abrir Ventana Emergente</button>
+
+<div class="overlay" id="overlay">
+    <div class="popup" id="popup">
+        <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+        <h3>Completa los datos</h3>
+        <form action="">
+            <div class="contenedor-inputs">
+                <input type="text" placeholder="Punto de inicio">
+                <input type="text" placeholder="Punto de entrega">
+            </div>
+            <input type="submit" class="btn-submit" value="Ver rutas disponibles">
+        </form>
+    </div>
+</div>
+<script src='index.js'></script>
 </body>
 </html>
