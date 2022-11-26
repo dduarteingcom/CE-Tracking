@@ -35,8 +35,8 @@ body {
 .btn-abrir-popup:hover {
     background: rgba(94,125,227, .9);
 }
-/*El overlay hace que la pantalla se oscurezca cuando aparece la ventana emergida*/
-.overlay {
+/*El overlay1 hace que la pantalla se oscurezca cuando aparece la ventana emergida*/
+.overlay1 {
     background: rgba(0,0,0,.3);
     position: fixed;
     top: 0;
@@ -50,7 +50,7 @@ body {
 
 }
 /*Se llama cuando se quiere que la ventana emergente sea visible*/
-.overlay.active {
+.overlay1.active {
     visibility: visible;
 }
 /*Es el cuadro blanco que aparece en la ventana emergente*/
@@ -94,7 +94,7 @@ body {
     border: 1px solid #BBBBBB;
 }
 /*Estilo para el botón de ver rutas disponibles*/
-.popup form .btn-submit1 {
+.popup form .btnAvailabeR {
     padding: 0 20px;
     height: 40px;
     line-height: 40px;
@@ -108,7 +108,70 @@ body {
     transition: .3s ease all;
 }
 /*Sirve para se cambie la opacidad cuando el cursor se pase por encima*/
-.popup form .btn-submit1:hover {
+.popup form .btnAvailabeR:hover {
+    background: rgba(94,125,227, .9);
+}
+.overlay2{
+    background: rgba(0,0,0,.3);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+   visibility: hidden;
+}
+.overlay2.active {
+    visibility: visible;
+}
+.popup2{
+    background: #F8F8F8;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 20px;
+    text-align: center;
+    width: 600px;
+
+}
+.popup2 .btn-cerrar-popup2 {
+    font-size: 16px;
+    line-height: 16px;
+    display: block;
+    text-align: right;
+    transition: .3s ease all;
+    color: #BBBBBB;
+}
+.popup2 .btn-cerrar-popup2:hover {
+    color: #000;
+}
+.popup2 h2 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.popup2 select{
+    margin-bottom: 10px;
+}
+/*Estilo para el botón de ver rutas disponibles*/
+.popup2 .btnSubmit {
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    color: #fff;
+    background: #5E7DE3;
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s ease all;
+
+}
+/*Sirve para se cambie la opacidad cuando el cursor se pase por encima*/
+.popup2 .btnSubmit:hover {
     background: rgba(94,125,227, .9);
 }
 

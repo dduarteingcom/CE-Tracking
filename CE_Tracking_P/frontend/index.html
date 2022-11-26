@@ -33,8 +33,8 @@
 </div>
 <!Botón para solicitar un nuevo pedido>
 <button id="btn-abrir-popup" class="btn-abrir-popup">Solicita tu pedido</button>
-<!El overlay es lo que provoca que la pantalla se oscurezca cuando aparece el pop up>
-<div class="overlay" id="overlay">
+<!El overlay1 es lo que provoca que la pantalla se oscurezca cuando aparece el pop up>
+<div class="overlay1" id="overlay1">
     <!Ventana emergente>
     <div class="popup" id="popup">
         <!Botón que se encuentra en la ventana emergente para cerrar la misma>
@@ -46,16 +46,33 @@
             <!Clase que contiene a los inputs>
             <div class="contenedor-inputs">
                 <!Input para ingresar el punto de inicio del paquete>
-                <input type="text" placeholder="Punto de inicio">
+                <input type="text" id="iInitailPoint" placeholder="Punto de inicio">
                 <!Input para ingresar el punto de entrega del paquete>
-                <input type="text" placeholder="Punto de entrega">
+                <input type="text" id="iFinalPoint" placeholder="Punto de entrega">
             </div>
             <!Botón para ver las rutas disponibles>
-            <input type="submit" id="btnAvailabeR" class="btn-submit1" value="Ver rutas disponibles">
+            <a href="#" id="btnAvailabeR" class="btnAvailabeR" ><i class="fas fa-times"></i></a>
         </form>
     </div>
 </div>
+<div class="overlay2" id="overlay2">
+    <div class="popup2" id="popup2">
+        <a href="#" id="btn-cerrar-popup2" class="btn-cerrar-popup2"><i class="fas fa-times"></i></a>
+        <h2>Rutas</h2>
+        <form>
+            Seleccione la ruta
+            <select>
+                <script type="text/javascript" src="index.js">
+                </script>
+            </select>
+        </form>
+        <button id="btnSubmit" class="btnSubmit">Finalizar pedido</button>
+    </div>
+</div>
+
 <!Path para el archivo.js>
-<script src='index.js'></script>
+<script src="index.js">
+
+</script>
 </body>
 </html>
