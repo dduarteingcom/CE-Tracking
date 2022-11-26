@@ -2,8 +2,8 @@
 let canvas = document.querySelector("canvas")
 ;
 //Configuración de los parámetros del canvas.
-canvas.width = 750;
-canvas.height = 750;
+canvas.width = 450;
+canvas.height = 450;
 var ctx = canvas.getContext('2d');
 
 //Variable para los pedidos
@@ -17,17 +17,88 @@ let selPack;
     Canvas para el mapa
     :D
 */
-// Parámetros de las líneas
-var colour = '';
-var startPoint = (0, 0);
-var endPoint = (0, 0);
 
-// Cargando las imagenes del mapa
-function loadMap(){
-    var mapImage = document.getElementById('mapImage');
-    //var pinIcon = document.getElementById('mapPin');
+var mouse = {
 
-    ctx.drawImage(mapImage, 0, 0);
+    x: undefined,
+    y: undefined,
+    click: false
+}
+
+function Map(){
+
+    var mapImage = new Image();
+    mapImage.src = "./images/map-template.png";
+
+    this.draw = function(){
+
+        ctx.drawImage(mapImage, 0, 0);
+    }
+
+    this.draw();
+}
+
+function Marker(x, y){
+    
+    this.x = x;
+    this.y = y;
+    this.initialy = y;
+
+    this.pinImage = new Image();
+    this.pinImage.src = "./images/marker.png";
+
+    this.draw = function(){
+
+        ctx.drawImage(this.pinImage, this.x, this.y);
+    }
+
+    this.update = function() {
+
+        if (mouse.x > this.x && mouse.x < this.x + 75 && mouse.y > this.initialy && mouse.y < this.initialy + 75){
+
+            ctx.fillStyle = 'rgba(75, 100, 170, .6)'
+            ctx.fillRect(this.x, this.initialy, 75, 75);
+
+            if(this.y > this.initialy - 10){
+
+                this.y -= 2;
+            }
+
+            if(mouse.click){
+                console.log('this pin has been clicked!');
+                mouse.click = false;
+            }
+        }
+        else{
+
+            this.y = this.initialy;
+        }
+
+        this.draw();
+    }
+}
+
+var pinArray = [];
+
+for(var i = 0; i < 4; i++){
+
+    for(var j = 0; j < 4; j++){
+
+        pinArray.push(new Marker(((200 * j) + 75)/2, ((200 * i) + 75)/2));
+    }
+}
+
+function mapRendering(){
+
+    requestAnimationFrame(mapRendering);
+    
+    ctx.clearRect(0, 0, 900, 900);
+    var map = new Map();
+
+    for(var i = 0; i < pinArray.length; i++){
+
+        pinArray[i].update();
+    }
 }
 
 /*
@@ -203,4 +274,7 @@ function showStat(x){
 btnPaquete.addEventListener('click', function (){
     showStat(selPack);
 });
+
+
+mapRendering();
 

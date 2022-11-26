@@ -13,9 +13,9 @@
     <script src="https://kit.fontawesome.com/4f8846e444.js" crossorigin="anonymous"></script>
 
     <style>
-        canvas {
-            border: 1px solid black;
-            background: purple;
+         canvas {
+            
+            background: white;
         }
 
         body {
@@ -26,11 +26,16 @@
         }
     </style>
 </head>
-<body>
+
+<img src="./images/logo.png" alt="CE Tracking Logo">
+
 <canvas>
 </canvas>
 
 <img class="mapImage" src="https://github.com/dduarteingcom/CE-Tracking/blob/main/CE_Tracking_P/frontend/img/map-template.png" alt="El Mapa con sus elementos" height="750" width="750">
+
+<body>
+
 
 <!--Label para el historial de los packages-->
 <div class="cTotalPackages">
@@ -38,9 +43,12 @@
 </div>
 <!--Botón para solicitar un nuevo pedido-->
 <button id="btn-abrir-popup" class="btn-abrir-popup">Solicita tu pedido</button>
-<!El overlay1 es lo que provoca que la pantalla se oscurezca cuando aparece el pop up>
+
+
+<!--El overlay1 es lo que provoca que la pantalla se oscurezca cuando aparece el pop up-->
+
 <div class="overlay1" id="overlay1">
-    <!Ventana emergente>
+    <!--Ventana emergente-->
 
 
 
@@ -54,14 +62,13 @@
             <!--Clase que contiene a los inputs-->
             <div class="contenedor-inputs">
 
-                <!Input para ingresar el punto de inicio del paquete>
+                <!--Input para ingresar el punto de inicio del paquete-->
                 <input type="text" id="iInitailPoint" placeholder="Punto de inicio">
-                <!Input para ingresar el punto de entrega del paquete>
+                <!--Input para ingresar el punto de entrega del paquete-->
                 <input type="text" id="iFinalPoint" placeholder="Punto de entrega">
             </div>
             <!Botón para ver las rutas disponibles>
             <button id="btnAvailabeR" class="btnAvailabeR">Ver Rutas Disponibles</button>
-
         </form>
     </div>
 </div>
@@ -91,7 +98,7 @@
     </div>
 </div>
 
-<!Path para el archivo.js>
+<!--Path para el archivo.js-->
 <script src="index.js">
 </script>
 </body>
