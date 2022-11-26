@@ -32,7 +32,10 @@
 <canvas>
 </canvas>
 
+<img class="mapImage" src="https://github.com/dduarteingcom/CE-Tracking/blob/main/CE_Tracking_P/frontend/img/map-template.png" alt="El Mapa con sus elementos" height="750" width="750">
+
 <body>
+
 
 <!--Label para el historial de los packages-->
 <div class="cTotalPackages">
@@ -41,13 +44,13 @@
 <!--Botón para solicitar un nuevo pedido-->
 <button id="btn-abrir-popup" class="btn-abrir-popup">Solicita tu pedido</button>
 
+
 <!--El overlay1 es lo que provoca que la pantalla se oscurezca cuando aparece el pop up-->
+
 <div class="overlay1" id="overlay1">
     <!--Ventana emergente-->
 
-<!--El overlay es lo que provoca que la pantalla se oscurezca cuando aparece el pop up-->
-<div class="overlay" id="overlay">
-    <!--Ventana emergente-->
+
 
     <div class="popup" id="popup">
         <!--Botón que se encuentra en la ventana emergente para cerrar la misma-->
@@ -65,43 +68,38 @@
                 <input type="text" id="iFinalPoint" placeholder="Punto de entrega">
             </div>
             <!--Botón para ver las rutas disponibles-->
-            <a href="#" id="btnAvailabeR" class="btnAvailabeR" ><i class="fas fa-times"></i></a>
+            <button id="btnAvailabeR" class="btnAvailabeR">Ver Rutas Disponibles</button>
         </form>
     </div>
 </div>
+
 <div class="overlay2" id="overlay2">
     <div class="popup2" id="popup2">
         <a href="#" id="btn-cerrar-popup2" class="btn-cerrar-popup2"><i class="fas fa-times"></i></a>
         <h2>Rutas</h2>
-        <form>
             Seleccione la ruta
-            <select>
-                <script type="text/javascript" src="index.js">
-                </script>
+            <select id="opciones" onchange="leerSelectedR()">
             </select>
-        </form>
         <button id="btnSubmit" class="btnSubmit">Finalizar pedido</button>
+    </div>
+
+</div>
+<button id="btn-abrir-popup3" class="btn-abrir-popup3">Estado de mi paquete</button>
+<div class="overlay3" id="overlay3">
+    <div class="popup3" id="popup3">
+        <a href="#" id="btn-cerrar-popup3" class="btn-cerrar-popup3"><i class="fas fa-times"></i></a>
+        <form>
+            Seleccioná el paquete que querás checar
+            <select id="selectPackage" onchange="leerSelectedP()">
+            </select>
+            <a href="#" id="btnPaquete" class="btnPaquete"><i class="fa-solid fa-box-archive"></i></a>
+        </form>
+        <label id="statusPackage"></label><br>
     </div>
 </div>
 
 <!--Path para el archivo.js-->
 <script src="index.js">
-
 </script>
-
-                <!--Input para ingresar el punto de inicio del paquete-->
-                <input type="text" placeholder="Punto de inicio">
-                <!--Input para ingresar el punto de entrega del paquete-->
-                <input type="text" placeholder="Punto de entrega">
-            </div>
-            <!--Botón para ver las rutas disponibles-->
-            <input type="submit" id="btnAvailabeR" class="btn-submit1" value="Ver rutas disponibles">
-        </form>
-    </div>
-</div>
-<!--Path para el archivo.js-->
-<script src='map.js'></script>
-<script src='index.js'></script>
-
 </body>
 </html>
