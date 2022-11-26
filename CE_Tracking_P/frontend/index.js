@@ -3,19 +3,40 @@ let canvas = document.querySelector("canvas")
 ;
 //Configuración de los parámetros del canvas.
 canvas.width = 750;
-canvas.height = 450;
-
+canvas.height = 750;
 var ctx = canvas.getContext('2d');
-//Variable para la cantidad de paquetes pedidos.
+
+//Variable para los pedidos
 let reqPack = 0;
-//Variable para la cantidad de paquetes entregados.
 let deliPack = 0;
-//Variable para la cantidad de paquetes de pendientes.
 let pendPack = 0;
+
+/*
+    Canvas para el mapa
+    :D
+*/
+// Parámetros de las líneas
+var colour = '';
+var startPoint = (0, 0);
+var endPoint = (0, 0);
+
+// Cargando las imagenes del mapa
+function loadMap(){
+    var mapImage = document.getElementById('mapImage');
+    //var pinIcon = document.getElementById('mapPin');
+
+    ctx.drawImage(mapImage, 0, 0);
+}
+
+/*
+    Formulario de entrega y botones
+    y los Pop Ups
+*/
 //Se le asigna el texto que va a llevar el label.
 let routes;
 document.getElementById("totalPackages").innerHTML = "Numero de paquetes solicitados: " + reqPack + "<br>" +
     "Numero de paquetes entregados: " + deliPack + "<br>" + "Número de paquetes pendientes: " + pendPack;
+
 //Se asocian las las variables con los elementos pertnecientes al HTML.
 var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
     overlay1 = document.getElementById('overlay1'),
@@ -23,14 +44,20 @@ var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
     popup = document.getElementById('popup'),
     popup2 = document.getElementById('popup2'),
     btnCerrarPopup = document.getElementById('btn-cerrar-popup'),
+
     btnCerrarPopup2 = document.getElementById('btn-cerrar-popup2'),
     btnAvailableR= document.getElementById("btnAvailabeR"),
     btnSubmit = document.getElementById("btnSubmit");
+
+    btnAvailableR= document.getElementById("btnAvailabeR");
+
+
 //Función que hace visible el Pop Up
 btnAbrirPopup.addEventListener('click', function () {
     overlay1.classList.add('active');
     popup.classList.add('active');
 });
+
 addRoutes= function (x) {
     for (var i in x) {
         let newOption = new Option(x[i],'Option Value');
@@ -46,6 +73,9 @@ deleteRoutes=function(selectBox){
         x--;
     }
 }
+
+
+
 //Función que esconde el Pop Up
 btnCerrarPopup.addEventListener('click', function (e) {
     e.preventDefault();
@@ -79,7 +109,18 @@ btnSubmit.addEventListener("click", function(){
     deleteRoutes(routes);
 });
 
+//Función de prueba cuando se le da al boton de ver Rutas disponibles.
+btnAvailableR.addEventListener('click',function(){
+    alert("Se cerró");
+});
+
+
+setTimeout(() => {
 
 
 
+
+
+
+})
 
