@@ -1,19 +1,20 @@
-// //Variable para los pedidos
-// let reqPack = 0;
-// let deliPack = 0;
-// let pendPack = 0;
 
-// /*
-//     Formulario de entrega y botones
-//     y los Pop Ups
-// */
-// //Se le asigna el texto que va a llevar el label.
-// let routes;
-// document.getElementById("totalPackages").innerHTML = "Numero de paquetes solicitados: " + reqPack + "<br>" +
-//     "Numero de paquetes entregados: " + deliPack + "<br>" + "Número de paquetes pendientes: " + pendPack;
+//Variable para los pedidos
+let reqPack = 0;
+let deliPack = 0;
+let pendPack = 0;
 
-// //Se asocian las las variables con los elementos pertnecientes al HTML.
-// var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
+/*
+     Formulario de entrega y botones
+     y los Pop Ups
+*/
+//Se le asigna el texto que va a llevar el label.
+let routes;
+document.getElementById("totalPackages").innerHTML = "Numero de paquetes solicitados: " + reqPack + "<br>" +
+     "Numero de paquetes entregados: " + deliPack + "<br>" + "Número de paquetes pendientes: " + pendPack;
+
+//Se asocian las las variables con los elementos pertnecientes al HTML.
+var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
 //     overlay1 = document.getElementById('overlay1'),
 //     overlay2 = document.getElementById('overlay2'),
 //     popup = document.getElementById('popup'),
