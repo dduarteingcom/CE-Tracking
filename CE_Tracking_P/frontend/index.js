@@ -180,30 +180,10 @@ btnSubmit.addEventListener("click", function(){
     deleteRoutes(routes);
 });
 
-window.addEventListener('mousemove', function(event){
-
-    var rect = canvas.getBoundingClientRect();
-
-    mouse.x = event.clientX - rect.left;
-    mouse.y = event.clientY - rect.top;
-
-    //console.log(mouse);
+//Función de prueba cuando se le da al boton de ver Rutas disponibles.
+btnAvailableR.addEventListener('click',function(){
+    alert("Se cerró");
 });
-
-window.addEventListener('mousedown', function(event){
-
-    if(event.button == 0){
-
-        mouse.click = true;
-        console.log('there\'s a click :3' + mouse.click);
-    }
-    
-})
-
-window.addEventListener('mouseup', function(event){
-
-    if(event.button == 0) mouse.click = false;
-})
 
 
 mapRendering();
