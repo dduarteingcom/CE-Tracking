@@ -5,6 +5,13 @@ var canvas = document.querySelector("canvas")
 canvas.width = 450;
 canvas.height = 450;
 var ctx = canvas.getContext('2d');
+var sendX;
+var sendY;
+
+// Variables para el mapa
+let selectedNode;
+let nodeList = [];
+//let 
 
 /*
     Canvas para el mapa
@@ -31,7 +38,7 @@ function Map(){
     this.draw();
 }
 
-function Marker(x, y, isCenter){
+function Marker(x, y, isCenter, id){
     
     // Position to calculate hitboxes and animations
     this.x = x;
@@ -39,6 +46,7 @@ function Marker(x, y, isCenter){
     this.initialY = y;
 
     // Node data for Distribution Centers
+    this.id = id;
     this.isCenter = isCenter;
     this.centerName = '';
     this.centerConnections = [];
@@ -47,11 +55,12 @@ function Marker(x, y, isCenter){
     this.pinImage = new Image();
 
     // Command that sets up the 
-    this.setCenter = function(name, centerConnections){
+    this.newCenter = function(){
 
         this.isCenter = true;
-        this.centerName = name;
-        this.centerConnections = centerConnections;
+        console.log(nodeList);
+        setUpCentros(this);
+        nodeList.push(this);
     }
     
     // Function that draws in the pin sprite
@@ -63,7 +72,7 @@ function Marker(x, y, isCenter){
         }
         else{
 
-            this.pinImage.src = "./images/add-marker.png"
+            this.pinImage.src = "./images/add-marker.png";
         }
 
         ctx.drawImage(this.pinImage, this.x, this.y);
@@ -74,8 +83,9 @@ function Marker(x, y, isCenter){
 
         //Checks hitbox for the animation to play
         if (mouse.x > this.x && mouse.x < this.x + 75 && mouse.y > this.initialY && mouse.y < this.initialY + 75){
-
-            ctx.fillStyle = 'rgba(75, 100, 170, .6)'
+            
+            //Animation stuff
+            ctx.fillStyle = 'rgba(75, 100, 170, .6)';
             ctx.fillRect(this.x, this.initialY, 75, 75);
 
             if(this.y > this.initialY - 10){
@@ -83,15 +93,21 @@ function Marker(x, y, isCenter){
                 this.y -= 2;
             }
 
+            //Shows the popup
+            showWeight(this);
+
             //checks if you clicked the box
-            if(mouse.click){
+            if(mouse.click && !isInMenu){
                 console.log('this pin has been clicked!');
                 mouse.click = false;
+                
+                if(!this.isCenter){
 
-                if(!isCenter){
+                    this.newCenter();
+                }
+                else{
 
-                    //placeholder
-                    this.setCenter('test', 'naur');
+                    editCentros(this);
                 }
             }
         }
@@ -105,12 +121,14 @@ function Marker(x, y, isCenter){
 }
 
 var pinArray = [];
+var idNum = 0
 
 for(var i = 0; i < 4; i++){
 
     for(var j = 0; j < 4; j++){
 
-        pinArray.push(new Marker(((200 * j) + 75)/2, ((200 * i) + 75)/2));
+        pinArray.push(new Marker(((200 * j) + 75)/2, ((200 * i) + 75)/2, false, idNum));
+        idNum++;
     }
 }
 
@@ -145,11 +163,11 @@ window.addEventListener('mousedown', function(event){
         console.log('there\'s a click :3' + mouse.click);
     }
     
-})
+});
 
 window.addEventListener('mouseup', function(event){
 
     if(event.button == 0) mouse.click = false;
-})
+});
 
 mapRendering();

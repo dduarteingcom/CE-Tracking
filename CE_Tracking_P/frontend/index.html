@@ -95,7 +95,43 @@
         <label id="statusPackage"></label><br>
     </div>
 </div>
+<div class="popup4" id="popup4">
+    <div>
+    <a href="#" id="btn-cerrar-popup4" class="btn-cerrar-popup4"><i class="fas fa-times"></i></a>
+    </div>
+    <label class="conCenters" id="conCenters">c</label>
+</div>
 
+<!--El overlay4 es lo que provoca que la pantalla se oscurezca cuando aparece el pop up-->
+<div class="overlaySetCentros" id="overlaySetCentros">
+    <!--Ventana emergente-->
+    <div class="popupCentros" id="popupCentros">
+        <!--Label para completar los datos-->
+        <h1>Completa los datos</h1>
+        <!--Con esto indicamos que la ventana emergente es un formulario-->
+        <form action="">
+            <!--Clase que contiene a los inputs-->
+            <div class="contenedor-inputs">
+                <!--Input para ingresar el punto de inicio del paquete-->
+                <input type="text" id="nombreCentro" placeholder="Nombre del Centro">
+            </div>
+            <!--Botón para ver las rutas disponibles-->
+            <button id="btnSetCentro" class="btnSetCentro">Terminar Configuración</button>
+        </form>
+    </div>
+</div>
+<!-- 
+<div class="formulario" id="formulario">
+    <div class="popup2" id="popup2">
+        <a href="#" id="btn-cerrar-popup2" class="btn-cerrar-popup2"><i class="fas fa-times"></i></a>
+        <h2>Rutas</h2>
+            Seleccione la ruta
+            <select id="opciones" onchange="leerSelectedR()">
+            </select>
+        <button id="btnSubmit" class="btnSubmit">Finalizar pedido</button>
+    </div> -->
+
+</div>
 <!--Path para el archivo.js-->
 <script src="index.js"></script>
 <script src='map.js'></script>
