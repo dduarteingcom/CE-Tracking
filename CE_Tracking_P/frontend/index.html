@@ -60,10 +60,13 @@
             <!--Clase que contiene a los inputs-->
             <div class="contenedor-inputs">
 
-                <!--Input para ingresar el punto de inicio del paquete-->
-                <input type="text" id="iInitailPoint" placeholder="Punto de inicio">
-                <!--Input para ingresar el punto de entrega del paquete-->
-                <input type="text" id="iFinalPoint" placeholder="Punto de entrega">
+
+                Punto de Incio
+                <select id="iInitalPoint" onchange="leerSelectedIn()">
+                </select>
+                Punto de Entrega
+                <select id="iFinalPoint" onchange="leerSelectedFin()">
+                </select>
             </div>
             <!--Botón para ver las rutas disponibles-->
             <button id="btnAvailabeR" class="btnAvailabeR">Ver Rutas Disponibles</button>

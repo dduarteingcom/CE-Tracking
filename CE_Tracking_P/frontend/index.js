@@ -37,11 +37,31 @@ btnAbrirPopup.addEventListener('click', function () {
     overlay1.classList.add('active');
     popup.classList.add('active');
 });
-
+addPackages= function () {
+    for (var i in allPack) {
+        let newOption = new Option(allPack[i].code,'i');
+        const select = document.getElementById('selectPackage');
+        select.add(newOption,toString());
+    }
+}
 addRoutes= function (x) {
     for (var i in x) {
         let newOption = new Option(x[i],'i');
         const select = document.getElementById('opciones');
+        select.add(newOption,toString());
+    }
+}
+addInPoint= function (x) {
+    for (var i in x) {
+        let newOption = new Option(x[i],'i');
+        const select = document.getElementById('iInitalPoint');
+        select.add(newOption,toString());
+    }
+}
+addFinPoint= function (x) {
+    for (var i in x) {
+        let newOption = new Option(x[i],'i');
+        const select = document.getElementById('iFinalPoint');
         select.add(newOption,toString());
     }
 }
@@ -61,6 +81,22 @@ deletePackages=function(){
         x--;
     }
 }
+deleteInPoint=function(selectBox){
+    var x =selectBox.length;
+    while (x> 0) {
+        const select = document.getElementById('iInitalPoint');
+        select.remove(0);
+        x--;
+    }
+}
+deleteFinPoint=function(selectBox){
+    var x =selectBox.length;
+    while (x> 0) {
+        const select = document.getElementById('iInitalPoint');
+        select.remove(0);
+        x--;
+    }
+}
 
 
 
@@ -74,7 +110,7 @@ btnCerrarPopup2.addEventListener('click', function (e) {
     e.preventDefault();
     overlay2.classList.remove('active');
     popup2.classList.remove('active');
-    document.getElementById("iInitailPoint").value ="";
+    document.getElementById("iInitalPoint").value ="";
     document.getElementById("iFinalPoint").value="";
     deleteRoutes(routes);
 });
@@ -94,8 +130,6 @@ btnCerrarPopup4.addEventListener('click', function (e) {
 btnAvailableR.addEventListener('click',function(){
     addRoutes(["A-B-C","D-E-F","G-H-I"]);
     routes=["A-B-C","D-E-F","G-H-I"];
-    var initialPoint = document.getElementById("iInitailPoint").value;
-    var finalPoint= document.getElementById("iFinalPoint").value;
     overlay1.classList.remove('active');
     popup.classList.remove('active');
     overlay2.classList.add('active');
@@ -105,7 +139,7 @@ btnAvailableR.addEventListener('click',function(){
 btnSubmit.addEventListener('click', function(){
     overlay2.classList.remove('active');
     popup2.classList.remove('active');
-    document.getElementById("iInitailPoint").value ="";
+    document.getElementById("iInitalPoint").value ="";
     document.getElementById("iFinalPoint").value="";
     deleteRoutes(routes);
 
@@ -157,19 +191,23 @@ allPack.push(paquetito1);
 allPack.push(paquetito2);
 allPack.push(paquetito3);
 allPack.push(paquetito4);
-addPackages= function () {
-    for (var i in allPack) {
-        let newOption = new Option(allPack[i].code,'i');
-        const select = document.getElementById('selectPackage');
-        select.add(newOption,toString());
-    }
-}
+
+
 function leerSelectedP(){
     let select = document.getElementById('selectPackage');
     let text = select.options[select.selectedIndex].text;
     selPack=text;
 }
+function leerSelectedIn(){
+    let select = document.getElementById('iInitalPoint');
+    let text = select.options[select.selectedIndex].text;
 
+}
+function leerSelectedFin(){
+    let select = document.getElementById('iFinalPoint');
+    let text = select.options[select.selectedIndex].text;
+
+}
 function showStat(x){
     var cont=0;
     while(cont!==allPack.length){
@@ -191,5 +229,19 @@ function showWeight(nombre){
     popup4.classList.add('active');
     document.getElementById("conCenters").innerHTML="El centro de distribución "+nombre
         + "Está conectado con los siguientes centros: ";
+}
+function bubblesort(x){
+    let verify=true;
+    while(verify) {
+        verify=false;
+        for (var i = 0; i < x.length - 1; i++) {
+            if (x[i] > x[i + 1]) {
+                verify=true;
+                var temp=x[i];
+                x[i]= x[i + 1];
+                x[i + 1]=temp;
+            }
+        }
+    }
 }
 
