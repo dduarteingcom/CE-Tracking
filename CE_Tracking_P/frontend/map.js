@@ -11,7 +11,6 @@ var sendY;
 // Variables para el mapa
 let selectedNode;
 let nodeList = [];
-//let 
 
 /*
     Canvas para el mapa
@@ -116,6 +115,70 @@ function Marker(x, y, isCenter, id){
             this.y = this.initialY;
         }
 
+        this.draw();
+    }
+}
+
+function Drone(x, y, path){
+
+    // Position of Images
+    this.img = new Image();
+    this.x = x;
+    this.y = y;
+
+    //Variables for path traversal and speed calculation
+    this.path = path;
+    this.dx;
+    this.dy;
+    this.endX;
+    this.endY;
+    this.hasFinished = false;
+
+    this.draw = function(){
+
+        this.img.src = './images/drone.png';
+        ctx.drawImage(this.img, this.x, this.y);
+        
+    }
+
+    this.calculatePath = function(){
+
+        this.endX = this.path[0].x
+        this.endY = this.path[0].initialY;
+
+        //var curWeight = weight;
+        
+        // this.dx = (this.x - endX)/curWeight;
+        // this.dy = (this.y - endY)/curWeight;
+
+        ctx.beginPath();
+        ctx.strokeStyle = ''
+        ctx.moveTo(this.x + 75, this.y + 75);
+        ctx.lineTo(this.endX + 75/2 , this.endY + 75/2);
+        ctx.stroke();
+
+        // console.log('this drone goes to ' + this.path[i] + ' with a speed of (' + this.dx + ', ' + this.dy + ')');
+    }
+
+    this.update = function(){
+
+        // if(!this.hasFinished){
+
+        //     if (this.x != this.path[0].x && this.y != this.path[0].y) {
+
+        //         this.x += this.dx;
+        //         this.y += this.dy;
+        //     }
+        //     else{
+
+        //         this.calculatePath(1);
+        //         this.path.shift();
+        //     }
+
+        //    this.draw();
+        // }
+
+        this.calculatePath();
         this.draw();
     }
 }
