@@ -5,7 +5,8 @@ var canvas = document.querySelector("canvas")
 canvas.width = 450;
 canvas.height = 450;
 var ctx = canvas.getContext('2d');
-
+var sendX;
+var sendY
 /*
     Canvas para el mapa
     :D
@@ -74,7 +75,6 @@ function Marker(x, y, isCenter){
 
         //Checks hitbox for the animation to play
         if (mouse.x > this.x && mouse.x < this.x + 75 && mouse.y > this.initialY && mouse.y < this.initialY + 75){
-
             ctx.fillStyle = 'rgba(75, 100, 170, .6)'
             ctx.fillRect(this.x, this.initialY, 75, 75);
 
@@ -87,7 +87,7 @@ function Marker(x, y, isCenter){
             if(mouse.click){
                 console.log('this pin has been clicked!');
                 mouse.click = false;
-
+                showWeight(this.centerName)
                 if(!isCenter){
 
                     //placeholder
@@ -153,3 +153,4 @@ window.addEventListener('mouseup', function(event){
 })
 
 mapRendering();
+

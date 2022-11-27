@@ -23,9 +23,11 @@ var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
     popup = document.getElementById('popup'),
     popup2 = document.getElementById('popup2'),
     popup3 = document.getElementById('popup3'),
+    popup4 = document.getElementById('popup4'),
     btnCerrarPopup = document.getElementById('btn-cerrar-popup'),
     btnCerrarPopup2 = document.getElementById('btn-cerrar-popup2'),
     btnCerrarPopup3 = document.getElementById('btn-cerrar-popup3'),
+    btnCerrarPopup4 = document.getElementById('btn-cerrar-popup4'),
     btnSubmit = document.getElementById('btnSubmit'),
     btnAvailableR= document.getElementById("btnAvailabeR"),
     btnPaquete=document.getElementById("btnPaquete");
@@ -81,6 +83,12 @@ btnCerrarPopup3.addEventListener('click', function (e) {
     overlay3.classList.remove('active');
     popup3.classList.remove('active');
     deletePackages();
+});
+btnCerrarPopup4.addEventListener('click', function (e) {
+    e.preventDefault();
+    popup4.classList.remove('active');
+    document.getElementById("conCenters").innerHTML="";
+
 });
 //Función de prueba cuando se le da al boton de ver Rutas disponibles.
 btnAvailableR.addEventListener('click',function(){
@@ -178,3 +186,10 @@ function showStat(x){
 btnPaquete.addEventListener('click', function (){
     showStat(selPack);
 });
+function showWeight(nombre){
+    console.log(nombre)
+    popup4.classList.add('active');
+    document.getElementById("conCenters").innerHTML="El centro de distribución "+nombre
+        + "Está conectado con los siguientes centros: ";
+}
+
