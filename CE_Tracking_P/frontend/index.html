@@ -116,7 +116,9 @@
             <!--Clase que contiene a los inputs-->
             <div class="contenedor-inputs">
                 <!--Input para ingresar el punto de inicio del paquete-->
-                <input type="text" id="nombreCentro" placeholder="Nombre del Centro">
+                Nombre del Centro
+                <select id="nombreCentro" onchange="leerCenterName()">
+                </select>
             </div>
             <!--Botón para ver las rutas disponibles-->
             <button id="btnSetCentro" class="btnSetCentro">Terminar Configuración</button>

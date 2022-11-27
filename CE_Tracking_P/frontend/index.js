@@ -35,7 +35,7 @@ var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
     btnCerrarPopup4 = document.getElementById('btn-cerrar-popup4'),
     btnSubmit = document.getElementById('btnSubmit'),
     btnAvailableR= document.getElementById("btnAvailabeR"),
-    btnSetCentro = document.getElementById("btnSetCentro");
+    btnSetCentro = document.getElementById("btnSetCentro"),
     btnPaquete=document.getElementById("btnPaquete");
 
 //Función que hace visible el Pop Up
@@ -78,6 +78,13 @@ addFinPoint= function (x) {
         select.add(newOption,toString());
     }
 }
+addCentersN= function (x) {
+    for (var i in x) {
+        let newOption = new Option(x[i],'i');
+        const select = document.getElementById('nombreCentro');
+        select.add(newOption,toString());
+    }
+}
 deleteRoutes=function(selectBox){
     var x =selectBox.length;
     while (x> 0) {
@@ -105,12 +112,19 @@ deleteInPoint=function(selectBox){
 deleteFinPoint=function(selectBox){
     var x =selectBox.length;
     while (x> 0) {
-        const select = document.getElementById('iInitalPoint');
+        const select = document.getElementById('iFinalPoint');
         select.remove(0);
         x--;
     }
 }
-
+deleteCentersN=function(selectBox){
+    var x =selectBox.length;
+    while (x> 0) {
+        const select = document.getElementById('nombreCentro');
+        select.remove(0);
+        x--;
+    }
+}
 
 
 //Función que esconde el Pop Up
@@ -223,6 +237,11 @@ function leerSelectedIn(){
 }
 function leerSelectedFin(){
     let select = document.getElementById('iFinalPoint');
+    let text = select.options[select.selectedIndex].text;
+
+}
+function leerCenterName(){
+    let select = document.getElementById('nombreCentro');
     let text = select.options[select.selectedIndex].text;
 
 }
