@@ -171,3 +171,4 @@ window.addEventListener('mouseup', function(event){
 });
 
 mapRendering();
+

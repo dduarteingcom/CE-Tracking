@@ -109,6 +109,7 @@ btnCerrarPopup4.addEventListener('click', function (e) {
 
 });
 
+
 //Función de prueba cuando se le da al boton de ver Rutas disponibles.
 btnAvailableR.addEventListener('click',function(){
     addRoutes(["A-B-C","D-E-F","G-H-I"]);
@@ -143,11 +144,6 @@ function leerSelectedR(){
     let text = select.options[select.selectedIndex].text;
     console.log(text); // English
 }
-
-
-setTimeout(() => {
-
-})
 
 class Package{
     constructor(code,stat) {
