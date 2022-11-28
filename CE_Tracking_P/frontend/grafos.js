@@ -86,7 +86,25 @@ class Generador{
         }
 
 
-        eliminarCentro(a){
+        eliminarCentroInicio(a, b){
+            while (a > b){
+                for(var x=0; x<this.grafoUtilizable.length;x++){
+                    for(var y=0;y<this.grafoUtilizable[x].length;y++){
+                        if(this.grafoUtilizable[x][a]>0){
+                            this.grafoUtilizable[x][a]=0;
+                        }
+                    }
+                }
+                for(var z=0; z<this.grafoUtilizable.length;z++){
+                    if(this.grafoUtilizable[a][z]>0){
+                        this.grafoUtilizable[a][z]=0;
+                    }
+                }
+                a = a - 1;
+            }
+        }
+
+        eliminarCentroUnico(a){
             for(var x=0; x<this.grafoUtilizable.length;x++){
                 for(var y=0;y<this.grafoUtilizable[x].length;y++){
                     if(this.grafoUtilizable[x][a]>0){
@@ -99,7 +117,6 @@ class Generador{
                     this.grafoUtilizable[a][z]=0;
                 }
             }
-
         }
 
         addCentro(nodo){
@@ -177,7 +194,7 @@ class Generador{
             this.printAllPathsUtil(s, d, this.isVisited, this.pathList);
         }
 
-    // A recursive function to print
+        // A recursive function to print
         // all paths from 'u' to 'd'.
         // isVisited[] keeps track of
         // vertices in current path.
@@ -216,11 +233,15 @@ class Generador{
             isVisited[u] = false;
         }
 
+
+
 }
 
 Test = new Generador();
 Test.newgraph();
 Test.getListaAdy();
+Test.eliminarCentroInicio(15, 7);
+Test.addCentro(10);
 
 
 
