@@ -1,5 +1,5 @@
 /*Label para el historial de los paquetes */
-.cTotalPackages{
+.totalPackages{
     top: 20%;
     left: 70%;
     position: absolute;
@@ -486,7 +486,7 @@ body {
     cursor: pointer;
     transition: .3s ease all;
 }
-.btn-abrir-popup4{
+.btn-abrir-popupUltimate{
     padding: 0 20px;
     margin-bottom: 20px;
     height: 40px;
@@ -504,8 +504,7 @@ body {
     left:72%;
     position:absolute;
     z-index: 0;
-
 }
-.btn-abrir-popup4:hover {
+.btn-abrir-popupUltimate:hover {
     background: rgba(94,125,227, .9);
 }
