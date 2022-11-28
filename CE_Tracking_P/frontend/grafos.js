@@ -86,6 +86,54 @@ class Generador{
         }
 
 
+        eliminarCentro(a){
+            for(var x=0; x<this.grafoUtilizable.length;x++){
+                for(var y=0;y<this.grafoUtilizable[x].length;y++){
+                    if(this.grafoUtilizable[x][a]>0){
+                        this.grafoUtilizable[x][a]=0;
+                    }
+                }
+            }
+            for(var z=0; z<this.grafoUtilizable.length;z++){
+                if(this.grafoUtilizable[a][z]>0){
+                    this.grafoUtilizable[a][z]=0;
+                }
+            }
+
+        }
+
+        addCentro(nodo){
+            for(var x=0; x<this.grafoUtilizable.length;x++){
+                for(var y=0;y<this.grafoUtilizable[x].length;y++){
+                    if(this.grafoUtilizable[x][nodo] === 0){
+                        this.grafoUtilizable[x][nodo]=9;
+                    }
+                }
+            }
+            for(var z=0; z<this.grafoUtilizable.length;z++){
+                if(this.grafoUtilizable[nodo][z] === 0){
+                    this.grafoUtilizable[nodo][z]=9;
+                }
+            }
+            this.grafoUtilizable[nodo][nodo]= 0;
+        }
+
+        subirCentro(nodo, costo){
+            for(var x=0; x<this.grafoUtilizable.length;x++){
+                for(var y=0;y<this.grafoUtilizable[x].length;y++){
+                    if(this.grafoUtilizable[x][nodo] > 0){
+                        this.grafoUtilizable[x][nodo] = costo;
+                    }
+                }
+            }
+            for(var z=0; z<this.grafoUtilizable.length;z++){
+                if(this.grafoUtilizable[nodo][z] > 0){
+                    this.grafoUtilizable[nodo][z]= costo;
+                }
+            }
+            this.grafoUtilizable[nodo][nodo]= 0;
+        }
+
         newgraph(){
             for(var x=0; x<this.grafoUtilizable.length;x++){
                 this.tempVert = [];
@@ -173,7 +221,7 @@ class Generador{
 Test = new Generador();
 Test.newgraph();
 Test.getListaAdy();
-Test.printAllPaths(0,3)
+
 
 
 
