@@ -1,7 +1,7 @@
 /*Label para el historial de los paquetes */
 .cTotalPackages{
-    top: 10%;
-    left: 85%;
+    top: 20%;
+    left: 70%;
     position: absolute;
     z-index: 0;
     width: 300px;
@@ -10,6 +10,18 @@
     padding: 0;
     margin: 0;
     box-sizing:border-box;
+}
+.logo{
+    top:0%;
+    left:25%;
+    position: absolute;
+    z-index: 1;
+}
+.mapa{
+    top:20%;
+    left:30%;
+    position: absolute;
+    z-index: 0;
 }
 /*Estilo para todo lo que esté dentro del body*/
 body {
@@ -30,8 +42,8 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: .3s ease all;
-    top: 20%;
-    left: 81%;
+    top: 30%;
+    left: 72%;
     position: absolute;
     width: 200px;
 
@@ -139,7 +151,7 @@ body {
     padding: 20px;
     text-align: center;
     width: 600px;
-
+    z-index:1;
 }
 .popup2 .btn-cerrar-popup2 {
     font-size: 16px;
@@ -193,8 +205,8 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: .3s ease all;
-    top: 20%;
-    left:102%;
+    top: 40%;
+    left:72%;
     position:absolute;
     width: 200px;
 }
@@ -258,9 +270,9 @@ body {
     font-family: 'Montserrat', sans-serif;
     padding: 20px;
     text-align: center;
-    width: 400px;
-    top: 0%;
-    left: 18%;
+    width: 350px;
+    top: 20%;
+    left: 3%;
     position: absolute;
     visibility: hidden;
 }
@@ -307,18 +319,7 @@ body {
     font-weight: 600;
     margin-bottom: 10px;
 }
-/*Estilo para los entrys*/
-.popupCentros form .contenedor-inputs input {
-    width: 50%;
-    left: 50px;
-    margin-bottom: 10px;
-    height: 40px;
-    font-size: 16px;
-    line-height: 52px;
-    text-align: left;
-    border: 1px solid #BBBBBB;
-}
-.popupCentros form .btnSetCentro {
+ .btnSetCentros {
     padding: 0 20px;
     height: 40px;
     line-height: 40px;
@@ -330,5 +331,181 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: .3s ease all;
+}
+.popupCentros .btn-cerrar-popupCentros {
+    font-size: 16px;
+    line-height: 16px;
+    display: block;
+    text-align: right;
+    transition: .3s ease all;
+    color: #BBBBBB;
+}
+/*Esto sirve cuando se pone por encima el cursor de la equiz, este se vuelve más oscuro*/
+.popupCentros .btn-cerrar-popupCentros:hover {
+    color: #000;
+}
+.overlaySetCentros2{
+    background: rgba(0,0,0,.3);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    visibility: hidden;
 
+}
+.overlaySetCentros2.active {
+    visibility: visible;
+}
+.popupCentros2 {
+    background: #F8F8F8;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 20px;
+    text-align: center;
+    width: 600px;
+}
+.popupCentros2 h1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.btnSetCentros2 {
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    color: #fff;
+    background: #5E7DE3;
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s ease all;
+    margin-bottom: 10px;
+}
+.popupCentros2 .btn-cerrar-popupCentros2 {
+    font-size: 16px;
+    line-height: 16px;
+    display: block;
+    text-align: right;
+    transition: .3s ease all;
+    color: #BBBBBB;
+}
+.popupCentros2 .btn-cerrar-popupCentros2:hover {
+    color: #000;
+}
+.popupCentros2 form input {
+    width: 50%;
+    margin-bottom: 20px;
+    height: 32px;
+    font-size: 18px;
+    line-height: 52px;
+    text-align: center;
+    border: 1px solid #BBBBBB;
+}
+.btnAddCpopupCentros {
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    color: #5E7DE3;
+    background: #E9E9E9;
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s ease all;
+    margin-bottom: 10px;
+}
+.overlayUltimate{
+    background: rgba(0,0,0,.3);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    visibility: hidden;
+
+}
+.overlayUltimate.active {
+    visibility: visible;
+}
+.popupUltimate{
+    background: #F8F8F8;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 20px;
+    text-align: center;
+    width: 600px;
+}
+.popupUltimate .btn-cerrar-popupUltimate {
+    font-size: 16px;
+    line-height: 16px;
+    display: block;
+    text-align: right;
+    transition: .3s ease all;
+    color: #BBBBBB;
+}
+.newName {
+    width: 60%;
+    margin-bottom: 20px;
+    height: 32px;
+    font-size: 18px;
+    line-height: 52px;
+    text-align: center;
+    border: 1px solid #BBBBBB;
+}
+.newWeight {
+    width: 60%;
+    margin-bottom: 20px;
+    height: 32px;
+    font-size: 18px;
+    line-height: 52px;
+    text-align: center;
+    border: 1px solid #BBBBBB;
+}
+.popupUltimate .btnUltimate {
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    color: #fff;
+    background: #5E7DE3;
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s ease all;
+}
+.btn-abrir-popup4{
+    padding: 0 20px;
+    margin-bottom: 20px;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    color: #fff;
+    background: #5E7DE3;
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s ease all;
+    width: 280px;
+    top: 50%;
+    left:72%;
+    position:absolute;
+    z-index: 0;
+
+}
+.btn-abrir-popup4:hover {
+    background: rgba(94,125,227, .9);
 }
