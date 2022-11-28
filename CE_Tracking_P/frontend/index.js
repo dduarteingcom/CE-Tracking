@@ -5,6 +5,7 @@
 let reqPack = 0;
 let deliPack = 0;
 let pendPack = 0;
+let givenG;
 /**
  * Variable donde se almacenan todos los paquetes que han sido solicitados
  * @type {*[]}
@@ -14,11 +15,11 @@ let selPack;
 /**
  * //Variable que almacena el nombre del valor al que le deseamos realizar cambios.
  */
-let modOdCenters;
+let vModOdCenters;
 /**
  * //Variable que almacena el nombre de uno de los centros con los que se quiere modificar el peso.
  */
-let modOdSelected;
+let vModOdSelected;
 /**
  * //Una variable para evitar unos errores.
  * @type {boolean}
@@ -46,7 +47,8 @@ document.getElementById("totalPackages").innerHTML = "Numero de paquetes solicit
  * Variable en donde se guardan todos los centros de distribución creados.
  * @type {*[]}
  */
-let availableCentes=[];
+let availableCenters = [];
+
 /**
  * Función que se encarga de actualizar el label donde se encuentra el historial de todos los paquetes.
  * @constructor
@@ -71,7 +73,7 @@ var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
      * Botón que abre la ventana para modificar los centros de distribución
      * @type {HTMLElement}
      */
-    btnAbrirPopup4 = document.getElementById('btn-abrir-popupUltimate'),
+    btnAbrirPopUpUltimate = document.getElementById('btn-abrir-popupUltimate'),
     /**
      * Overlay para la ventana emergente donde se solicita el punto de inicio y el punto final
      * para calcular las rutas.
@@ -221,6 +223,8 @@ var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
 btnAbrirPopup.addEventListener('click', function () {
     overlay1.classList.add('active');
     popup.classList.add('active');
+    addAvailableCenter("iInitalPoint");
+    addAvailableCenter("iFinalPoint");
     isInMenu = true;
 });
 /**
@@ -246,58 +250,32 @@ addRoutes = function (x) {
     }
 }
 /**
- * Función que añade todos los posibles centros para el punto de inicio y final del nuevo paquete.
- * @param punto Con este parámetro se sabe si se trata de un punto de inicio o un punto final.
+ * Función que añade todos los posibles centros a selects en específico.
+ * @param punto Select al que se quiere añadir información
  */
 addAvailableCenter = function (punto) {
-    if (punto === inicio) {
-        for (var i in availableCentes) {
-            let newOption = new Option(availableCentes[i], 'i');
-            const select = document.getElementById('iInitalPoint');
-            select.add(newOption, toString());
-        }
-    }
-    else {
-        for (var i in availableCentes) {
-            let newOption = new Option(availableCentes[i], 'i');
-            const select = document.getElementById('iFinalPointPoint');
-            select.add(newOption, toString());
-        }
+    for (var i in availableCenters) {
+        let newOption = new Option(availableCenters[i].nombre, 'i');
+        const select = document.getElementById(punto);
+        select.add(newOption, toString());
     }
 }
 /**
- *
- * @param x
+ * Añade los nombres default al select de la ventana para crear un nuevo centro.
  */
 addCentersN = function () {
-    var x=[]
+    var x = ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
+        "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
     for (var i in x) {
         let newOption = new Option(x[i], 'i');
         const select = document.getElementById('nombreCentro');
         select.add(newOption, toString());
     }
 }
-addConnectedC = function (x) {
-    for (var i in x) {
-        let newOption = new Option(x[i], 'i');
-        const select = document.getElementById('nombreCentro2');
-        select.add(newOption, toString());
-    }
-}
-addmodOdCenters = function (x) {
-    for (var i in x) {
-        let newOption = new Option(x[i], 'i');
-        const select = document.getElementById('modOdCenters');
-        select.add(newOption, toString());
-    }
-}
-addmodmodOdSelected = function (x) {
-    for (var i in x) {
-        let newOption = new Option(x[i], 'i');
-        const select = document.getElementById('modOdSelected');
-        select.add(newOption, toString());
-    }
-}
+/**
+ * Función que sirve para no se acumulen las mismas opciones en la ventana para seleccionar las rutas
+ * @param selectBox Rutas disponibles para la nueva entrega.
+ */
 deleteRoutes = function (selectBox) {
     var x = selectBox.length;
     while (x > 0) {
@@ -306,6 +284,10 @@ deleteRoutes = function (selectBox) {
         x--;
     }
 }
+/**
+ * Función que sirve para que no se acumulen todos los paquetes solicitados en la ventana para visualizar
+ * estado de los paquetes.
+ */
 deletePackages = function () {
     var x = allPack.length;
     while (x > 0) {
@@ -314,23 +296,24 @@ deletePackages = function () {
         x--;
     }
 }
-deleteInPoint = function (selectBox) {
-    var x = selectBox.length;
+/**
+ * Esta función sirve para que no se acumulen opciones en distintos selects.
+ * @param punto Este corresponde al select al que le quiero eliminar las opciones.
+ */
+deleteAvailableCenters = function (punto) {
+    var x = availableCenters.length;
     while (x > 0) {
-        const select = document.getElementById('iInitalPoint');
+        const select = document.getElementById(punto);
         select.remove(0);
         x--;
     }
 }
-deleteFinPoint = function (selectBox) {
-    var x = selectBox.length;
-    while (x > 0) {
-        const select = document.getElementById('iFinalPoint');
-        select.remove(0);
-        x--;
-    }
-}
-deleteCentersN = function (selectBox) {
+/**
+ * Función que permite que no se acumulen las opciones en el select para crear un nuevo centro.
+ */
+deleteCentersN = function () {
+    var selectBox = ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
+        "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
     var x = selectBox.length;
     while (x > 0) {
         const select = document.getElementById('nombreCentro');
@@ -338,23 +321,18 @@ deleteCentersN = function (selectBox) {
         x--;
     }
 }
-deleteConnectedCenters = function (selectBox) {
-    var x = selectBox.length;
-    while (x > 0) {
-        const select = document.getElementById('nombreCentro2');
-        select.remove(0);
-        x--;
-    }
-}
-
-
-//Función que esconde el Pop Up
+/**
+ * Función que se encarga de cerrar la ventana donde se seleccionan los puntos de inicio y final.
+ */
 btnCerrarPopup.addEventListener('click', function (e) {
     e.preventDefault();
     overlay1.classList.remove('active');
     popup.classList.remove('active');
     isInMenu = false;
 });
+/**
+ * Función que se encarga de cerrar la ventana donde aparecen todas las opciones para las posibles rutas.
+ */
 btnCerrarPopup2.addEventListener('click', function (e) {
     e.preventDefault();
     overlay2.classList.remove('active');
@@ -364,6 +342,9 @@ btnCerrarPopup2.addEventListener('click', function (e) {
     deleteRoutes(routes);
     isInMenu = false;
 });
+/**
+ * Función que se encarga de cerrar la ventana en donde se puede visualizar el estado de todos los paquetes.
+ */
 btnCerrarPopup3.addEventListener('click', function (e) {
     e.preventDefault();
     overlay3.classList.remove('active');
@@ -371,7 +352,10 @@ btnCerrarPopup3.addEventListener('click', function (e) {
     deletePackages();
     isInMenu = false;
 });
-
+/**
+ * Función que se encarga de cerrar la ventana emergente donde aparece información del centro por el que pasó
+ * encima el mouse.
+ */
 btnCerrarPopup4.addEventListener('click', function (e) {
     e.preventDefault();
     popup4.classList.remove('active');
@@ -379,12 +363,18 @@ btnCerrarPopup4.addEventListener('click', function (e) {
     document.getElementById("conCenters").innerHTML = "";
     isInMenu = false;
 });
+/**
+ * Función que se encarga de cerrar la ventana donde se crea el nuevo centro de distribución.
+ */
 btnCerrarPopupCentros.addEventListener('click', function (e) {
     e.preventDefault();
     overlayCentros.classList.remove('active');
     isInMenu = false;
-
 });
+//Creo que esta también se tiene que borrar.
+/**
+ * Función que se encarga de cerrar la ventana donde se solicita los pesos con los centros ya existentes.
+ */
 btnCerrarPopupCentros2.addEventListener('click', function (e) {
     e.preventDefault();
     overlayCentros2.classList.remove('active');
@@ -392,6 +382,9 @@ btnCerrarPopupCentros2.addEventListener('click', function (e) {
     isInMenu = false;
 
 });
+/**
+ * Función que se encarga de cerrar la ventana en donde se modifican los centros de distribución.
+ */
 btnCerrarPopupUltimate.addEventListener('click', function (e) {
     e.preventDefault();
     overlayUltimate.classList.remove('active');
@@ -400,7 +393,9 @@ btnCerrarPopupUltimate.addEventListener('click', function (e) {
     document.getElementById("newWeight").value = "";
     isInMenu = false;
 });
-//Función de prueba cuando se le da al boton de ver Rutas disponibles.
+/**
+ * Con esta función el botón se encarga de mostrar la ventana de rutas disponibles.
+ */
 btnAvailableR.addEventListener('click', function () {
     addRoutes(["A-B-C", "D-E-F", "G-H-I"]);
     routes = ["A-B-C", "D-E-F", "G-H-I"];
@@ -411,6 +406,9 @@ btnAvailableR.addEventListener('click', function () {
     isInMenu = true;
 
 });
+/**
+ * Con esta función al presionar el botón es posible realizar el pedido
+ */
 btnSubmit.addEventListener('click', function () {
     overlay2.classList.remove('active');
     popup2.classList.remove('active');
@@ -422,7 +420,10 @@ btnSubmit.addEventListener('click', function () {
     UpdateReg();
 
 });
-
+/**
+ * Con esta función al presionar el botón es posible abrir la ventana donde se visualiza el estado de los
+ * paquetes.
+ */
 btnAbrirPopup3.addEventListener('click', function () {
     overlay3.classList.add('active');
     popup3.classList.add('active');
@@ -430,35 +431,49 @@ btnAbrirPopup3.addEventListener('click', function () {
     document.getElementById("statusPackage").innerHTML = "";
     isInMenu = true;
 });
-btnAddCpopupCentros.addEventListener('click', function () {
 
-});
-
-function leerSelectedR() {
-    let select = document.getElementById('opciones');
-    let text = select.options[select.selectedIndex].text;
-    console.log(text); // English
-}
-
-
+/**
+ * Clase que representa a un paquete
+ */
 class Package {
+    /**
+     * Constructro de la clase paquete.
+     * @param code
+     * @param stat
+     */
     constructor(code, stat) {
         this._code = code;
         this._stat = stat;
     }
 
+    /**
+     * Obtener código del paquete
+     * @returns {*} Código del paquete.
+     */
     get code() {
         return this._code;
     }
 
+    /**
+     * Editar código del paquete
+     * @param value
+     */
     set code(value) {
         this._code = value;
     }
 
+    /**
+     * Obtener el estado del paquete
+     * @returns {*} El estado del paquete
+     */
     get stat() {
         return this._stat;
     }
 
+    /**
+     * Editar el estado del paquete
+     * @param value
+     */
     set stat(value) {
         this._stat = value;
     }
@@ -473,47 +488,80 @@ allPack.push(paquetito2);
 allPack.push(paquetito3);
 allPack.push(paquetito4);
 
+/**
+ * Función que se encarga de leer la ruta seleccionada
+ */
+function leerSelectedR() {
+    let select = document.getElementById('opciones');
+    let text = select.options[select.selectedIndex].text;
+    console.log(text); // English
+}
 
+/**
+ * Función que se encarga de leer el paquete que al que se le quiere visualizar el estado.
+ */
 function leerSelectedP() {
     let select = document.getElementById('selectPackage');
     let text = select.options[select.selectedIndex].text;
     selPack = text;
 }
 
+/**
+ * Función que se encarga de leer el punto inicial seleccionado.
+ */
 function leerSelectedIn() {
     let select = document.getElementById('iInitalPoint');
     let text = select.options[select.selectedIndex].text;
 
 }
 
+/**
+ * Función que se encarga de leer el punto final seleccionado.
+ */
 function leerSelectedFin() {
     let select = document.getElementById('iFinalPoint');
     let text = select.options[select.selectedIndex].text;
 
 }
 
+/**
+ * Función que se encarga de leer el nombre seleccionado para un nuevo centro de distribución.
+ */
 function leerCenterName() {
     let select = document.getElementById('nombreCentro');
     let text = select.options[select.selectedIndex].text;
 }
-
+//Creo que esta se tiene que borrar
+/**
+ * Función que se encarga de leer el centro con el que se quiere conectar con el nuevo.
+ */
 function leerCenterConnected() {
     let select = document.getElementById('nombreCentro2');
     let text = select.options[select.selectedIndex].text;
 }
 
+/**
+ * Función que lee el centro que quiere ser modificado
+ */
 function leerMododSelected() {
     let select = document.getElementById('modOdSelected')
     let text = select.options[select.selectedIndex].text;
-    modOdSelected = text;
+    vModOdSelected = text;
 }
 
+/**
+ * Función que lee el centro con el que se le quiere cambiar el peso.
+ */
 function leerMododCenters() {
     let select = document.getElementById('modOdCenters')
     let text = select.options[select.selectedIndex].text;
-    modOdCenters = text;
+    vModOdCenters = text;
 }
 
+/**
+ * Función que se encarga de mostrar el estado del pedido que se está solicitando visualizar.
+ * @param x Código del pedido
+ */
 function showStat(x) {
     var cont = 0;
     while (cont !== allPack.length) {
@@ -527,12 +575,18 @@ function showStat(x) {
     }
 }
 
+/**
+ * Esta función se encarga principalmente de llamar a la función showStat() al presionar el botón.
+ */
 btnPaquete.addEventListener('click', function () {
     showStat(selPack);
 });
 
+/**
+ * Función que muestra los pesos que tiene el centro seleccionado, con los otros pesos.
+ * @param nombre Nombre del nodo seleccionado
+ */
 function showWeight(nombre) {
-
     popup4.classList.add('active');
     if (nombre.isCenter) {
         document.getElementById("conCenters").innerHTML = "El centro de distribución " +
@@ -543,6 +597,10 @@ function showWeight(nombre) {
     }
 }
 
+/**
+ * Función que se encarga de ordenar las rutas según su peso.
+ * @param x Array con los pesos de todas las rutas.
+ */
 function bubblesort(x) {
     let verify = true;
     while (verify) {
@@ -557,11 +615,8 @@ function bubblesort(x) {
         }
     }
 }
-
 var curNodeSel;
-
 function setUpCentros(curNode) {
-
     overlayCentros.classList.add('active');
     btnAbrirPopup.classList.add('active');
     isInMenu = true;
@@ -570,7 +625,6 @@ function setUpCentros(curNode) {
 }
 
 function editCentros(curNode) {
-
     curNodeSel = curNode;
     overlayCentros.classList.add('active');
     btnAbrirPopup.classList.add('active');
@@ -581,6 +635,9 @@ function editCentros(curNode) {
 
 }
 
+/**
+ * Función que al presionar el botón guarda los datos de la ventana para crear un nuevo centro.
+ */
 btnSetCentros.addEventListener('click', function (e) {
     e.preventDefault();
     //Activates the UI Elements
@@ -588,15 +645,14 @@ btnSetCentros.addEventListener('click', function (e) {
     popupCentros.classList.remove('active');
     overlayCentros2.classList.add('active');
     popupCentros2.classList.add('active');
-
     //Sets the center name by the Entry we made
     curNodeSel.centerName = document.getElementById("nombreCentro").value;
     console.log('the marker "' + curNodeSel.centerName + '" has been added!')
-
     //reset for next item
     document.getElementById("nombreCentro").value = '';
     isInMenu = false;
 });
+//Hay que eliminarla
 btnSetCentros2.addEventListener('click', function (e) {
     e.preventDefault();
     var x = document.getElementById("iPesoN").value;
@@ -606,11 +662,19 @@ btnSetCentros2.addEventListener('click', function (e) {
     popupCentros2.classList.remove('active');
     isInMenu = true;
 });
-btnAbrirPopup4.addEventListener('click', function () {
+/**
+ * Función que al presionar el botón se abre la ventana emergente donde se modifica el centro de distribución.
+ */
+btnAbrirPopUpUltimate.addEventListener('click', function () {
     overlayUltimate.classList.add('active');
     popupUltimate.classList.add('active');
+    addAvailableCenter("modOdSelected");
+    addAvailableCenter("modOdCenters");
     isInMenu = true;
 });
+/**
+ * Función que obtiene los datos dados en la ventana para modificar el centro de distribución.
+ */
 btnUltimate.addEventListener('click', function (e) {
     e.preventDefault();
     overlayUltimate.classList.remove('active');
@@ -621,3 +685,48 @@ btnUltimate.addEventListener('click', function (e) {
     document.getElementById("newWeight").value = "";
     isInMenu = true;
 });
+class Center{
+    constructor(nombre,posicion,weightCen) {
+        this._nombre = nombre;
+        this._posicion = posicion;
+        this._weightCen = weightCen;
+    }
+
+    get nombre() {
+        return this._nombre;
+    }
+
+    set nombre(value) {
+        this._nombre = value;
+    }
+
+    get posicion() {
+        return this._posicion;
+    }
+
+    set posicion(value) {
+        this._posicion = value;
+    }
+
+    get weightCen() {
+        return this._weightCen;
+    }
+
+    set weightCen(value) {
+        this._weightCen = value;
+    }
+}
+function addCentersServer(matrix){
+    var cont=Math.trunc((Math.random()*6)+2);
+    var y = ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
+        "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
+    for (var x=0; x<cont;x++){
+        var temp = [];
+        for(var z=0; z<cont;z++){
+            temp.push(matrix[x][z]);
+        }
+        center = new Center(y[x],x,temp);
+        availableCenters.push(center);
+    }
+}
+console.log(availableCenters);

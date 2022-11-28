@@ -82,7 +82,7 @@ class Generador{
             this.grafoUtilizable.push(this.osaka.getPath());
             this.grafoUtilizable.push(this.calgari.getPath());
             this.grafoUtilizable.push(this.porto.getPath());
-            console.log(this.grafoUtilizable);
+            addCentersServer(this.grafoUtilizable);
         }
 
 
