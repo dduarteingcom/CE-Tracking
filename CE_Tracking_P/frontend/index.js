@@ -5,6 +5,9 @@ let pendPack = 0;
 let allPack=[];
 let selPack;
 
+//Una variable para evitar unos errores
+let isInMenu = false;
+
 /*
     Formulario de entrega y botones
     y los Pop Ups
@@ -20,28 +23,65 @@ var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
     overlay1 = document.getElementById('overlay1'),
     overlay2 = document.getElementById('overlay2'),
     overlay3 = document.getElementById('overlay3'),
+    overlayCentros = document.getElementById('overlaySetCentros'),
     popup = document.getElementById('popup'),
     popup2 = document.getElementById('popup2'),
     popup3 = document.getElementById('popup3'),
     popup4 = document.getElementById('popup4'),
+    popupCentro = document.getElementById('popupCentros'),
     btnCerrarPopup = document.getElementById('btn-cerrar-popup'),
     btnCerrarPopup2 = document.getElementById('btn-cerrar-popup2'),
     btnCerrarPopup3 = document.getElementById('btn-cerrar-popup3'),
     btnCerrarPopup4 = document.getElementById('btn-cerrar-popup4'),
     btnSubmit = document.getElementById('btnSubmit'),
     btnAvailableR= document.getElementById("btnAvailabeR"),
+    btnSetCentro = document.getElementById("btnSetCentro"),
     btnPaquete=document.getElementById("btnPaquete");
 
 //Función que hace visible el Pop Up
 btnAbrirPopup.addEventListener('click', function () {
     overlay1.classList.add('active');
     popup.classList.add('active');
+    isInMenu = true;
 });
-
+//Función que hace visible el Pop Up del menu de anadir centros
+btnAbrirPopup.addEventListener('click', function () {
+    overlay1.classList.add('active');
+    popup.classList.add('active');
+    isInMenu = true;
+});
+addPackages= function () {
+    for (var i in allPack) {
+        let newOption = new Option(allPack[i].code,'i');
+        const select = document.getElementById('selectPackage');
+        select.add(newOption,toString());
+    }
+}
 addRoutes= function (x) {
     for (var i in x) {
         let newOption = new Option(x[i],'i');
         const select = document.getElementById('opciones');
+        select.add(newOption,toString());
+    }
+}
+addInPoint= function (x) {
+    for (var i in x) {
+        let newOption = new Option(x[i],'i');
+        const select = document.getElementById('iInitalPoint');
+        select.add(newOption,toString());
+    }
+}
+addFinPoint= function (x) {
+    for (var i in x) {
+        let newOption = new Option(x[i],'i');
+        const select = document.getElementById('iFinalPoint');
+        select.add(newOption,toString());
+    }
+}
+addCentersN= function (x) {
+    for (var i in x) {
+        let newOption = new Option(x[i],'i');
+        const select = document.getElementById('nombreCentro');
         select.add(newOption,toString());
     }
 }
@@ -61,7 +101,30 @@ deletePackages=function(){
         x--;
     }
 }
-
+deleteInPoint=function(selectBox){
+    var x =selectBox.length;
+    while (x> 0) {
+        const select = document.getElementById('iInitalPoint');
+        select.remove(0);
+        x--;
+    }
+}
+deleteFinPoint=function(selectBox){
+    var x =selectBox.length;
+    while (x> 0) {
+        const select = document.getElementById('iFinalPoint');
+        select.remove(0);
+        x--;
+    }
+}
+deleteCentersN=function(selectBox){
+    var x =selectBox.length;
+    while (x> 0) {
+        const select = document.getElementById('nombreCentro');
+        select.remove(0);
+        x--;
+    }
+}
 
 
 //Función que esconde el Pop Up
@@ -69,45 +132,52 @@ btnCerrarPopup.addEventListener('click', function (e) {
     e.preventDefault();
     overlay1.classList.remove('active');
     popup.classList.remove('active');
+    isInMenu = false;
 });
 btnCerrarPopup2.addEventListener('click', function (e) {
     e.preventDefault();
     overlay2.classList.remove('active');
     popup2.classList.remove('active');
-    document.getElementById("iInitailPoint").value ="";
+    document.getElementById("iInitalPoint").value ="";
     document.getElementById("iFinalPoint").value="";
     deleteRoutes(routes);
+    isInMenu = false;
 });
 btnCerrarPopup3.addEventListener('click', function (e) {
     e.preventDefault();
     overlay3.classList.remove('active');
     popup3.classList.remove('active');
     deletePackages();
+    isInMenu = false;
 });
+
 btnCerrarPopup4.addEventListener('click', function (e) {
     e.preventDefault();
     popup4.classList.remove('active');
     document.getElementById("conCenters").innerHTML="";
+    isInMenu = false;
 
 });
+
+
 //Función de prueba cuando se le da al boton de ver Rutas disponibles.
 btnAvailableR.addEventListener('click',function(){
     addRoutes(["A-B-C","D-E-F","G-H-I"]);
     routes=["A-B-C","D-E-F","G-H-I"];
-    var initialPoint = document.getElementById("iInitailPoint").value;
-    var finalPoint= document.getElementById("iFinalPoint").value;
     overlay1.classList.remove('active');
     popup.classList.remove('active');
     overlay2.classList.add('active');
     popup2.classList.add('active');
+    isInMenu = true;
 
 });
 btnSubmit.addEventListener('click', function(){
     overlay2.classList.remove('active');
     popup2.classList.remove('active');
-    document.getElementById("iInitailPoint").value ="";
+    document.getElementById("iInitalPoint").value ="";
     document.getElementById("iFinalPoint").value="";
     deleteRoutes(routes);
+    isInMenu = true;
 
 });
 btnAbrirPopup3.addEventListener('click', function (){
@@ -115,17 +185,13 @@ btnAbrirPopup3.addEventListener('click', function (){
     popup3.classList.add('active')
     addPackages();
     document.getElementById("statusPackage").innerHTML ="";
+    isInMenu = true;
 });
 function leerSelectedR(){
     let select = document.getElementById('opciones');
     let text = select.options[select.selectedIndex].text;
     console.log(text); // English
 }
-
-
-setTimeout(() => {
-
-})
 
 class Package{
     constructor(code,stat) {
@@ -157,19 +223,28 @@ allPack.push(paquetito1);
 allPack.push(paquetito2);
 allPack.push(paquetito3);
 allPack.push(paquetito4);
-addPackages= function () {
-    for (var i in allPack) {
-        let newOption = new Option(allPack[i].code,'i');
-        const select = document.getElementById('selectPackage');
-        select.add(newOption,toString());
-    }
-}
+
+
 function leerSelectedP(){
     let select = document.getElementById('selectPackage');
     let text = select.options[select.selectedIndex].text;
     selPack=text;
 }
+function leerSelectedIn(){
+    let select = document.getElementById('iInitalPoint');
+    let text = select.options[select.selectedIndex].text;
 
+}
+function leerSelectedFin(){
+    let select = document.getElementById('iFinalPoint');
+    let text = select.options[select.selectedIndex].text;
+
+}
+function leerCenterName(){
+    let select = document.getElementById('nombreCentro');
+    let text = select.options[select.selectedIndex].text;
+
+}
 function showStat(x){
     var cont=0;
     while(cont!==allPack.length){
@@ -186,10 +261,67 @@ function showStat(x){
 btnPaquete.addEventListener('click', function (){
     showStat(selPack);
 });
+
 function showWeight(nombre){
-    console.log(nombre)
+    
     popup4.classList.add('active');
-    document.getElementById("conCenters").innerHTML="El centro de distribución "+nombre
-        + "Está conectado con los siguientes centros: ";
+    if (nombre.isCenter){
+        document.getElementById("conCenters").innerHTML="El centro de distribución "+
+        nombre.centerName + " está conectado con los siguientes centros: ";
+    }
+    else{
+        document.getElementById("conCenters").innerHTML="El centro de distribución "+
+        "no está activo en este momento";
+    }
+}
+function bubblesort(x){
+    let verify=true;
+    while(verify) {
+        verify=false;
+        for (var i = 0; i < x.length - 1; i++) {
+            if (x[i] > x[i + 1]) {
+                verify=true;
+                var temp=x[i];
+                x[i]= x[i + 1];
+                x[i + 1]=temp;
+            }
+        }
+    }
 }
 
+var curNodeSel;
+function setUpCentros(curNode){
+
+    overlayCentros.classList.add('active');
+    btnAbrirPopup.classList.add('active');
+    isInMenu = true;
+    curNodeSel = curNode;
+    
+}
+
+function editCentros(curNode){
+
+    curNodeSel = curNode;
+    overlayCentros.classList.add('active');
+    btnAbrirPopup.classList.add('active');
+    isInMenu = true;
+
+    //Grabs the name from the currently selected node and puts it in the entry
+    document.getElementById("nombreCentro").value = curNodeSel.centerName;
+    
+}
+
+btnSetCentro.addEventListener('click', function(){
+    
+    //Activates the UI Elements
+    overlayCentros.classList.remove('active');
+    popupCentro.classList.remove('active');
+
+    //Sets the center name by the Entry we made
+    curNodeSel.centerName = document.getElementById("nombreCentro").value;
+    console.log('the marker "' + curNodeSel.centerName + '" has been added!')
+
+    //reset for next item
+    document.getElementById("nombreCentro").value = '';
+    isInMenu = false;
+});
