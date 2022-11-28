@@ -12,24 +12,12 @@
     <!--Link para los items que podamos llegar a necesitar-->
     <script src="https://kit.fontawesome.com/4f8846e444.js" crossorigin="anonymous"></script>
 
-    <style>
-         canvas {
-            
-            background: white;
-        }
 
-        body {
-            top:10%;
-            left:10%;
-            position: absolute;
-            z-index: 0;
-        }
-    </style>
 </head>
 
-<img src="./images/logo.png" alt="CE Tracking Logo">
+<img src="./images/logo.png" alt="CE Tracking Logo" class="logo">
 
-<canvas>
+<canvas class="mapa">
 </canvas>
 
 <body>
@@ -49,7 +37,6 @@
     <!--Ventana emergente-->
 
 
-
     <div class="popup" id="popup">
         <!--Botón que se encuentra en la ventana emergente para cerrar la misma-->
         <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
@@ -59,8 +46,6 @@
         <form action="">
             <!--Clase que contiene a los inputs-->
             <div class="contenedor-inputs">
-
-
                 Punto de Incio
                 <select id="iInitalPoint" onchange="leerSelectedIn()">
                 </select>
@@ -78,9 +63,9 @@
     <div class="popup2" id="popup2">
         <a href="#" id="btn-cerrar-popup2" class="btn-cerrar-popup2"><i class="fas fa-times"></i></a>
         <h2>Rutas</h2>
-            Seleccione la ruta
-            <select id="opciones" onchange="leerSelectedR()">
-            </select>
+        Seleccione la ruta
+        <select id="opciones" onchange="leerSelectedR()">
+        </select>
         <button id="btnSubmit" class="btnSubmit">Finalizar pedido</button>
     </div>
 
@@ -100,7 +85,7 @@
 </div>
 <div class="popup4" id="popup4">
     <div>
-    <a href="#" id="btn-cerrar-popup4" class="btn-cerrar-popup4"><i class="fas fa-times"></i></a>
+        <a href="#" id="btn-cerrar-popup4" class="btn-cerrar-popup4"><i class="fas fa-times"></i></a>
     </div>
     <label class="conCenters" id="conCenters">c</label>
 </div>
@@ -110,32 +95,68 @@
     <!--Ventana emergente-->
     <div class="popupCentros" id="popupCentros">
         <!--Label para completar los datos-->
+        <a href="#" id="btn-cerrar-popupCentros" class="btn-cerrar-popupCentros"><i class="fas fa-times"></i></a>
         <h1>Completa los datos</h1>
         <!--Con esto indicamos que la ventana emergente es un formulario-->
         <form action="">
-            <!--Clase que contiene a los inputs-->
-            <div class="contenedor-inputs">
-                <!--Input para ingresar el punto de inicio del paquete-->
-                Nombre del Centro
-                <select id="nombreCentro" onchange="leerCenterName()">
-                </select>
-            </div>
-            <!--Botón para ver las rutas disponibles-->
-            <button id="btnSetCentro" class="btnSetCentro">Terminar Configuración</button>
+            <!--Input para ingresar el punto de inicio del paquete-->
+            Nombre del Centro
+            <select id="nombreCentro" onchange="leerCenterName()">
+            </select>
         </form>
+        <!--Botón para ver las rutas disponibles-->
+        <button id="btnSetCentros" class="btnSetCentros">Elegir centros conectados</button>
     </div>
 </div>
-<!-- 
-<div class="formulario" id="formulario">
-    <div class="popup2" id="popup2">
-        <a href="#" id="btn-cerrar-popup2" class="btn-cerrar-popup2"><i class="fas fa-times"></i></a>
-        <h2>Rutas</h2>
-            Seleccione la ruta
-            <select id="opciones" onchange="leerSelectedR()">
-            </select>
-        <button id="btnSubmit" class="btnSubmit">Finalizar pedido</button>
-    </div> -->
 
+<div class="overlaySetCentros2" id="overlaySetCentros2">
+    <!--Ventana emergente-->
+    <div class="popupCentros2" id="popupCentros2">
+        <!--Label para completar los datos-->
+        <a href="#" id="btn-cerrar-popupCentros2" class="btn-cerrar-popupCentros2"><i class="fas fa-times"></i></a>
+        <h1>Centros Disponibles</h1>
+        <!--Con esto indicamos que la ventana emergente es un formulario-->
+        <form action="">
+            <!--Input para ingresar el punto de inicio del paquete-->
+            <select id="nombreCentro2" onchange="leerCenterConnected()">
+            </select>
+            <input  id="iPesoN"type="text" placeholder="Peso con el centro">
+        </form>
+        <div>
+        <button id="btnAddCpopupCentros" class="addCpopupCentros">Añadir</button>
+        </div>
+        <!--Botón para ver las rutas disponibles-->
+        <button id="btnSetCentros2" class="btnSetCentros2">Terminar Configuración</button>
+    </div>
+</div>
+<button id="btn-abrir-popup4" class="btn-abrir-popup4">Modificar centros de distribución</button>
+<div class="overlayUltimate" id="overlayUltimate">
+    <!--Ventana emergente-->
+    <div class="popupUltimate" id="popupUltimate">
+        <!--Label para completar los datos-->
+        <a href="#" id="btn-cerrar-popupUltimate" class="btn-cerrar-popupUltimate"><i class="fas fa-times"></i></a>
+        <!--Con esto indicamos que la ventana emergente es un formulario-->
+        <form action="">
+            <!--Input para ingresar el punto de inicio del paquete-->
+            Seleccionar centro a editar
+            <select id="modOdSelected" onchange="leerCenterConnected()">
+            </select>
+            <div>
+            <input  id="newName" class="newName" type="text" placeholder="Nuevo Nombre">
+            </div>
+            <div>
+                Centros Conectados
+                <select id="modOdCenters" class="modOdCenters">
+                </select>
+            </div>
+            <div>
+                <input id="newWeight" class="newWeight" type="text" placeholder="Nuevo Peso">
+            </div>
+            <div>
+                <button id="btnUltimate" class="btnUltimate">Modificar</button>
+            </div>
+        </form>
+    </div>
 </div>
 <!--Path para el archivo.js-->
 <script src="index.js"></script>

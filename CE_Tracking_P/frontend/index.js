@@ -20,6 +20,7 @@ document.getElementById("totalPackages").innerHTML = "Numero de paquetes solicit
 //Se asocian las las variables con los elementos pertnecientes al HTML.
 var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
     btnAbrirPopup3= document.getElementById('btn-abrir-popup3'),
+    btnAbrirPopup4= document.getElementById('btn-abrir-popup4'),
     overlay1 = document.getElementById('overlay1'),
     overlay2 = document.getElementById('overlay2'),
     overlay3 = document.getElementById('overlay3'),
@@ -28,23 +29,20 @@ var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
     popup2 = document.getElementById('popup2'),
     popup3 = document.getElementById('popup3'),
     popup4 = document.getElementById('popup4'),
-    popupCentro = document.getElementById('popupCentros'),
+    popupCentros = document.getElementById('popupCentros'),
     btnCerrarPopup = document.getElementById('btn-cerrar-popup'),
     btnCerrarPopup2 = document.getElementById('btn-cerrar-popup2'),
     btnCerrarPopup3 = document.getElementById('btn-cerrar-popup3'),
     btnCerrarPopup4 = document.getElementById('btn-cerrar-popup4'),
+    btnCerrarPopupCentros = document.getElementById('btn-cerrar-popupCentros'),
+    btnSetCentros2 = document.getElementById('btnSetCentros2'),
     btnSubmit = document.getElementById('btnSubmit'),
     btnAvailableR= document.getElementById("btnAvailabeR"),
-    btnSetCentro = document.getElementById("btnSetCentro"),
-    btnPaquete=document.getElementById("btnPaquete");
+    btnSetCentro = document.getElementById("btnSetCentros"),
+    btnPaquete=document.getElementById("btnPaquete"),
+    btnAddCpopupCentros=document.getElementById("btnAddCpopupCentros");
 
 //Función que hace visible el Pop Up
-btnAbrirPopup.addEventListener('click', function () {
-    overlay1.classList.add('active');
-    popup.classList.add('active');
-    isInMenu = true;
-});
-//Función que hace visible el Pop Up del menu de anadir centros
 btnAbrirPopup.addEventListener('click', function () {
     overlay1.classList.add('active');
     popup.classList.add('active');
@@ -82,6 +80,13 @@ addCentersN= function (x) {
     for (var i in x) {
         let newOption = new Option(x[i],'i');
         const select = document.getElementById('nombreCentro');
+        select.add(newOption,toString());
+    }
+}
+addConnectedC= function (x) {
+    for (var i in x) {
+        let newOption = new Option(x[i],'i');
+        const select = document.getElementById('nombreCentro2');
         select.add(newOption,toString());
     }
 }
@@ -125,6 +130,14 @@ deleteCentersN=function(selectBox){
         x--;
     }
 }
+deleteConnectedCenters=function(selectBox){
+    var x =selectBox.length;
+    while (x> 0) {
+        const select = document.getElementById('nombreCentro2');
+        select.remove(0);
+        x--;
+    }
+}
 
 
 //Función que esconde el Pop Up
@@ -158,7 +171,12 @@ btnCerrarPopup4.addEventListener('click', function (e) {
     isInMenu = false;
 
 });
+btnCerrarPopupCentros.addEventListener('click', function (e) {
+    e.preventDefault();
+    overlayCentros.classList.remove('active');
+    isInMenu = false;
 
+});
 
 //Función de prueba cuando se le da al boton de ver Rutas disponibles.
 btnAvailableR.addEventListener('click',function(){
@@ -180,6 +198,7 @@ btnSubmit.addEventListener('click', function(){
     isInMenu = true;
 
 });
+
 btnAbrirPopup3.addEventListener('click', function (){
     overlay3.classList.add('active');
     popup3.classList.add('active')
@@ -187,11 +206,15 @@ btnAbrirPopup3.addEventListener('click', function (){
     document.getElementById("statusPackage").innerHTML ="";
     isInMenu = true;
 });
+btnAddCpopupCentros.addEventListener('click', function (){
+
+});
 function leerSelectedR(){
     let select = document.getElementById('opciones');
     let text = select.options[select.selectedIndex].text;
     console.log(text); // English
 }
+
 
 class Package{
     constructor(code,stat) {
@@ -243,7 +266,10 @@ function leerSelectedFin(){
 function leerCenterName(){
     let select = document.getElementById('nombreCentro');
     let text = select.options[select.selectedIndex].text;
-
+}
+function leerCenterConnected(){
+    let select = document.getElementById('nombreCentro2');
+    let text = select.options[select.selectedIndex].text;
 }
 function showStat(x){
     var cont=0;
@@ -315,7 +341,7 @@ btnSetCentro.addEventListener('click', function(){
     
     //Activates the UI Elements
     overlayCentros.classList.remove('active');
-    popupCentro.classList.remove('active');
+    popupCentros.classList.remove('active');
 
     //Sets the center name by the Entry we made
     curNodeSel.centerName = document.getElementById("nombreCentro").value;
@@ -324,4 +350,9 @@ btnSetCentro.addEventListener('click', function(){
     //reset for next item
     document.getElementById("nombreCentro").value = '';
     isInMenu = false;
+});
+btnSetCentros2.addEventListener('click', function() {
+    var x= document.getElementById("iPesoN").value;
+    console.log(x);
+    document.getElementById("iPesoN").value="";
 });
