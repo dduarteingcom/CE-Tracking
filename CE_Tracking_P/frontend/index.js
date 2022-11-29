@@ -83,10 +83,7 @@ class Generador {
         this.grafoUtilizable.push(this.calgari.getPath());
         this.grafoUtilizable.push(this.porto.getPath());
         this.largo = 16;
-
     }
-
-
     eliminarCentroInicio(a, b) {
         while (a > b) {
             for (var x = 0; x < this.largo; x++) {
@@ -123,8 +120,8 @@ class Generador {
                 this.grafoUtilizable[a][z] = 0;
             }
         }
-        addCentersServer(this.grafoUtilizable, this.largo);
         this.largo--;
+        addCentersServer(this.grafoUtilizable, this.largo);
         return this.grafoUtilizable
 
     }
@@ -287,6 +284,8 @@ var givenG = [];
 var newG = [];
 let listPlaces= ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
     "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
+let codigo;
+
 
 /**
  * Variable donde se almacenan todos los paquetes que han sido solicitados
@@ -659,7 +658,11 @@ btnSubmit.addEventListener('click', function () {
     isInMenu = false;
     reqPack++;
     pendPack++;
+    hexadecimal();
     UpdateReg();
+    document.getElementById("lCodigo").innerHTML="El código del paquete creado fue: "+codigo;
+    paquetito = new Package(codigo,"Pendiente de entrega");
+    allPack.push(paquetito)
 
     droneActive[numDronesActivos++] = true;
 
@@ -727,11 +730,14 @@ btnAbrirPopup3.addEventListener('click', function () {
     isInMenu = true;
 });
 btnEliminarN.addEventListener('click', function () {
-    if(grafito.largo > 2) {
-        grafito.eliminarCentroUnico(grafito.largo -= 1);
+
+    grafito.largo-1;
+    if(grafito.largo>2) {
+        grafito.eliminarCentroUnico(grafito.largo);
         nodeList[nodeList.length - 1].isCenter = false;
         nodeList[nodeList.length - 1].centerName = false;
         nodeList.pop();
+
     }
     console.log(availableCenters);
 });
@@ -781,15 +787,6 @@ class Package {
         this._stat = value;
     }
 }
-
-let paquetito1 = new Package("FJD878", "Pendiente de entrega");
-let paquetito2 = new Package("KVB897", "En Proceso");
-let paquetito3 = new Package("OPF112", "Pendiente de entrega");
-let paquetito4 = new Package("ÑPS084", "Entregado");
-allPack.push(paquetito1);
-allPack.push(paquetito2);
-allPack.push(paquetito3);
-allPack.push(paquetito4);
 
 /**
  * Función que se encarga de leer la ruta seleccionada
@@ -1055,8 +1052,26 @@ function addCentersServer(matrix, cont) {
 
 let grafito = new Generador()
 let random = Math.trunc(Math.random() * 7) + 1
-console.log(random)
 console.log(grafito.eliminarCentroInicio(15, random));
+function hexadecimal(){
+    var letras=['a','b','c','d','e','f','g','h','i','j','l','n','o','p','q','r','s','t','u','y'];
+
+    var a = Math.trunc(Math.random()*20);
+    var b = Math.trunc(Math.random()*20);
+    var c = Math.trunc(Math.random()*20);
+    var d = Math.trunc(Math.random()*10);
+    var e = Math.trunc(Math.random()*10);
+    var f = Math.trunc(Math.random()*10);
+    codigo= letras[a]+letras[b]+letras[c]+d+e+f;
+}
+function modPackage(code){
+    for(var x=0;x<allPack.length;x++){
+        if(code===allPack[x]){
+            allPack[x].stat="entregado";
+        }
+    }
+}
+
 
 
 
