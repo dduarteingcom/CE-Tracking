@@ -1,5 +1,262 @@
+class Centros {
+    constructor (name){ //constructor
+        this.name = name;
+        this.path = [];
+        this.value = 0;
+
+    }
+
+    setPaths(path){ //definir paths con pesos
+        this.path = path
+    }
+
+    getName(){ //getter de nombre
+        return this.name
+    }
+
+    getPath(){ //getter de path
+        return this.path
+    }
+}
+
+class Generador{
+    constructor() {
+        this.upperbound = 20;
+        this.grafoTotal = [];
+        this.grafoUtilizable = [];
+        this.grafoTempUtili = [];
+        this.grafoVertices = [];
+        this.listaAdy = [];
+        this.v = 16
+        this.isVisited = new Array(this.v);
+        this.pathList = [];
+
+        this.siquirres = new Centros("siquirres");
+        this.pococi = new Centros("pococi");
+        this.guatuso = new Centros("guatuso");
+        this.sanFrancisco = new Centros("sanFrancisco");
+        this.desamparados = new Centros("desamparados");
+        this.xetulul = new Centros("xetulul");
+        this.xocomil = new Centros("xocomil");
+        this.paten = new Centros("paten");
+        this.coronado = new Centros("coronado");
+        this.tibas = new Centros("tibas");
+        this.helsinki = new Centros("helsinki");
+        this.praga = new Centros("praga");
+        this.shanghai = new Centros("shanghai");
+        this.osaka = new Centros("osaka");
+        this.calgari = new Centros("calgari");
+        this.porto = new Centros("porto");
+
+        this.siquirres.setPaths([0, Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20)]);
+        this.pococi.setPaths([Math.trunc(Math.random()*20), 0, Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20)]);
+        this.guatuso.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), 0,Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20)]);
+        this.sanFrancisco.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),0,Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20)]);
+        this.desamparados.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),0,Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.xetulul.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),0,Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.xocomil.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),0,Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.paten.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),0,Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.coronado.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),0,Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.tibas.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),0, Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.helsinki.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),0, Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.praga.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),0, Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.shanghai.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),0, Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.osaka.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),0, Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.calgari.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),0, Math.trunc(Math.random()*20)]);
+        this.porto.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), 0]);
+        this.grafoTotal.push(this.siquirres,this.pococi,this.guatuso,this.sanFrancisco,this.desamparados,this.xetulul,this.paten,this.coronado,this.tibas,this.helsinki,this.praga,this.shanghai, this.osaka, this.calgari, this.porto);
+
+        this.grafoUtilizable.push(this.siquirres.getPath());
+        this.grafoUtilizable.push(this.pococi.getPath());
+        this.grafoUtilizable.push(this.guatuso.getPath());
+        this.grafoUtilizable.push(this.sanFrancisco.getPath());
+        this.grafoUtilizable.push(this.desamparados.getPath());
+        this.grafoUtilizable.push(this.xetulul.getPath());
+        this.grafoUtilizable.push(this.xocomil.getPath());
+        this.grafoUtilizable.push(this.paten.getPath());
+        this.grafoUtilizable.push(this.coronado.getPath());
+        this.grafoUtilizable.push(this.tibas.getPath());
+        this.grafoUtilizable.push(this.helsinki.getPath());
+        this.grafoUtilizable.push(this.praga.getPath());
+        this.grafoUtilizable.push(this.shanghai.getPath());
+        this.grafoUtilizable.push(this.osaka.getPath());
+        this.grafoUtilizable.push(this.calgari.getPath());
+        this.grafoUtilizable.push(this.porto.getPath());
+        this.largo=16;
+
+    }
 
 
+    eliminarCentroInicio(a, b){
+        while (a > b){
+            for(var x=0; x<this.largo;x++){
+                for(var y=0;y<this.grafoUtilizable[x].length;y++){
+                    if(this.grafoUtilizable[x][a]>0){
+                        this.grafoUtilizable[x][a]=0;
+                    }
+                }
+            }
+            for(var z=0; z<this.largo;z++){
+                if(this.grafoUtilizable[a][z]>0){
+                    this.grafoUtilizable[a][z]=0;
+                }
+            }
+            a = a - 1;
+        }
+        this.largo= b+1;
+        console.log(this.largo)
+        addCentersServer(this.grafoUtilizable,this.largo);
+        return(this.grafoUtilizable);
+
+    }
+
+    eliminarCentroUnico(a){
+        for(var x=0; x<this.grafoUtilizable.length;x++){
+            for(var y=0;y<this.grafoUtilizable[x].length;y++){
+                if(this.grafoUtilizable[x][a]>0){
+                    this.grafoUtilizable[x][a]=0;
+                }
+            }
+        }
+        for(var z=0; z<this.grafoUtilizable.length;z++){
+            if(this.grafoUtilizable[a][z]>0){
+                this.grafoUtilizable[a][z]=0;
+            }
+        }
+        addCentersServer(this.grafoUtilizable,this.largo);
+        this.largo--;
+        return this.grafoUtilizable
+
+    }
+
+    addCentro(nodo){
+        for(var x=0; x<this.largo+1;x++){
+            for(var y=0;y<this.largo+2;y++){
+                if(this.grafoUtilizable[x][nodo] === 0){
+                    this.grafoUtilizable[x][nodo]=9;
+                }
+            }
+        }
+        for(var z=0; z<this.largo+2;z++){
+            if(this.grafoUtilizable[nodo][z] === 0){
+                this.grafoUtilizable[nodo][z]=9;
+            }
+        }
+        this.grafoUtilizable[nodo][nodo]= 0;
+        this.largo++;
+        addCentersServer(this.grafoUtilizable,this.largo);
+        return this.grafoUtilizable
+
+    }
+
+    subirCentro(nodo, costo){
+        for(var x=0; x<this.grafoUtilizable.length;x++){
+            for(var y=0;y<this.grafoUtilizable[x].length;y++){
+                if(this.grafoUtilizable[x][nodo] > 0){
+                    this.grafoUtilizable[x][nodo] = costo;
+                }
+            }
+        }
+        for(var z=0; z<this.largo;z++){
+            if(this.grafoUtilizable[nodo][z] > 0){
+                this.grafoUtilizable[nodo][z]= costo;
+            }
+        }
+        this.grafoUtilizable[nodo][nodo]= 0;
+        addCentersServer(this.grafoUtilizable,this.largo);
+        return this.grafoUtilizable;
+    }
+
+    newgraph(){
+        for(var x=0; x<this.grafoUtilizable.length;x++){
+            this.tempVert = [];
+            for(var y=0;y<this.grafoUtilizable[x].length;y++){
+                if(this.grafoUtilizable[x][y]>0){
+                    this.tempVert.push(1);
+                }
+                else{
+                    this.tempVert.push(0);
+                }
+            }
+            this.grafoVertices.push(this.tempVert);
+        }
+        console.log(this.grafoVertices);
+
+    }
+
+    getListaAdy(){
+        for(var x=0; x<this.grafoVertices.length; x++){
+            this.temp = [];
+            for(var y=0;y<this.grafoVertices[x].length;y++){
+                if(this.grafoVertices[x][y] > 0) {
+                    this.temp.push(y);
+                }
+            }
+            this.listaAdy.push(this.temp);
+        }
+        console.log(this.listaAdy);
+    }
+
+    printAllPaths(s,d)
+    {
+
+        for(let i=0;i<this.v;i++)
+            this.isVisited[i]=false;
+
+        // add source to path[]
+        this.pathList.push(s);
+
+        // Call recursive utility
+        this.printAllPathsUtil(s, d, this.isVisited, this.pathList);
+    }
+
+    // A recursive function to print
+    // all paths from 'u' to 'd'.
+    // isVisited[] keeps track of
+    // vertices in current path.
+    // localPathList<> stores actual
+    // vertices in the current path
+    printAllPathsUtil(u,d,isVisited,localPathList)
+    {
+        if (u === (d)) {
+            console.log(localPathList);
+            // if match found then no need to
+            // traverse more till depth
+            return;
+        }
+
+        // Mark the current node
+        isVisited[u] = true;
+
+        // Recur for all the vertices
+        // adjacent to current vertex
+        for (let i=0;i< this.listaAdy[u].length;i++) {
+            if (!isVisited[this.listaAdy[u][i]]) {
+                // store current node
+                // in path[]
+                localPathList.push(this.listaAdy[u][i]);
+                this.printAllPathsUtil(this.listaAdy[u][i], d,
+                    isVisited, localPathList);
+
+                // remove current node
+                // in path[]
+                localPathList.splice(localPathList.indexOf
+                (this.listaAdy[u][i]),1);
+            }
+        }
+
+        // Mark the current node
+        isVisited[u] = false;
+    }
+    aumentarCantidadC(){
+        var num= this.cantidadCentros;
+        num++;
+        return num;
+    }
+
+
+
+}
 /**
  * Variable donde se lleva la cuenta de la cantidad de pedidos que se hayan realizado
  * @type {number}
@@ -7,8 +264,8 @@
 let reqPack = 0;
 let deliPack = 0;
 let pendPack = 0;
-var givenG=[];
-var newG=[];
+var givenG = [];
+var newG = [];
 
 
 /**
@@ -52,7 +309,8 @@ document.getElementById("totalPackages").innerHTML = "Numero de paquetes solicit
  * Variable en donde se guardan todos los centros de distribución creados.
  * @type {*[]}
  */
-var availableCenters=[];
+var availableCenters = [];
+
 /**
  * Función que se encarga de actualizar el label donde se encuentra el historial de todos los paquetes.
  * @constructor
@@ -231,43 +489,47 @@ btnAbrirPopup.addEventListener('click', function () {
     addAvailableCenter("iFinalPoint");
     isInMenu = true;
 });
+
 /**
  * Función que añade todos los paquetes que se haya solicitado al select de la venta para visualizar el
  * estado de los paquetes.
  */
-addPackages = function () {
+function addPackages() {
     for (var i in allPack) {
         let newOption = new Option(allPack[i].code, 'i');
         const select = document.getElementById('selectPackage');
         select.add(newOption, toString());
     }
 }
+
 /**
  * Función que añade todas las rutas posibles al select de la ventana para un nuevo pedido.
  * @param x Array con las listas disponibles.
  */
-addRoutes = function (x) {
+function addRoutes(x) {
     for (var i in x) {
         let newOption = new Option(x[i], 'i');
         const select = document.getElementById('opciones');
         select.add(newOption, toString());
     }
 }
+
 /**
  * Función que añade todos los posibles centros a selects en específico.
  * @param punto Select al que se quiere añadir información
  */
-addAvailableCenter = function (punto) {
+function addAvailableCenter(punto) {
     for (var i in availableCenters) {
         let newOption = new Option(availableCenters[i].nombre, 'i');
         const select = document.getElementById(punto);
         select.add(newOption, toString());
     }
 }
+
 /**
  * Añade los nombres default al select de la ventana para crear un nuevo centro.
  */
-addCentersN = function () {
+function addCentersN() {
     var x = ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
         "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
     for (var i in x) {
@@ -276,11 +538,12 @@ addCentersN = function () {
         select.add(newOption, toString());
     }
 }
+
 /**
  * Función que sirve para no se acumulen las mismas opciones en la ventana para seleccionar las rutas
  * @param selectBox Rutas disponibles para la nueva entrega.
  */
-deleteRoutes = function (selectBox) {
+function deleteRoutes(selectBox) {
     var x = selectBox.length;
     while (x > 0) {
         const select = document.getElementById('opciones');
@@ -288,11 +551,12 @@ deleteRoutes = function (selectBox) {
         x--;
     }
 }
+
 /**
  * Función que sirve para que no se acumulen todos los paquetes solicitados en la ventana para visualizar
  * estado de los paquetes.
  */
-deletePackages = function () {
+function deletePackages() {
     var x = allPack.length;
     while (x > 0) {
         const select = document.getElementById('selectPackage');
@@ -300,11 +564,12 @@ deletePackages = function () {
         x--;
     }
 }
+
 /**
  * Esta función sirve para que no se acumulen opciones en distintos selects.
  * @param punto Este corresponde al select al que le quiero eliminar las opciones.
  */
-deleteAvailableCenters = function (punto) {
+function deleteAvailableCenters(punto) {
     var x = availableCenters.length;
     while (x > 0) {
         const select = document.getElementById(punto);
@@ -312,10 +577,11 @@ deleteAvailableCenters = function (punto) {
         x--;
     }
 }
+
 /**
  * Función que permite que no se acumulen las opciones en el select para crear un nuevo centro.
  */
-deleteCentersN = function () {
+function deleteCentersN () {
     var selectBox = ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
         "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
     var x = selectBox.length;
@@ -333,6 +599,8 @@ btnCerrarPopup.addEventListener('click', function (e) {
     overlay1.classList.remove('active');
     popup.classList.remove('active');
     isInMenu = false;
+    deleteAvailableCenters("iInitalPoint");
+    deleteAvailableCenters("iFinalPoint");
 });
 /**
  * Función que se encarga de cerrar la ventana donde aparecen todas las opciones para las posibles rutas.
@@ -396,6 +664,8 @@ btnCerrarPopupUltimate.addEventListener('click', function (e) {
     document.getElementById("newName").value = "";
     document.getElementById("newWeight").value = "";
     isInMenu = false;
+    deleteAvailableCenters("modOdCenters");
+    deleteAvailableCenters("modOdSelected");
 });
 /**
  * Con esta función el botón se encarga de mostrar la ventana de rutas disponibles.
@@ -408,6 +678,8 @@ btnAvailableR.addEventListener('click', function () {
     overlay2.classList.add('active');
     popup2.classList.add('active');
     isInMenu = true;
+    deleteAvailableCenters("iInitalPoint");
+    deleteAvailableCenters("iFinalPoint");
 
 });
 /**
@@ -535,6 +807,7 @@ function leerCenterName() {
     let select = document.getElementById('nombreCentro');
     let text = select.options[select.selectedIndex].text;
 }
+
 //Creo que esta se tiene que borrar
 /**
  * Función que se encarga de leer el centro con el que se quiere conectar con el nuevo.
@@ -619,7 +892,9 @@ function bubblesort(x) {
         }
     }
 }
+
 var curNodeSel;
+
 function setUpCentros(curNode) {
     overlayCentros.classList.add('active');
     btnAbrirPopup.classList.add('active');
@@ -688,9 +963,12 @@ btnUltimate.addEventListener('click', function (e) {
     document.getElementById("newName").value = "";
     document.getElementById("newWeight").value = "";
     isInMenu = true;
+    deleteAvailableCenters("modOdCenters");
+    deleteAvailableCenters("modOdSelected");
 });
-class Center{
-    constructor(nombre,posicion,weightCen) {
+
+class Center {
+    constructor(nombre, posicion, weightCen) {
         this._nombre = nombre;
         this._posicion = posicion;
         this._weightCen = weightCen;
@@ -720,41 +998,32 @@ class Center{
         this._weightCen = value;
     }
 }
-function addCentersServer(matrix){
-    var cont=Math.trunc((Math.random()*6)+2);
+
+function addCentersServer(matrix,cont) {
+    console.log("Ac")
+    availableCenters=[];
     var y = ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
         "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
-    for (var x=0; x<cont;x++){
+    for (var x = 0; x < cont; x++) {
         var temp = [];
-        for(var z=0; z<cont;z++){
+        for (var z = 0; z < cont; z++) {
             temp.push(matrix[x][z]);
         }
-        z=cont;
-        for(z ;z<16;z++){
+        z = cont;
+        for (z; z < 16; z++) {
             temp.push(0);
         }
-        center = new Center(y[x],x,temp);
+        var center = new Center(y[x], x, temp);
         availableCenters.push(center);
         newG.push(temp)
     }
-    for (var x=0; x<16;x++){
-        givenG.push(matrix[x])
-        }
 
 }
-function createCenters(){
-    var temp=[];
-    var temp2=(availableCenters.length)+=1;
-    console.log(temp2)
-    var y = ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
-        "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
-    for(var x=0;x<16;x++){
-        temp.push(givenG[temp2][x]);
-    }
-    center = new Center(y[temp2],newG.length+1,temp);
-    availableCenters.push(center);
 
-    newG.push(temp)
-}
+let grafito = new Generador()
+let random=Math.trunc(Math.random()*7)+1
+console.log(random)
+console.log(grafito.eliminarCentroInicio(15, random));
 
-console.log(availableCenters);
+
+
