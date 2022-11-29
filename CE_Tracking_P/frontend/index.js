@@ -130,18 +130,18 @@ class Generador {
     }
 
     addCentro(nodo) {
-        for (var x = 0; x < this.largo + 1; x++) {
-            for (var y = 0; y < this.largo + 2; y++) {
+        for (var x = 0; x < this.largo ; x++) {
+            for (var y = 0; y < this.largo; y++) {
                 if (this.grafoUtilizable[x][nodo] === 0) {
                     var p = Math.trunc(Math.random() * 20);
                     this.grafoUtilizable[x][nodo] = p;
                 }
             }
         }
-        for (var z = 0; z < this.largo + 2; z++) {
+        for (var z = 0; z < this.largo; z++) {
             if (this.grafoUtilizable[nodo][z] === 0) {
                 p = Math.trunc(Math.random() * 20);
-                this.grafoUtilizable[nodo][z] = p;
+                this.grafoUtilizable[nodo][z] =p;
             }
         }
         this.grafoUtilizable[nodo][nodo] = 0;
@@ -162,6 +162,25 @@ class Generador {
         for (var z = 0; z < this.largo; z++) {
             if (this.grafoUtilizable[nodo][z] > 0) {
                 this.grafoUtilizable[nodo][z] = costo;
+            }
+        }
+        this.grafoUtilizable[nodo][nodo] = 0;
+        addCentersServer(this.grafoUtilizable, this.largo);
+        return this.grafoUtilizable;
+    }
+    subirCentro2(nodo) {
+        for (var x = 0; x < this.largo; x++) {
+            for (var y = 0; y < this.largo; y++) {
+                if (this.grafoUtilizable[x][nodo] > 0) {
+                    var ñ= Math.trunc((Math.random())*20);
+                    this.grafoUtilizable[x][nodo] = ñ;
+                }
+            }
+        }
+        for (var z = 0; z < this.largo; z++) {
+            if (this.grafoUtilizable[nodo][z] > 0) {
+                ñ= Math.trunc((Math.random())*20);
+                this.grafoUtilizable[nodo][z] = ñ;
             }
         }
         this.grafoUtilizable[nodo][nodo] = 0;
@@ -787,15 +806,20 @@ btnPaquete.addEventListener('click', function () {
  * @param nombre Nombre del nodo seleccionado
  */
 function showWeight(nombre) {
+    console.log(grafito.largo);
     popup4.classList.add('active');
     if (nombre.isCenter) {
         availableCenters[nombre.id];
-        let textResult;
+        let textResult="";
         for(var x=0;x<grafito.largo;x++){
-            textResult+= listPlaces[x]+" "+availableCenters[nombre.id].weightCen[x]+" ";
-        }
+
+                if(availableCenters[nombre.id].weightCen[x]!==0) {
+                    textResult += listPlaces[x] + " " +"("+ availableCenters[nombre.id].weightCen[x]+")" + " ";
+                }
+            }
+
         document.getElementById("conCenters").innerHTML = "El centro de distribución " +
-            nombre.centerName + " está conectado con los siguientes centros: "+textResult;
+            listPlaces[nombre.id] + " está conectado con los siguientes centros: "+textResult;
     } else {
         document.getElementById("conCenters").innerHTML = "El centro de distribución " +
             "no está activo en este momento";
@@ -859,9 +883,9 @@ btnSetCentros.addEventListener('click', function (e) {
         //reset for next item
         //document.getElementById("nombreCentro").value = '';
         idNum++
-        grafito.addCentro(grafito.largo + 1);
-        console.log(availableCenters);
-        console.log(nodeList);
+        grafito.addCentro(grafito.largo);
+        console.log(grafito.grafoUtilizable);
+        console.log(availableCenters)
     }
     isInMenu = false;
 });
@@ -900,9 +924,28 @@ btnUltimate.addEventListener('click', function (e) {
     grafito.subirCentro(pos,newWeight)
     isInMenu = true;
     deleteAvailableCenters("modOdSelected");
-    console.log(availableCenters);
 });
+btnUltimate2.addEventListener('click', function (e) {
+    e.preventDefault();
+    overlayUltimate.classList.remove('active');
+    popupUltimate.classList.remove('active');
+    newName = document.getElementById("newName").value;
+    document.getElementById("newName").value = "";
+    document.getElementById("newWeight").value = "";
+    var pos;
 
+    for(var x=0;x<listPlaces.length;x++){
+        if (listPlaces[x]===vModOdSelected){
+            pos=x;
+        }
+        else{
+        }
+    }
+    listPlaces[pos]= newName;
+    grafito.subirCentro2(pos)
+    isInMenu = true;
+    deleteAvailableCenters("modOdSelected");
+});
 class Center {
     constructor(nombre, posicion, weightCen) {
         this._nombre = nombre;
@@ -936,7 +979,6 @@ class Center {
 }
 
 function addCentersServer(matrix, cont) {
-    console.log("Ac")
     availableCenters = [];
     for (var x = 0; x < cont; x++) {
         var temp = [];
