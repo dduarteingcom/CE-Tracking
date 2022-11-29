@@ -96,39 +96,14 @@
     <div class="popupCentros" id="popupCentros">
         <!--Label para completar los datos-->
         <a href="#" id="btn-cerrar-popupCentros" class="btn-cerrar-popupCentros"><i class="fas fa-times"></i></a>
-        <h1>Completa los datos</h1>
+        <h1>¿Querés crear un nuevo centro?</h1>
         <!--Con esto indicamos que la ventana emergente es un formulario-->
-        <form action="">
-            <!--Input para ingresar el punto de inicio del paquete-->
-            Nombre del Centro
-            <select id="nombreCentro" onchange="leerCenterName()">
-            </select>
-        </form>
+
         <!--Botón para ver las rutas disponibles-->
-        <button id="btnSetCentros" class="btnSetCentros">Elegir centros conectados</button>
+        <button id="btnSetCentros" class="btnSetCentros">Crear</button>
     </div>
 </div>
 
-<div class="overlaySetCentros2" id="overlaySetCentros2">
-    <!--Ventana emergente-->
-    <div class="popupCentros2" id="popupCentros2">
-        <!--Label para completar los datos-->
-        <a href="#" id="btn-cerrar-popupCentros2" class="btn-cerrar-popupCentros2"><i class="fas fa-times"></i></a>
-        <h1>Centros Disponibles</h1>
-        <!--Con esto indicamos que la ventana emergente es un formulario-->
-        <form action="">
-            <!--Input para ingresar el punto de inicio del paquete-->
-            <select id="nombreCentro2" onchange="leerCenterConnected()">
-            </select>
-            <input  id="iPesoN"type="text" placeholder="Peso con el centro">
-        </form>
-        <div>
-        <button id="btnAddCpopupCentros" class="addCpopupCentros">Añadir</button>
-        </div>
-        <!--Botón para ver las rutas disponibles-->
-        <button id="btnSetCentros2" class="btnSetCentros2">Terminar Configuración</button>
-    </div>
-</div>
 <button id="btn-abrir-popupUltimate" class="btn-abrir-popupUltimate">Modificar centros de distribución</button>
 <div class="overlayUltimate" id="overlayUltimate">
     <!--Ventana emergente-->
@@ -145,15 +120,11 @@
             <input  id="newName" class="newName" type="text" placeholder="Nuevo Nombre">
             </div>
             <div>
-                Centros Conectados
-                <select id="modOdCenters" class="modOdCenters" onchange="leerMododCenters()">
-                </select>
-            </div>
-            <div>
-                <input id="newWeight" class="newWeight" type="text" placeholder="Nuevo Peso">
+                <input id="newWeight" class="newWeight" type="text" placeholder="Nuevos Pesos">
             </div>
             <div>
                 <button id="btnUltimate" class="btnUltimate">Modificar</button>
+                <button id="btnUltimate2" class="btnUltimate2">Generar Pesos Aleatorios</button>
             </div>
         </form>
     </div>
