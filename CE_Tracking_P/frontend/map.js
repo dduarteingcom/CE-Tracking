@@ -140,7 +140,7 @@ function Marker(x, y, isCenter, posNum){
  * @param {Marker} startPoint Centro en el que el dron empieza
  * @param {Marker[]} path 
  */
- function Drone(startPoint, path){
+ function Drone(startPoint, path, weight){
 
     this.path = path;
     this.package = '696969'; //haha funni
@@ -154,6 +154,7 @@ function Marker(x, y, isCenter, posNum){
     // Calcula la posición del nodo por llegar
     this.endX = this.path[1].x;
     this.endY = this.path[1].initialY;
+    // this.weight = weight[0];
     // console.log('the drone goes to ' + this.endX, this.endY);
 
     //Variables for path traversal and speed calculation
@@ -205,7 +206,28 @@ function Marker(x, y, isCenter, posNum){
                 this.recalculateRoute(this);
                 
             }
+            else{
+                updateReg();
+                modPackage(this.package);
+            }
         }
+    }
+
+    this.setInitialStuff = function(){
+
+        this.x = this.path[0].x;
+        this.y = this.path[0].initialY;
+        console.log('the drone is in ' + this.x, this.y);
+
+        this.endX = this.path[1].x;
+        this.endY = this.path[1].initialY;
+        console.log('the drone goes to ' + this.endX, this.endY);
+
+        this.dx = (this.endX - this.x)/100;
+        this.dy = (this.y - this.endY)/100;
+
+        console.log('x speed: ' + this.dx);
+        console.log('y speed: ' + this.dy);
     }
 
     this.recalculateRoute = function(){
@@ -237,8 +259,6 @@ function Marker(x, y, isCenter, posNum){
             pendPack -= 1;
             deliPack += 1;
             numDronesActivos -= 1;
-            UpdateReg();
-            modPackage(this.package);
             console.log('the route has been finished!');
         }    
     }
@@ -378,26 +398,6 @@ function mapRendering(){
     if (droneActive[5]){
         drone5.moveToCenter();
         drone5.draw();
-    }
-
-    if (droneActive[6]){
-        drone6.moveToCenter();
-        drone6.draw();
-    }
-
-    if (droneActive[7]){
-        drone7.moveToCenter();
-        drone7.draw();
-    }
-
-    if (droneActive[8]){
-        drone8.moveToCenter();
-        drone8.draw();
-    }
-
-    if (droneActive[9]){
-        drone9.moveToCenter();
-        drone9.draw();
     }
 
 }
