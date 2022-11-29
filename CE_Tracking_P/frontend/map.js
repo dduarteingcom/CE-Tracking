@@ -1,6 +1,6 @@
 //Se asocia la variable canvas con el canbas creado en el html.
-var canvas = document.querySelector("canvas")
-;
+var canvas = document.querySelector("canvas");
+
 //Configuración de los parámetros del canvas.
 canvas.width = 450;
 canvas.height = 450;
@@ -11,9 +11,9 @@ var sendY;
 // Variables para el mapa
 let nodeList = [];
 
-/*
-    Canvas para el mapa
-    :D
+/* 
+ *  Canvas para el mapa
+ *  :D
 */
 
 var mouse = {
@@ -34,6 +34,13 @@ function Map(){
     }
 }
 
+/**
+ * Clase representativa de los marcadores y centros de distribución
+ * @param {number} x 
+ * @param {number} y 
+ * @param {boolean} isCenter 
+ * @param {number} id 
+ */
 function Marker(x, y, isCenter, id){
     
     // Position to calculate hitboxes and animations
@@ -50,7 +57,9 @@ function Marker(x, y, isCenter, id){
     // Funni graphics stuff
     this.pinImage = new Image();
 
-    // Command that sets up the 
+    /**
+     * Función encargada de cambiar los marcadores del mapa
+     */
     this.newCenter = function(){
 
         this.isCenter = true;
@@ -58,8 +67,16 @@ function Marker(x, y, isCenter, id){
         setUpCentros(this);
         nodeList.push(this);
     }
+
+    this.deleteCenter = function(){
+
+        this.isCenter = false;
+        nodeList.
+    }
     
-    // Function that draws in the pin sprite
+    /**
+     * Función encargada de desplegar los gráficos
+     */
     this.draw = function(){
         
         if(this.centerName){
@@ -74,7 +91,10 @@ function Marker(x, y, isCenter, id){
         ctx.drawImage(this.pinImage, this.x, this.y);
     }
 
-    // Function that animates the sprite when selected and identifies input
+    /**
+     * Función que se encarga de la animación y registrar acciones de parte del
+     * usuario
+     */
     this.update = function() {
 
         //Checks hitbox for the animation to play
@@ -101,10 +121,6 @@ function Marker(x, y, isCenter, id){
 
                     this.newCenter();
                 }
-                else{
-
-                    editCentros(this);
-                }
             }
         }
         else{
@@ -116,38 +132,98 @@ function Marker(x, y, isCenter, id){
     }
 }
 
-function Drone(x, y, path){
+/**
+ * Clase que representa el dron de entrega
+ * @param {Marker} startPoint Centro en el que el dron empieza
+ * @param {Marker[]} path 
+ */
+function Drone(startPoint, path){
+
+    this.path = path;
 
     // Position of Images
     this.img = new Image();
-    this.x = x;
-    this.y = y;
+    this.x = startPoint.x;
+    this.y = startPoint.initialY;
+    console.log('the drone is in ' + this.x, this.y);
+    
+    // Calcula la posición del nodo por llegar
+    this.endX = this.path[1].x;
+    this.endY = this.path[1].initialY;
+    console.log('the drone goes to ' + this.endX, this.endY);
 
     //Variables for path traversal and speed calculation
-    this.path = path;
-    this.dx;
-    this.dy;
-    this.endX;
-    this.endY;
+    this.dx = (this.endX - this.x)/100;
+    this.dy = (this.y - this.endY)/100;
+
+    console.log('x speed: ' + this.dx);
+    console.log('y speed: ' + this.dy);
+
     this.hasFinished = false;
 
+    /**
+     * Función que renderiza la imagen del dron!
+     */
     this.draw = function(){
 
-        calculatePath(nodeList, this);
+        if(!this.hasFinished){
 
-        this.img.src = './images/drone.png';
-        ctx.drawImage(this.img, this.x, this.y);
+            //debug lines
+            ctx.beginPath();
+            ctx.moveTo(this.x + 75/2, this.y + 75/2);
+            ctx.lineTo(this.endX + 75/2, this.endY + 75/2);
+            ctx.strokeStyle = "rgba(59, 51, 200, 1)"
+            ctx.lineWidth = 10;
+            ctx.stroke();
 
-    }
+            //Rendering the Drone sprite itself
+            this.img.src = './images/drone.png';
+            ctx.drawImage(this.img, this.x, this.y);
 
-    this.moveToCenter = function(){
-
-        if(this.x != this.endX && this.y != this.endY && this.y != 0){
-
-            this.x += 1;
-            this.y -= 1;
         }
     }
+
+    /**
+     * Función que se encarga de mover el dron a la posición que sigue
+     */
+    this.moveToCenter = function(){
+
+        if(this.x != this.endX || this.y != this.endY){
+
+            this.x += this.dx;
+            this.y -= this.dy;
+        }
+        else{
+
+            if(!this.hasFinished){
+
+                this.hasFinished = true;
+                recalculateRoute(this);
+                
+            }
+        }
+    }
+}
+
+/**
+ * Función que recalcula el siguiente punto al que el dron debe moverse
+ * @param {Drone} droneSelf es el nodo que quiere recalcular su ruta
+ */
+function recalculateRoute(droneSelf){
+
+    droneSelf.path.shift();
+
+    if (droneSelf.path.length != 0){
+    
+        drones.hasFinished = false;
+        drones = new Drone(nodeList[0], nodeList);
+        console.log('the route has been recalculated!')
+    }
+    else{
+
+        drones.hasFinished = true;
+        console.log('the route has been finished!');
+    }    
 }
 
 var pinArray = [];
@@ -159,7 +235,7 @@ for(var i = 0; i < 4; i++){
 
         pinArray.push(new Marker(((200 * j) + 75)/2, ((200 * i) + 75)/2, false, idNum));
         
-        if(idNum == 2 || idNum == 7 || idNum == 14){
+        if(idNum === 0 || idNum === 2 || idNum === 7 || idNum === 14){
             
             pinArray[idNum].isCenter = true;
             pinArray[idNum].centerName = 'test ' + idNum;
@@ -170,25 +246,13 @@ for(var i = 0; i < 4; i++){
     }
 }
 
-function calculatePath(paths, node){
-
-    var pathsArray = paths;
-    var startNode = node;
-
-    startNode.dx = (startNode.endX - startNode.x)/2;
-    startNode.dy = (startNode.endY - startNode.y)/2;
-
-    //debug line rendering
-    ctx.beginPath();
-    ctx.moveTo(startNode.x + 75/2, startNode.y + 75/2);
-    ctx.lineTo(pathsArray[0].x + 75/2, pathsArray[0].y + 75/2);
-    ctx.strokeStyle = "rgba(200, 59, 51, 1)";
-    ctx.lineWidth = 5;
-    ctx.stroke();
-}
-
-var drones = new Drone(137.5, 137.5, nodeList);
+var drones = new Drone(nodeList[0], nodeList);
 var map = new Map();
+
+/**
+ * Función que se encarga de renderizar los distintos
+ * elementos
+ */
 function mapRendering(){
 
     //basic animation rendering stuff

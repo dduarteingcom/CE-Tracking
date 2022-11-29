@@ -569,18 +569,6 @@ function setUpCentros(curNode) {
 
 }
 
-function editCentros(curNode) {
-
-    curNodeSel = curNode;
-    overlayCentros.classList.add('active');
-    btnAbrirPopup.classList.add('active');
-    isInMenu = true;
-
-    //Grabs the name from the currently selected node and puts it in the entry
-    document.getElementById("nombreCentro").value = curNodeSel.centerName;
-
-}
-
 btnSetCentros.addEventListener('click', function (e) {
     e.preventDefault();
     //Activates the UI Elements
