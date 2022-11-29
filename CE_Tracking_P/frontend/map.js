@@ -64,7 +64,7 @@ function Marker(x, y, isCenter, posNum){
     this.newCenter = function(){
 
         this.isCenter = true;
-        console.log('this is nodeList: ' + nodeList);
+        console.log('this is nodeList: ', nodeList);
         setUpCentros(this);
         nodeList.push(this);
     }
@@ -203,6 +203,12 @@ function Drone(startPoint, path){
             }
         }
     }
+
+    this.update = function(){
+
+        this.moveToCenter();
+        this.draw();
+    }
 }
 
 /**
@@ -215,13 +221,13 @@ function recalculateRoute(droneSelf){
 
     if (droneSelf.path.length != 0){
     
-        drones.hasFinished = false;
-        drones = new Drone(nodeList[0], nodeList);
+        droneSelf.hasFinished = false;
+        droneSelf = new Drone(nodeList[0], nodeList);
         //console.log('the route has been recalculated!')
     }
     else{
 
-        drones.hasFinished = true;
+        droneSelf.hasFinished = true;
         reqPack += 1;
         deliPack += 1;
         UpdateReg();
@@ -250,14 +256,15 @@ for(var i = 0; i < availableCenters.length; i++){
 
     for(var j = 0; j < pinArray.length; j++){
 
-        if(pinArray[j].id != 16 && pinArray[j].id === randomCenter){
+        if(pinArray[j].id != 16 && pinArray[j].posNum == randomCenter){
 
             repeats = true
-            console.log(pinArray[j])
+            console.log("it repeats!")
             break;
         }
         else{
 
+            repeats = false;
         }
     }
 
@@ -268,6 +275,7 @@ for(var i = 0; i < availableCenters.length; i++){
         pinArray[randomCenter].id = idNum;
         nodeList.push(pinArray[randomCenter]);
 
+        console.log(availableCenters);
         console.log(nodeList);
 
         idNum++
@@ -279,6 +287,7 @@ for(var i = 0; i < availableCenters.length; i++){
 
 //var drones = new Drone(nodeList[0], nodeList);
 var map = new Map();
+var drones = [];
 
 /**
  * Función que se encarga de renderizar los distintos
@@ -298,9 +307,14 @@ function mapRendering(){
         pinArray[i].update();
     }
 
-    //Draws the drones up
-    //drones.moveToCenter();
-    //drones.draw();
+    // Checks if there are drones in an array and updates them if there are any
+    if (drones.length > 0){
+
+        for(var d = 0; d < drones.length; d++){
+
+            drones[d].update()
+        }
+    }
 }
 
 //checks some inputs
