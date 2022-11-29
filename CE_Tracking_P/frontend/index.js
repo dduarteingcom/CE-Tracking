@@ -656,9 +656,63 @@ btnSubmit.addEventListener('click', function () {
     document.getElementById("iInitalPoint").value = "";
     document.getElementById("iFinalPoint").value = "";
     deleteRoutes(routes);
-    isInMenu = true;
+    isInMenu = false;
     reqPack++;
+    pendPack++;
     UpdateReg();
+
+    droneActive[numDronesActivos++] = true;
+
+    if (droneActive[0]){
+        drone0.hasFinished = false;
+        //drone0.path = 
+        
+    }
+
+    if (droneActive[1]){
+        drone1.hasFinished = false;
+        
+    }
+
+    if (droneActive[2]){
+        drone2.hasFinished = false;
+        
+    }
+
+    if (droneActive[3]){
+        drone3.hasFinished = false;
+        
+    }
+
+    if (droneActive[4]){
+        drone4.hasFinished = false;
+        
+    }
+
+    if (droneActive[5]){
+        drone5.hasFinished = false;
+        
+    }
+
+    if (droneActive[6]){
+        drone6.hasFinished = false;
+        
+    }
+
+    if (droneActive[7]){
+        drone7.hasFinished = false;
+        
+    }
+
+    if (droneActive[8]){
+        drone8.hasFinished = false;
+        
+    }
+
+    if (droneActive[9]){
+        drone9.hasFinished = false;
+        
+    }
 
 });
 /**
@@ -673,8 +727,11 @@ btnAbrirPopup3.addEventListener('click', function () {
     isInMenu = true;
 });
 btnEliminarN.addEventListener('click', function () {
-    if(grafito.largo>2) {
+    if(grafito.largo > 2) {
         grafito.eliminarCentroUnico(grafito.largo -= 1);
+        nodeList[nodeList.length - 1].isCenter = false;
+        nodeList[nodeList.length - 1].centerName = false;
+        nodeList.pop();
     }
     console.log(availableCenters);
 });
@@ -806,7 +863,7 @@ btnPaquete.addEventListener('click', function () {
  * @param nombre Nombre del nodo seleccionado
  */
 function showWeight(nombre) {
-    console.log(grafito.largo);
+    //console.log(grafito.largo);
     popup4.classList.add('active');
     if (nombre.isCenter) {
         availableCenters[nombre.id];
@@ -922,7 +979,7 @@ btnUltimate.addEventListener('click', function (e) {
     listPlaces[pos]= newName;
     console.log(listPlaces[pos])
     grafito.subirCentro(pos,newWeight)
-    isInMenu = true;
+    isInMenu = false;
     deleteAvailableCenters("modOdSelected");
 });
 btnUltimate2.addEventListener('click', function (e) {
@@ -943,7 +1000,7 @@ btnUltimate2.addEventListener('click', function (e) {
     }
     listPlaces[pos]= newName;
     grafito.subirCentro2(pos)
-    isInMenu = true;
+    isInMenu = false;
     deleteAvailableCenters("modOdSelected");
 });
 class Center {
