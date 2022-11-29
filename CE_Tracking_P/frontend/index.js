@@ -1,3 +1,5 @@
+
+
 /**
  * Variable donde se lleva la cuenta de la cantidad de pedidos que se hayan realizado
  * @type {number}
@@ -5,7 +7,10 @@
 let reqPack = 0;
 let deliPack = 0;
 let pendPack = 0;
-let givenG;
+var givenG=[];
+var newG=[];
+
+
 /**
  * Variable donde se almacenan todos los paquetes que han sido solicitados
  * @type {*[]}
@@ -47,8 +52,7 @@ document.getElementById("totalPackages").innerHTML = "Numero de paquetes solicit
  * Variable en donde se guardan todos los centros de distribución creados.
  * @type {*[]}
  */
-let availableCenters = [];
-
+var availableCenters=[];
 /**
  * Función que se encarga de actualizar el label donde se encuentra el historial de todos los paquetes.
  * @constructor
@@ -725,8 +729,32 @@ function addCentersServer(matrix){
         for(var z=0; z<cont;z++){
             temp.push(matrix[x][z]);
         }
+        z=cont;
+        for(z ;z<16;z++){
+            temp.push(0);
+        }
         center = new Center(y[x],x,temp);
         availableCenters.push(center);
+        newG.push(temp)
     }
+    for (var x=0; x<16;x++){
+        givenG.push(matrix[x])
+        }
+
 }
+function createCenters(){
+    var temp=[];
+    var temp2=(availableCenters.length)+=1;
+    console.log(temp2)
+    var y = ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
+        "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
+    for(var x=0;x<16;x++){
+        temp.push(givenG[temp2][x]);
+    }
+    center = new Center(y[temp2],newG.length+1,temp);
+    availableCenters.push(center);
+
+    newG.push(temp)
+}
+
 console.log(availableCenters);

@@ -82,6 +82,7 @@ class Generador{
             this.grafoUtilizable.push(this.osaka.getPath());
             this.grafoUtilizable.push(this.calgari.getPath());
             this.grafoUtilizable.push(this.porto.getPath());
+
             addCentersServer(this.grafoUtilizable);
         }
 
@@ -215,6 +216,11 @@ class Generador{
             // Mark the current node
             isVisited[u] = false;
         }
+    aumentarCantidadC(){
+        var num= this.cantidadCentros;
+        num++;
+        return num;
+    }
 
 }
 
