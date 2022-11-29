@@ -671,6 +671,8 @@ btnAvailableR.addEventListener('click', function () {
     temp.push(finPoint)
     temp2 += finPoint;
     nombresFranco.push(temp);
+    var y= Math.trunc(Math.random()*20)+40;
+    temp2 += "Costo en dolores: "+y;
     nombres.push(temp2);
     cantidadAl = Math.trunc(Math.random() * grafito.largo - 1) + 1
     temp = [];
@@ -704,6 +706,8 @@ btnAvailableR.addEventListener('click', function () {
     }
     temp.push(finPoint)
     temp2 += finPoint;
+    var y= Math.trunc(Math.random()*20)+40;
+    temp2 += "Costo en colones: "+ y;
     nombresFranco.push(temp);
     nombres.push(temp2);
     console.log(nombres);
@@ -1192,7 +1196,22 @@ function modPackage(code) {
         if (code === allPack[x]) {
             allPack[x] = paquetito;
         }
-
-        alert('entregao.')
     }
+}
+function addCosts(x){
+
+    var posiciones=[];
+    var costo=0;
+    for(var y=0;y<x.length;y++)
+        for(var w=0;w<listPlaces.length;w++){
+            if(x[y]===listPlaces[w]){
+                posiciones.push(w);
+                break;
+            }
+        }
+    for(var t=0;t<posiciones.length-1;t++){
+        costo+= availableCenters[posiciones[t]].weightCen[posiciones[t+1]];
+    }
+    costo*=300
+    return costo
 }
