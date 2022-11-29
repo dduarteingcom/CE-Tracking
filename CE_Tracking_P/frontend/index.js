@@ -461,7 +461,8 @@ var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
      * @type {HTMLElement}
      */
     btnUltimate = document.getElementById('btnUltimate'),
-    btnUltimate2=document.getElementById('btnUltimate2');
+    btnUltimate2=document.getElementById('btnUltimate2'),
+    btnEliminarN=document.getElementById('btnEliminarN');
 
 /**
  * //Función que hace visible la ventana emergente donde se solicitan los puntos de inicio y final.
@@ -652,7 +653,10 @@ btnAbrirPopup3.addEventListener('click', function () {
     document.getElementById("statusPackage").innerHTML = "";
     isInMenu = true;
 });
+btnEliminarN.addEventListener('click', function () {
+    grafito.eliminarCentroUnico(grafito.largo-=1);
 
+});
 /**
  * Clase que representa a un paquete
  */
