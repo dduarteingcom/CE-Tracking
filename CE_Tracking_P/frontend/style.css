@@ -513,11 +513,33 @@ body {
     cursor: pointer;
     transition: .3s ease all;
     width: 280px;
-    top: 50%;
+    top: 60%;
     left:72%;
     position:absolute;
     z-index: 0;
 }
 .btn-abrir-popupUltimate:hover {
+    background: rgba(94,125,227, .9);
+}
+.btnEliminarN{
+    padding: 0 20px;
+    margin-bottom: 20px;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    color: #fff;
+    background: #5E7DE3;
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s ease all;
+    width: 200px;
+    top: 50%;
+    left:72%;
+    position:absolute;
+    z-index: 0;
+}
+.btnEliminarN:hover {
     background: rgba(94,125,227, .9);
 }
