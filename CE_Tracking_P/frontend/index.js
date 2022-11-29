@@ -282,6 +282,8 @@ let deliPack = 0;
 let pendPack = 0;
 var givenG = [];
 var newG = [];
+var inPoint;
+var finPoint;
 let listPlaces= ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
     "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
 let codigo;
@@ -635,8 +637,22 @@ btnCerrarPopupUltimate.addEventListener('click', function (e) {
  * Con esta función el botón se encarga de mostrar la ventana de rutas disponibles.
  */
 btnAvailableR.addEventListener('click', function () {
-    addRoutes(["A-B-C", "D-E-F", "G-H-I"]);
-    routes = ["A-B-C", "D-E-F", "G-H-I"];
+    grafito.newgraph();
+    grafito.getListaAdy();
+    var pos1;
+    var pos2;
+    for (var x in listPlaces) {
+        if (inPoint === listPlaces[x]) {
+            pos1 = x
+        }
+    }
+    for (var y in listPlaces) {
+        if (finPoint === listPlaces[x]) {
+            pos2 = x
+        }
+    }
+    printAllPaths(pos1, pos2, grafito.largo);
+    console.log(result);
     overlay1.classList.remove('active');
     popup.classList.remove('active');
     overlay2.classList.add('active');
@@ -843,6 +859,7 @@ function leerSelectedP() {
 function leerSelectedIn() {
     let select = document.getElementById('iInitalPoint');
     let text = select.options[select.selectedIndex].text;
+    inPoint=text;
 
 }
 
@@ -852,6 +869,7 @@ function leerSelectedIn() {
 function leerSelectedFin() {
     let select = document.getElementById('iFinalPoint');
     let text = select.options[select.selectedIndex].text;
+    finPoint=text;
 
 }
 /**
