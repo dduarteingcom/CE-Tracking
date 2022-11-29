@@ -1,25 +1,42 @@
+/**
+ * Clase que genera los centros que funcionan como nodos
+ */
 class Centros {
+    /**
+     * metodo constructor para la clase centro
+     */
     constructor(name) { //constructor
         this.name = name;
         this.path = [];
         this.value = 0;
 
     }
-
+    /**
+     * metodo que determina los paths
+     */
     setPaths(path) { //definir paths con pesos
         this.path = path
     }
-
+    /**
+     * metodo getter del nombre del centro
+     */
     getName() { //getter de nombre
         return this.name
     }
-
+    /**
+     * metodo que genera los centros que funcionan como nodos
+     */
     getPath() { //getter de path
         return this.path
     }
 }
-
+/**
+ * Clase que genera el grafo
+ */
 class Generador {
+    /**
+     * metodo que genera el grafo a utilizar
+     */
     constructor() {
         this.upperbound = 20;
         this.grafoTotal = [];
@@ -84,6 +101,9 @@ class Generador {
         this.grafoUtilizable.push(this.porto.getPath());
         this.largo = 16;
     }
+    /**
+     * metodo que elimina nodos
+     */
     eliminarCentroInicio(a, b) {
         while (a > b) {
             for (var x = 0; x < this.largo; x++) {
@@ -106,7 +126,9 @@ class Generador {
         return (this.grafoUtilizable);
 
     }
-
+    /**
+     * metodo que elimina nodos
+     */
     eliminarCentroUnico(a) {
         for (var x = 0; x < this.grafoUtilizable.length; x++) {
             for (var y = 0; y < this.grafoUtilizable[x].length; y++) {
@@ -125,7 +147,9 @@ class Generador {
         return this.grafoUtilizable
 
     }
-
+    /**
+     * metodo que añade centros
+     */
     addCentro(nodo) {
         for (var x = 0; x < this.largo ; x++) {
             for (var y = 0; y < this.largo; y++) {
@@ -147,7 +171,9 @@ class Generador {
         return this.grafoUtilizable
 
     }
-
+    /**
+     * Clase que sube los pesos de los nodos
+     */
     subirCentro(nodo, costo) {
         for (var x = 0; x < this.grafoUtilizable.length; x++) {
             for (var y = 0; y < this.grafoUtilizable[x].length; y++) {
@@ -165,6 +191,9 @@ class Generador {
         addCentersServer(this.grafoUtilizable, this.largo);
         return this.grafoUtilizable;
     }
+    /**
+     * Clase que genera los centros que funcionan como nodos
+     */
     subirCentro2(nodo) {
         for (var x = 0; x < this.largo; x++) {
             for (var y = 0; y < this.largo; y++) {
@@ -184,7 +213,9 @@ class Generador {
         addCentersServer(this.grafoUtilizable, this.largo);
         return this.grafoUtilizable;
     }
-
+    /**
+     * Clase que genera los matriz de adyecencia
+     */
     newgraph() {
         for (var x = 0; x < this.grafoUtilizable.length; x++) {
             this.tempVert = [];
@@ -200,7 +231,9 @@ class Generador {
         console.log(this.grafoVertices);
 
     }
-
+    /**
+     * Clase que genera las listas de adyecencia
+     */
     getListaAdy() {
         for (var x = 0; x < this.grafoVertices.length; x++) {
             this.temp = [];
@@ -213,7 +246,9 @@ class Generador {
         }
         console.log(this.listaAdy);
     }
-
+    /**
+     * Clase que genera los paths entre los nodos
+     */
     printAllPaths(s, d) {
 
         for (let i = 0; i < this.v; i++)
@@ -263,7 +298,9 @@ class Generador {
         // Mark the current node
         isVisited[u] = false;
     }
-
+    /**
+     * Clase que gaumenta cantidad de centros
+     */
     aumentarCantidadC() {
         var num = this.cantidadCentros;
         num++;
