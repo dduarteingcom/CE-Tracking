@@ -207,8 +207,9 @@ function Marker(x, y, isCenter, posNum){
                 
             }
             else{
-                updateReg();
-                modPackage(this.package);
+                
+                // alert("aquí :3");
+                // alert(this.package);
             }
         }
     }
@@ -258,7 +259,8 @@ function Marker(x, y, isCenter, posNum){
             this.hasFinished = true;
             pendPack -= 1;
             deliPack += 1;
-            numDronesActivos -= 1;
+            updateReg();
+            modPackage(this.package);
             console.log('the route has been finished!');
         }    
     }
@@ -323,6 +325,8 @@ for(var i = 0; i < availableCenters.length; i++){
         i--;
     }
 }
+
+console.log(droneRoute2.reverse())
 
 //var drones = new Drone(nodeList[0], nodeList);
 var map = new Map();

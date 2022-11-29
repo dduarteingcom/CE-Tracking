@@ -746,7 +746,7 @@ btnSubmit.addEventListener('click', function () {
 
     if (droneActive[0]) {
         drone0.hasFinished = false;
-        one0.package = codigo;
+        drone0.package = codigo;
         //console.log(rutaDef);
         console.log('el dron tiene el código: ' + drone0.package)
 
@@ -1185,9 +1185,14 @@ function hexadecimal() {
 }
 
 function modPackage(code) {
+
+    var paquetito = new Package(code, 'entregado');
+
     for (var x = 0; x < allPack.length; x++) {
         if (code === allPack[x]) {
-            allPack[x].stat = "entregado";
+            allPack[x] = paquetito;
         }
+
+        alert('entregao.')
     }
 }
