@@ -1,3 +1,262 @@
+class Centros {
+    constructor (name){ //constructor
+        this.name = name;
+        this.path = [];
+        this.value = 0;
+
+    }
+
+    setPaths(path){ //definir paths con pesos
+        this.path = path
+    }
+
+    getName(){ //getter de nombre
+        return this.name
+    }
+
+    getPath(){ //getter de path
+        return this.path
+    }
+}
+
+class Generador{
+    constructor() {
+        this.upperbound = 20;
+        this.grafoTotal = [];
+        this.grafoUtilizable = [];
+        this.grafoTempUtili = [];
+        this.grafoVertices = [];
+        this.listaAdy = [];
+        this.v = 16
+        this.isVisited = new Array(this.v);
+        this.pathList = [];
+
+        this.siquirres = new Centros("siquirres");
+        this.pococi = new Centros("pococi");
+        this.guatuso = new Centros("guatuso");
+        this.sanFrancisco = new Centros("sanFrancisco");
+        this.desamparados = new Centros("desamparados");
+        this.xetulul = new Centros("xetulul");
+        this.xocomil = new Centros("xocomil");
+        this.paten = new Centros("paten");
+        this.coronado = new Centros("coronado");
+        this.tibas = new Centros("tibas");
+        this.helsinki = new Centros("helsinki");
+        this.praga = new Centros("praga");
+        this.shanghai = new Centros("shanghai");
+        this.osaka = new Centros("osaka");
+        this.calgari = new Centros("calgari");
+        this.porto = new Centros("porto");
+
+        this.siquirres.setPaths([0, Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20)]);
+        this.pococi.setPaths([Math.trunc(Math.random()*20), 0, Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20)]);
+        this.guatuso.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), 0,Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20)]);
+        this.sanFrancisco.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),0,Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20)]);
+        this.desamparados.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),0,Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.xetulul.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),0,Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.xocomil.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),0,Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.paten.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),0,Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.coronado.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),0,Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.tibas.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),0, Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.helsinki.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),0, Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.praga.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),0, Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.shanghai.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),0, Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.osaka.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),0, Math.trunc(Math.random()*20),Math.trunc(Math.random()*20)]);
+        this.calgari.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),0, Math.trunc(Math.random()*20)]);
+        this.porto.setPaths([Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20), Math.trunc(Math.random()*20),Math.trunc(Math.random()*20), 0]);
+        this.grafoTotal.push(this.siquirres,this.pococi,this.guatuso,this.sanFrancisco,this.desamparados,this.xetulul,this.paten,this.coronado,this.tibas,this.helsinki,this.praga,this.shanghai, this.osaka, this.calgari, this.porto);
+
+        this.grafoUtilizable.push(this.siquirres.getPath());
+        this.grafoUtilizable.push(this.pococi.getPath());
+        this.grafoUtilizable.push(this.guatuso.getPath());
+        this.grafoUtilizable.push(this.sanFrancisco.getPath());
+        this.grafoUtilizable.push(this.desamparados.getPath());
+        this.grafoUtilizable.push(this.xetulul.getPath());
+        this.grafoUtilizable.push(this.xocomil.getPath());
+        this.grafoUtilizable.push(this.paten.getPath());
+        this.grafoUtilizable.push(this.coronado.getPath());
+        this.grafoUtilizable.push(this.tibas.getPath());
+        this.grafoUtilizable.push(this.helsinki.getPath());
+        this.grafoUtilizable.push(this.praga.getPath());
+        this.grafoUtilizable.push(this.shanghai.getPath());
+        this.grafoUtilizable.push(this.osaka.getPath());
+        this.grafoUtilizable.push(this.calgari.getPath());
+        this.grafoUtilizable.push(this.porto.getPath());
+        this.largo=16;
+
+    }
+
+
+    eliminarCentroInicio(a, b){
+        while (a > b){
+            for(var x=0; x<this.largo;x++){
+                for(var y=0;y<this.grafoUtilizable[x].length;y++){
+                    if(this.grafoUtilizable[x][a]>0){
+                        this.grafoUtilizable[x][a]=0;
+                    }
+                }
+            }
+            for(var z=0; z<this.largo;z++){
+                if(this.grafoUtilizable[a][z]>0){
+                    this.grafoUtilizable[a][z]=0;
+                }
+            }
+            a = a - 1;
+        }
+        this.largo= b+1;
+        console.log(this.largo)
+        addCentersServer(this.grafoUtilizable,this.largo);
+        return(this.grafoUtilizable);
+
+    }
+
+    eliminarCentroUnico(a){
+        for(var x=0; x<this.grafoUtilizable.length;x++){
+            for(var y=0;y<this.grafoUtilizable[x].length;y++){
+                if(this.grafoUtilizable[x][a]>0){
+                    this.grafoUtilizable[x][a]=0;
+                }
+            }
+        }
+        for(var z=0; z<this.grafoUtilizable.length;z++){
+            if(this.grafoUtilizable[a][z]>0){
+                this.grafoUtilizable[a][z]=0;
+            }
+        }
+        addCentersServer(this.grafoUtilizable,this.largo);
+        this.largo--;
+        return this.grafoUtilizable
+
+    }
+
+    addCentro(nodo){
+        for(var x=0; x<this.largo+1;x++){
+            for(var y=0;y<this.largo+2;y++){
+                if(this.grafoUtilizable[x][nodo] === 0){
+                    this.grafoUtilizable[x][nodo]=9;
+                }
+            }
+        }
+        for(var z=0; z<this.largo+2;z++){
+            if(this.grafoUtilizable[nodo][z] === 0){
+                this.grafoUtilizable[nodo][z]=9;
+            }
+        }
+        this.grafoUtilizable[nodo][nodo]= 0;
+        this.largo++;
+        addCentersServer(this.grafoUtilizable,this.largo);
+        return this.grafoUtilizable
+
+    }
+
+    subirCentro(nodo, costo){
+        for(var x=0; x<this.grafoUtilizable.length;x++){
+            for(var y=0;y<this.grafoUtilizable[x].length;y++){
+                if(this.grafoUtilizable[x][nodo] > 0){
+                    this.grafoUtilizable[x][nodo] = costo;
+                }
+            }
+        }
+        for(var z=0; z<this.largo;z++){
+            if(this.grafoUtilizable[nodo][z] > 0){
+                this.grafoUtilizable[nodo][z]= costo;
+            }
+        }
+        this.grafoUtilizable[nodo][nodo]= 0;
+        addCentersServer(this.grafoUtilizable,this.largo);
+        return this.grafoUtilizable;
+    }
+
+    newgraph(){
+        for(var x=0; x<this.grafoUtilizable.length;x++){
+            this.tempVert = [];
+            for(var y=0;y<this.grafoUtilizable[x].length;y++){
+                if(this.grafoUtilizable[x][y]>0){
+                    this.tempVert.push(1);
+                }
+                else{
+                    this.tempVert.push(0);
+                }
+            }
+            this.grafoVertices.push(this.tempVert);
+        }
+        console.log(this.grafoVertices);
+
+    }
+
+    getListaAdy(){
+        for(var x=0; x<this.grafoVertices.length; x++){
+            this.temp = [];
+            for(var y=0;y<this.grafoVertices[x].length;y++){
+                if(this.grafoVertices[x][y] > 0) {
+                    this.temp.push(y);
+                }
+            }
+            this.listaAdy.push(this.temp);
+        }
+        console.log(this.listaAdy);
+    }
+
+    printAllPaths(s,d)
+    {
+
+        for(let i=0;i<this.v;i++)
+            this.isVisited[i]=false;
+
+        // add source to path[]
+        this.pathList.push(s);
+
+        // Call recursive utility
+        this.printAllPathsUtil(s, d, this.isVisited, this.pathList);
+    }
+
+    // A recursive function to print
+    // all paths from 'u' to 'd'.
+    // isVisited[] keeps track of
+    // vertices in current path.
+    // localPathList<> stores actual
+    // vertices in the current path
+    printAllPathsUtil(u,d,isVisited,localPathList)
+    {
+        if (u === (d)) {
+            console.log(localPathList);
+            // if match found then no need to
+            // traverse more till depth
+            return;
+        }
+
+        // Mark the current node
+        isVisited[u] = true;
+
+        // Recur for all the vertices
+        // adjacent to current vertex
+        for (let i=0;i< this.listaAdy[u].length;i++) {
+            if (!isVisited[this.listaAdy[u][i]]) {
+                // store current node
+                // in path[]
+                localPathList.push(this.listaAdy[u][i]);
+                this.printAllPathsUtil(this.listaAdy[u][i], d,
+                    isVisited, localPathList);
+
+                // remove current node
+                // in path[]
+                localPathList.splice(localPathList.indexOf
+                (this.listaAdy[u][i]),1);
+            }
+        }
+
+        // Mark the current node
+        isVisited[u] = false;
+    }
+    aumentarCantidadC(){
+        var num= this.cantidadCentros;
+        num++;
+        return num;
+    }
+
+
+
+}
 /**
  * Variable donde se lleva la cuenta de la cantidad de pedidos que se hayan realizado
  * @type {number}
@@ -5,6 +264,10 @@
 let reqPack = 0;
 let deliPack = 0;
 let pendPack = 0;
+var givenG = [];
+var newG = [];
+
+
 /**
  * Variable donde se almacenan todos los paquetes que han sido solicitados
  * @type {*[]}
@@ -14,11 +277,11 @@ let selPack;
 /**
  * //Variable que almacena el nombre del valor al que le deseamos realizar cambios.
  */
-let modOdCenters;
+let vModOdCenters;
 /**
  * //Variable que almacena el nombre de uno de los centros con los que se quiere modificar el peso.
  */
-let modOdSelected;
+let vModOdSelected;
 /**
  * //Una variable para evitar unos errores.
  * @type {boolean}
@@ -46,7 +309,8 @@ document.getElementById("totalPackages").innerHTML = "Numero de paquetes solicit
  * Variable en donde se guardan todos los centros de distribución creados.
  * @type {*[]}
  */
-let availableCentes=[];
+var availableCenters = [];
+
 /**
  * Función que se encarga de actualizar el label donde se encuentra el historial de todos los paquetes.
  * @constructor
@@ -71,7 +335,7 @@ var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
      * Botón que abre la ventana para modificar los centros de distribución
      * @type {HTMLElement}
      */
-    btnAbrirPopup4 = document.getElementById('btn-abrir-popupUltimate'),
+    btnAbrirPopUpUltimate = document.getElementById('btn-abrir-popupUltimate'),
     /**
      * Overlay para la ventana emergente donde se solicita el punto de inicio y el punto final
      * para calcular las rutas.
@@ -221,84 +485,65 @@ var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
 btnAbrirPopup.addEventListener('click', function () {
     overlay1.classList.add('active');
     popup.classList.add('active');
+    addAvailableCenter("iInitalPoint");
+    addAvailableCenter("iFinalPoint");
     isInMenu = true;
 });
+
 /**
  * Función que añade todos los paquetes que se haya solicitado al select de la venta para visualizar el
  * estado de los paquetes.
  */
-addPackages = function () {
+function addPackages() {
     for (var i in allPack) {
         let newOption = new Option(allPack[i].code, 'i');
         const select = document.getElementById('selectPackage');
         select.add(newOption, toString());
     }
 }
+
 /**
  * Función que añade todas las rutas posibles al select de la ventana para un nuevo pedido.
  * @param x Array con las listas disponibles.
  */
-addRoutes = function (x) {
+function addRoutes(x) {
     for (var i in x) {
         let newOption = new Option(x[i], 'i');
         const select = document.getElementById('opciones');
         select.add(newOption, toString());
     }
 }
+
 /**
- * Función que añade todos los posibles centros para el punto de inicio y final del nuevo paquete.
- * @param punto Con este parámetro se sabe si se trata de un punto de inicio o un punto final.
+ * Función que añade todos los posibles centros a selects en específico.
+ * @param punto Select al que se quiere añadir información
  */
-addAvailableCenter = function (punto) {
-    if (punto === inicio) {
-        for (var i in availableCentes) {
-            let newOption = new Option(availableCentes[i], 'i');
-            const select = document.getElementById('iInitalPoint');
-            select.add(newOption, toString());
-        }
-    }
-    else {
-        for (var i in availableCentes) {
-            let newOption = new Option(availableCentes[i], 'i');
-            const select = document.getElementById('iFinalPointPoint');
-            select.add(newOption, toString());
-        }
+function addAvailableCenter(punto) {
+    for (var i in availableCenters) {
+        let newOption = new Option(availableCenters[i].nombre, 'i');
+        const select = document.getElementById(punto);
+        select.add(newOption, toString());
     }
 }
+
 /**
- *
- * @param x
+ * Añade los nombres default al select de la ventana para crear un nuevo centro.
  */
-addCentersN = function () {
-    var x=[]
+function addCentersN() {
+    var x = ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
+        "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
     for (var i in x) {
         let newOption = new Option(x[i], 'i');
         const select = document.getElementById('nombreCentro');
         select.add(newOption, toString());
     }
 }
-addConnectedC = function (x) {
-    for (var i in x) {
-        let newOption = new Option(x[i], 'i');
-        const select = document.getElementById('nombreCentro2');
-        select.add(newOption, toString());
-    }
-}
-addmodOdCenters = function (x) {
-    for (var i in x) {
-        let newOption = new Option(x[i], 'i');
-        const select = document.getElementById('modOdCenters');
-        select.add(newOption, toString());
-    }
-}
-addmodmodOdSelected = function (x) {
-    for (var i in x) {
-        let newOption = new Option(x[i], 'i');
-        const select = document.getElementById('modOdSelected');
-        select.add(newOption, toString());
-    }
-}
-deleteRoutes = function (selectBox) {
+
+/**
+ * Función que sirve para no se acumulen las mismas opciones en la ventana para seleccionar las rutas
+ * @param selectBox Rutas disponibles para la nueva entrega.
+ */
+function deleteRoutes(selectBox) {
     var x = selectBox.length;
     while (x > 0) {
         const select = document.getElementById('opciones');
@@ -306,7 +551,12 @@ deleteRoutes = function (selectBox) {
         x--;
     }
 }
-deletePackages = function () {
+
+/**
+ * Función que sirve para que no se acumulen todos los paquetes solicitados en la ventana para visualizar
+ * estado de los paquetes.
+ */
+function deletePackages() {
     var x = allPack.length;
     while (x > 0) {
         const select = document.getElementById('selectPackage');
@@ -314,23 +564,26 @@ deletePackages = function () {
         x--;
     }
 }
-deleteInPoint = function (selectBox) {
-    var x = selectBox.length;
+
+/**
+ * Esta función sirve para que no se acumulen opciones en distintos selects.
+ * @param punto Este corresponde al select al que le quiero eliminar las opciones.
+ */
+function deleteAvailableCenters(punto) {
+    var x = availableCenters.length;
     while (x > 0) {
-        const select = document.getElementById('iInitalPoint');
+        const select = document.getElementById(punto);
         select.remove(0);
         x--;
     }
 }
-deleteFinPoint = function (selectBox) {
-    var x = selectBox.length;
-    while (x > 0) {
-        const select = document.getElementById('iFinalPoint');
-        select.remove(0);
-        x--;
-    }
-}
-deleteCentersN = function (selectBox) {
+
+/**
+ * Función que permite que no se acumulen las opciones en el select para crear un nuevo centro.
+ */
+function deleteCentersN () {
+    var selectBox = ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
+        "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
     var x = selectBox.length;
     while (x > 0) {
         const select = document.getElementById('nombreCentro');
@@ -338,23 +591,20 @@ deleteCentersN = function (selectBox) {
         x--;
     }
 }
-deleteConnectedCenters = function (selectBox) {
-    var x = selectBox.length;
-    while (x > 0) {
-        const select = document.getElementById('nombreCentro2');
-        select.remove(0);
-        x--;
-    }
-}
-
-
-//Función que esconde el Pop Up
+/**
+ * Función que se encarga de cerrar la ventana donde se seleccionan los puntos de inicio y final.
+ */
 btnCerrarPopup.addEventListener('click', function (e) {
     e.preventDefault();
     overlay1.classList.remove('active');
     popup.classList.remove('active');
     isInMenu = false;
+    deleteAvailableCenters("iInitalPoint");
+    deleteAvailableCenters("iFinalPoint");
 });
+/**
+ * Función que se encarga de cerrar la ventana donde aparecen todas las opciones para las posibles rutas.
+ */
 btnCerrarPopup2.addEventListener('click', function (e) {
     e.preventDefault();
     overlay2.classList.remove('active');
@@ -364,6 +614,9 @@ btnCerrarPopup2.addEventListener('click', function (e) {
     deleteRoutes(routes);
     isInMenu = false;
 });
+/**
+ * Función que se encarga de cerrar la ventana en donde se puede visualizar el estado de todos los paquetes.
+ */
 btnCerrarPopup3.addEventListener('click', function (e) {
     e.preventDefault();
     overlay3.classList.remove('active');
@@ -371,7 +624,10 @@ btnCerrarPopup3.addEventListener('click', function (e) {
     deletePackages();
     isInMenu = false;
 });
-
+/**
+ * Función que se encarga de cerrar la ventana emergente donde aparece información del centro por el que pasó
+ * encima el mouse.
+ */
 btnCerrarPopup4.addEventListener('click', function (e) {
     e.preventDefault();
     popup4.classList.remove('active');
@@ -379,12 +635,18 @@ btnCerrarPopup4.addEventListener('click', function (e) {
     document.getElementById("conCenters").innerHTML = "";
     isInMenu = false;
 });
+/**
+ * Función que se encarga de cerrar la ventana donde se crea el nuevo centro de distribución.
+ */
 btnCerrarPopupCentros.addEventListener('click', function (e) {
     e.preventDefault();
     overlayCentros.classList.remove('active');
     isInMenu = false;
-
 });
+//Creo que esta también se tiene que borrar.
+/**
+ * Función que se encarga de cerrar la ventana donde se solicita los pesos con los centros ya existentes.
+ */
 btnCerrarPopupCentros2.addEventListener('click', function (e) {
     e.preventDefault();
     overlayCentros2.classList.remove('active');
@@ -392,6 +654,9 @@ btnCerrarPopupCentros2.addEventListener('click', function (e) {
     isInMenu = false;
 
 });
+/**
+ * Función que se encarga de cerrar la ventana en donde se modifican los centros de distribución.
+ */
 btnCerrarPopupUltimate.addEventListener('click', function (e) {
     e.preventDefault();
     overlayUltimate.classList.remove('active');
@@ -399,8 +664,12 @@ btnCerrarPopupUltimate.addEventListener('click', function (e) {
     document.getElementById("newName").value = "";
     document.getElementById("newWeight").value = "";
     isInMenu = false;
+    deleteAvailableCenters("modOdCenters");
+    deleteAvailableCenters("modOdSelected");
 });
-//Función de prueba cuando se le da al boton de ver Rutas disponibles.
+/**
+ * Con esta función el botón se encarga de mostrar la ventana de rutas disponibles.
+ */
 btnAvailableR.addEventListener('click', function () {
     addRoutes(["A-B-C", "D-E-F", "G-H-I"]);
     routes = ["A-B-C", "D-E-F", "G-H-I"];
@@ -409,8 +678,13 @@ btnAvailableR.addEventListener('click', function () {
     overlay2.classList.add('active');
     popup2.classList.add('active');
     isInMenu = true;
+    deleteAvailableCenters("iInitalPoint");
+    deleteAvailableCenters("iFinalPoint");
 
 });
+/**
+ * Con esta función al presionar el botón es posible realizar el pedido
+ */
 btnSubmit.addEventListener('click', function () {
     overlay2.classList.remove('active');
     popup2.classList.remove('active');
@@ -422,7 +696,10 @@ btnSubmit.addEventListener('click', function () {
     UpdateReg();
 
 });
-
+/**
+ * Con esta función al presionar el botón es posible abrir la ventana donde se visualiza el estado de los
+ * paquetes.
+ */
 btnAbrirPopup3.addEventListener('click', function () {
     overlay3.classList.add('active');
     popup3.classList.add('active');
@@ -430,35 +707,49 @@ btnAbrirPopup3.addEventListener('click', function () {
     document.getElementById("statusPackage").innerHTML = "";
     isInMenu = true;
 });
-btnAddCpopupCentros.addEventListener('click', function () {
 
-});
-
-function leerSelectedR() {
-    let select = document.getElementById('opciones');
-    let text = select.options[select.selectedIndex].text;
-    console.log(text); // English
-}
-
-
+/**
+ * Clase que representa a un paquete
+ */
 class Package {
+    /**
+     * Constructro de la clase paquete.
+     * @param code
+     * @param stat
+     */
     constructor(code, stat) {
         this._code = code;
         this._stat = stat;
     }
 
+    /**
+     * Obtener código del paquete
+     * @returns {*} Código del paquete.
+     */
     get code() {
         return this._code;
     }
 
+    /**
+     * Editar código del paquete
+     * @param value
+     */
     set code(value) {
         this._code = value;
     }
 
+    /**
+     * Obtener el estado del paquete
+     * @returns {*} El estado del paquete
+     */
     get stat() {
         return this._stat;
     }
 
+    /**
+     * Editar el estado del paquete
+     * @param value
+     */
     set stat(value) {
         this._stat = value;
     }
@@ -473,47 +764,81 @@ allPack.push(paquetito2);
 allPack.push(paquetito3);
 allPack.push(paquetito4);
 
+/**
+ * Función que se encarga de leer la ruta seleccionada
+ */
+function leerSelectedR() {
+    let select = document.getElementById('opciones');
+    let text = select.options[select.selectedIndex].text;
+    console.log(text); // English
+}
 
+/**
+ * Función que se encarga de leer el paquete que al que se le quiere visualizar el estado.
+ */
 function leerSelectedP() {
     let select = document.getElementById('selectPackage');
     let text = select.options[select.selectedIndex].text;
     selPack = text;
 }
 
+/**
+ * Función que se encarga de leer el punto inicial seleccionado.
+ */
 function leerSelectedIn() {
     let select = document.getElementById('iInitalPoint');
     let text = select.options[select.selectedIndex].text;
 
 }
 
+/**
+ * Función que se encarga de leer el punto final seleccionado.
+ */
 function leerSelectedFin() {
     let select = document.getElementById('iFinalPoint');
     let text = select.options[select.selectedIndex].text;
 
 }
 
+/**
+ * Función que se encarga de leer el nombre seleccionado para un nuevo centro de distribución.
+ */
 function leerCenterName() {
     let select = document.getElementById('nombreCentro');
     let text = select.options[select.selectedIndex].text;
 }
 
+//Creo que esta se tiene que borrar
+/**
+ * Función que se encarga de leer el centro con el que se quiere conectar con el nuevo.
+ */
 function leerCenterConnected() {
     let select = document.getElementById('nombreCentro2');
     let text = select.options[select.selectedIndex].text;
 }
 
+/**
+ * Función que lee el centro que quiere ser modificado
+ */
 function leerMododSelected() {
     let select = document.getElementById('modOdSelected')
     let text = select.options[select.selectedIndex].text;
-    modOdSelected = text;
+    vModOdSelected = text;
 }
 
+/**
+ * Función que lee el centro con el que se le quiere cambiar el peso.
+ */
 function leerMododCenters() {
     let select = document.getElementById('modOdCenters')
     let text = select.options[select.selectedIndex].text;
-    modOdCenters = text;
+    vModOdCenters = text;
 }
 
+/**
+ * Función que se encarga de mostrar el estado del pedido que se está solicitando visualizar.
+ * @param x Código del pedido
+ */
 function showStat(x) {
     var cont = 0;
     while (cont !== allPack.length) {
@@ -527,12 +852,18 @@ function showStat(x) {
     }
 }
 
+/**
+ * Esta función se encarga principalmente de llamar a la función showStat() al presionar el botón.
+ */
 btnPaquete.addEventListener('click', function () {
     showStat(selPack);
 });
 
+/**
+ * Función que muestra los pesos que tiene el centro seleccionado, con los otros pesos.
+ * @param nombre Nombre del nodo seleccionado
+ */
 function showWeight(nombre) {
-
     popup4.classList.add('active');
     if (nombre.isCenter) {
         document.getElementById("conCenters").innerHTML = "El centro de distribución " +
@@ -543,6 +874,10 @@ function showWeight(nombre) {
     }
 }
 
+/**
+ * Función que se encarga de ordenar las rutas según su peso.
+ * @param x Array con los pesos de todas las rutas.
+ */
 function bubblesort(x) {
     let verify = true;
     while (verify) {
@@ -561,7 +896,6 @@ function bubblesort(x) {
 var curNodeSel;
 
 function setUpCentros(curNode) {
-
     overlayCentros.classList.add('active');
     btnAbrirPopup.classList.add('active');
     isInMenu = true;
@@ -569,6 +903,20 @@ function setUpCentros(curNode) {
 
 }
 
+function editCentros(curNode) {
+    curNodeSel = curNode;
+    overlayCentros.classList.add('active');
+    btnAbrirPopup.classList.add('active');
+    isInMenu = true;
+
+    //Grabs the name from the currently selected node and puts it in the entry
+    document.getElementById("nombreCentro").value = curNodeSel.centerName;
+
+}
+
+/**
+ * Función que al presionar el botón guarda los datos de la ventana para crear un nuevo centro.
+ */
 btnSetCentros.addEventListener('click', function (e) {
     e.preventDefault();
     //Activates the UI Elements
@@ -576,15 +924,14 @@ btnSetCentros.addEventListener('click', function (e) {
     popupCentros.classList.remove('active');
     overlayCentros2.classList.add('active');
     popupCentros2.classList.add('active');
-
     //Sets the center name by the Entry we made
     curNodeSel.centerName = document.getElementById("nombreCentro").value;
     console.log('the marker "' + curNodeSel.centerName + '" has been added!')
-
     //reset for next item
     document.getElementById("nombreCentro").value = '';
     isInMenu = false;
 });
+//Hay que eliminarla
 btnSetCentros2.addEventListener('click', function (e) {
     e.preventDefault();
     var x = document.getElementById("iPesoN").value;
@@ -594,11 +941,19 @@ btnSetCentros2.addEventListener('click', function (e) {
     popupCentros2.classList.remove('active');
     isInMenu = true;
 });
-btnAbrirPopup4.addEventListener('click', function () {
+/**
+ * Función que al presionar el botón se abre la ventana emergente donde se modifica el centro de distribución.
+ */
+btnAbrirPopUpUltimate.addEventListener('click', function () {
     overlayUltimate.classList.add('active');
     popupUltimate.classList.add('active');
+    addAvailableCenter("modOdSelected");
+    addAvailableCenter("modOdCenters");
     isInMenu = true;
 });
+/**
+ * Función que obtiene los datos dados en la ventana para modificar el centro de distribución.
+ */
 btnUltimate.addEventListener('click', function (e) {
     e.preventDefault();
     overlayUltimate.classList.remove('active');
@@ -608,4 +963,67 @@ btnUltimate.addEventListener('click', function (e) {
     document.getElementById("newName").value = "";
     document.getElementById("newWeight").value = "";
     isInMenu = true;
+    deleteAvailableCenters("modOdCenters");
+    deleteAvailableCenters("modOdSelected");
 });
+
+class Center {
+    constructor(nombre, posicion, weightCen) {
+        this._nombre = nombre;
+        this._posicion = posicion;
+        this._weightCen = weightCen;
+    }
+
+    get nombre() {
+        return this._nombre;
+    }
+
+    set nombre(value) {
+        this._nombre = value;
+    }
+
+    get posicion() {
+        return this._posicion;
+    }
+
+    set posicion(value) {
+        this._posicion = value;
+    }
+
+    get weightCen() {
+        return this._weightCen;
+    }
+
+    set weightCen(value) {
+        this._weightCen = value;
+    }
+}
+
+function addCentersServer(matrix,cont) {
+    console.log("Ac")
+    availableCenters=[];
+    var y = ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
+        "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
+    for (var x = 0; x < cont; x++) {
+        var temp = [];
+        for (var z = 0; z < cont; z++) {
+            temp.push(matrix[x][z]);
+        }
+        z = cont;
+        for (z; z < 16; z++) {
+            temp.push(0);
+        }
+        var center = new Center(y[x], x, temp);
+        availableCenters.push(center);
+        newG.push(temp)
+    }
+
+}
+
+let grafito = new Generador()
+let random=Math.trunc(Math.random()*7)+1
+console.log(random)
+console.log(grafito.eliminarCentroInicio(15, random));
+
+
+
