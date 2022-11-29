@@ -515,10 +515,10 @@ function addPackages() {
  * @param x Array con las listas disponibles.
  */
 function addRoutes(x) {
-        let newOption = new Option(x, harto);
-        const select = document.getElementById('opciones');
-        select.add(newOption, toString());
-       harto++;
+    let newOption = new Option(x, harto);
+    const select = document.getElementById('opciones');
+    select.add(newOption, toString());
+    harto++;
 }
 
 /**
@@ -743,12 +743,16 @@ btnSubmit.addEventListener('click', function () {
     allPack.push(paquetito)
 
     droneActive[numDronesActivos++] = true;
+    console.log(nombresFranco);
+    //console.log(harto);
+    //console.log(nombresFranco[1]);
+    rutaDef = nombresFranco[harto];
 
     if (droneActive[0]) {
         drone0.hasFinished = false;
         drone0.package = codigo;
+        //console.log(rutaDef);
         console.log('el dron tiene el código: ' + drone0.package)
-        //drone0.path = 
 
     }
 
@@ -823,7 +827,7 @@ btnSubmit.addEventListener('click', function () {
 
 
     }
-    rutaDef = nombresFranco[harto];
+    
     console.log('the drone has been set! Paquete: ', codigo);
     deleteRoutes();
 
@@ -1185,9 +1189,12 @@ function hexadecimal() {
 }
 
 function modPackage(code) {
+
+    var paquetito = new Package(code, 'entregado');
+
     for (var x = 0; x < allPack.length; x++) {
         if (code === allPack[x]) {
-            allPack[x].stat = "entregado";
+            allPack[x] = paquetito;
         }
     }
 }
@@ -1208,7 +1215,3 @@ function addCosts(x){
     costo*=300
     return costo
 }
-
-
-
-
