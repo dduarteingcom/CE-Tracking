@@ -10,6 +10,7 @@ var sendY;
 
 // Variables para el mapa
 let nodeList = [];
+let numDronesActivos = 0;
 
 /* 
  *  Canvas para el mapa
@@ -66,6 +67,8 @@ function Marker(x, y, isCenter, posNum){
         this.isCenter = true;
         console.log('this is nodeList: ', nodeList);
         setUpCentros(this);
+        droneRoute1.push(this);
+        droneRoute2.push(this);
         nodeList.push(this);
     }
 
@@ -137,27 +140,28 @@ function Marker(x, y, isCenter, posNum){
  * @param {Marker} startPoint Centro en el que el dron empieza
  * @param {Marker[]} path 
  */
-function Drone(startPoint, path){
+ function Drone(startPoint, path){
 
     this.path = path;
+    this.package = '696969'; //haha funni
 
     // Position of Images
     this.img = new Image();
     this.x = startPoint.x;
     this.y = startPoint.initialY;
-    //console.log('the drone is in ' + this.x, this.y);
+    // console.log('the drone is in ' + this.x, this.y);
     
     // Calcula la posición del nodo por llegar
     this.endX = this.path[1].x;
     this.endY = this.path[1].initialY;
-    //console.log('the drone goes to ' + this.endX, this.endY);
+    // console.log('the drone goes to ' + this.endX, this.endY);
 
     //Variables for path traversal and speed calculation
     this.dx = (this.endX - this.x)/100;
     this.dy = (this.y - this.endY)/100;
 
-    //console.log('x speed: ' + this.dx);
-    //console.log('y speed: ' + this.dy);
+    // console.log('x speed: ' + this.dx);
+    // console.log('y speed: ' + this.dy);
 
     this.hasFinished = false;
 
@@ -172,7 +176,7 @@ function Drone(startPoint, path){
             ctx.beginPath();
             ctx.moveTo(this.x + 75/2, this.y + 75/2);
             ctx.lineTo(this.endX + 75/2, this.endY + 75/2);
-            ctx.strokeStyle = "rgba(59, 51, 200, 1)"
+            ctx.strokeStyle = "rgba(200, 59, 51, 1)"
             ctx.lineWidth = 10;
             ctx.stroke();
 
@@ -188,7 +192,7 @@ function Drone(startPoint, path){
      */
     this.moveToCenter = function(){
 
-        if(this.x != this.endX || this.y != this.endY){
+        if((this.x != this.endX || this.y != this.endY) && !this.hasFinished){
 
             this.x += this.dx;
             this.y -= this.dy;
@@ -198,16 +202,45 @@ function Drone(startPoint, path){
             if(!this.hasFinished){
 
                 this.hasFinished = true;
-                recalculateRoute(this);
+                this.recalculateRoute(this);
                 
             }
         }
     }
 
-    this.update = function(){
+    this.recalculateRoute = function(){
 
-        this.moveToCenter();
-        this.draw();
+        this.path.shift();
+
+        if (this.path.length > 1){
+    
+            this.hasFinished = false;
+            console.log('the route has been recalculated! \n')
+
+            this.x = this.path[0].x;
+            this.y = this.path[0].initialY;
+            console.log('the drone is in ' + this.x, this.y);
+
+            this.endX = this.path[1].x;
+            this.endY = this.path[1].initialY;
+            console.log('the drone goes to ' + this.endX, this.endY);
+
+            this.dx = (this.endX - this.x)/100;
+            this.dy = (this.y - this.endY)/100;
+
+            console.log('x speed: ' + this.dx);
+            console.log('y speed: ' + this.dy);
+        }
+        else{
+
+            this.hasFinished = true;
+            pendPack -= 1;
+            deliPack += 1;
+            numDronesActivos -= 1;
+            UpdateReg();
+            modPackage(this.package);
+            console.log('the route has been finished!');
+        }    
     }
 }
 
@@ -215,27 +248,10 @@ function Drone(startPoint, path){
  * Función que recalcula el siguiente punto al que el dron debe moverse
  * @param {Drone} droneSelf es el nodo que quiere recalcular su ruta
  */
-function recalculateRoute(droneSelf){
-
-    droneSelf.path.shift();
-
-    if (droneSelf.path.length != 0){
-    
-        droneSelf.hasFinished = false;
-        droneSelf = new Drone(nodeList[0], nodeList);
-        //console.log('the route has been recalculated!')
-    }
-    else{
-
-        droneSelf.hasFinished = true;
-        reqPack += 1;
-        deliPack += 1;
-        UpdateReg();
-        console.log('the route has been finished!');
-    }    
-}
 
 var pinArray = [];
+var droneRoute1 = [];
+var droneRoute2 = [];
 var idNum = 0
 var posNum = 0
 
@@ -252,14 +268,14 @@ for(var i = 0; i < availableCenters.length; i++){
 
     var randomCenter = Math.floor(Math.random()*15);
     var repeats = false;
-    console.log(randomCenter);
+    // console.log(randomCenter);
 
     for(var j = 0; j < pinArray.length; j++){
 
         if(pinArray[j].id != 16 && pinArray[j].posNum == randomCenter){
 
             repeats = true
-            console.log("it repeats!")
+            // console.log("it repeats!")
             break;
         }
         else{
@@ -274,20 +290,46 @@ for(var i = 0; i < availableCenters.length; i++){
         pinArray[randomCenter].centerName = availableCenters[i].nombre;
         pinArray[randomCenter].id = idNum;
         nodeList.push(pinArray[randomCenter]);
+        droneRoute1.push(pinArray[randomCenter]);
+        droneRoute2.push(pinArray[randomCenter]);
 
-        console.log(availableCenters);
-        console.log(nodeList);
+        // console.log(availableCenters);
+        // console.log(nodeList);
 
         idNum++
     }
     else{
+
         i--;
     }
 }
 
 //var drones = new Drone(nodeList[0], nodeList);
 var map = new Map();
-var drones = [];
+
+
+let drone0 = new Drone(droneRoute1[0], droneRoute1);
+drone0.hasFinished = true;
+let drone1 = new Drone(droneRoute2[0], droneRoute2);
+drone1.hasFinished = true;
+var drone2 = new Drone(droneRoute1[0], droneRoute1);
+drone2.hasFinished = true;
+let drone3 = new Drone(droneRoute1[0], droneRoute1);
+drone3.hasFinished = true;
+let drone4 = new Drone(droneRoute1[0], droneRoute1);
+drone4.hasFinished = true;
+let drone5 = new Drone(droneRoute1[0], droneRoute1);
+drone5.hasFinished = true;
+let drone6 = new Drone(droneRoute1[0], droneRoute1);
+drone6.hasFinished = true;
+let drone7 = new Drone(droneRoute1[0], droneRoute1);
+drone7.hasFinished = true;
+let drone8 = new Drone(droneRoute1[0], droneRoute1);
+drone8.hasFinished = true;
+let drone9 = new Drone(droneRoute1[0], droneRoute1);
+drone9.hasFinished = true;
+
+var droneActive = [false, false, false, false, false, false, false, false, false, false];
 
 /**
  * Función que se encarga de renderizar los distintos
@@ -308,13 +350,56 @@ function mapRendering(){
     }
 
     // Checks if there are drones in an array and updates them if there are any
-    if (drones.length > 0){
-
-        for(var d = 0; d < drones.length; d++){
-
-            drones[d].update()
-        }
+    if (droneActive[0]){
+        drone0.moveToCenter();
+        drone0.draw();
     }
+
+    if (droneActive[1]){
+        drone1.moveToCenter();
+        drone1.draw();
+    }
+
+    if (droneActive[2]){
+        drone2.moveToCenter();
+        drone2.draw();
+    }
+
+    if (droneActive[3]){
+        drone3.moveToCenter();
+        drone3.draw();
+    }
+
+    if (droneActive[4]){
+        drone4.moveToCenter();
+        drone4.draw();
+    }
+
+    if (droneActive[5]){
+        drone5.moveToCenter();
+        drone5.draw();
+    }
+
+    if (droneActive[6]){
+        drone6.moveToCenter();
+        drone6.draw();
+    }
+
+    if (droneActive[7]){
+        drone7.moveToCenter();
+        drone7.draw();
+    }
+
+    if (droneActive[8]){
+        drone8.moveToCenter();
+        drone8.draw();
+    }
+
+    if (droneActive[9]){
+        drone9.moveToCenter();
+        drone9.draw();
+    }
+
 }
 
 //checks some inputs

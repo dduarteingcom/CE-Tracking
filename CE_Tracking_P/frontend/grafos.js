@@ -1,9 +1,39 @@
 let  v;
 
 let adjList;
+let respaths = [];
+
+// A directed graph using
+// adjacency list representation
+function Graph(vertices)
+{
+    // initialise vertex count
+    v = vertices;
+
+    // initialise adjacency list
+    initAdjList();
+}
+
+// utility method to initialise
+// adjacency list
+function initAdjList()
+{
+    adjList = new Array(v);
+
+    for (let i = 0; i < v; i++) {
+        adjList[i] = [];
+    }
+}
+
+// add edge from u to v
+function addEdge(u,v)
+{
+    // Add v to u's list.
+    adjList[u].push(v);
+}
+
 // Prints all paths from
 // 's' to 'd'
-let result=[];
 function printAllPaths(s,d, c)
 {
     v = c;
@@ -14,7 +44,6 @@ function printAllPaths(s,d, c)
 
     // add source to path[]
     pathList.push(s);
-    
     // Call recursive utility
     printAllPathsUtil(s, d, isVisited, pathList);
 }
@@ -27,7 +56,8 @@ function printAllPaths(s,d, c)
 // vertices in the current path
 function printAllPathsUtil(u,d,isVisited,localPathList)
 {
-    if (u == (d)) {
+    if (u === (d)) {
+        alert("aquí")
         console.log(localPathList+"<br>");
         console.log(isVisited)
         // if match found then no need to
@@ -36,8 +66,8 @@ function printAllPathsUtil(u,d,isVisited,localPathList)
     }
     // Mark the current node
     isVisited[u] = true;
-    adjList= grafito.listaAdy;
-    // Recur for all the vertices
+    adjList= grafito.getListaAdy();
+    console.log(grafito.getListaAdy());    // Recur for all the vertices
     // adjacent to current vertex
     for (let i=0;i< adjList[u].length;i++) {
         if (!isVisited[adjList[u][i]]) {
@@ -56,6 +86,7 @@ function printAllPathsUtil(u,d,isVisited,localPathList)
     // Mark the current node
     isVisited[u] = false;
 }
+
 
 
 

@@ -84,6 +84,7 @@ class Generador {
         this.grafoUtilizable.push(this.porto.getPath());
         this.largo = 16;
     }
+
     eliminarCentroInicio(a, b) {
         while (a > b) {
             for (var x = 0; x < this.largo; x++) {
@@ -127,7 +128,7 @@ class Generador {
     }
 
     addCentro(nodo) {
-        for (var x = 0; x < this.largo ; x++) {
+        for (var x = 0; x < this.largo; x++) {
             for (var y = 0; y < this.largo; y++) {
                 if (this.grafoUtilizable[x][nodo] === 0) {
                     var p = Math.trunc(Math.random() * 20);
@@ -138,7 +139,7 @@ class Generador {
         for (var z = 0; z < this.largo; z++) {
             if (this.grafoUtilizable[nodo][z] === 0) {
                 p = Math.trunc(Math.random() * 20);
-                this.grafoUtilizable[nodo][z] =p;
+                this.grafoUtilizable[nodo][z] = p;
             }
         }
         this.grafoUtilizable[nodo][nodo] = 0;
@@ -165,18 +166,19 @@ class Generador {
         addCentersServer(this.grafoUtilizable, this.largo);
         return this.grafoUtilizable;
     }
+
     subirCentro2(nodo) {
         for (var x = 0; x < this.largo; x++) {
             for (var y = 0; y < this.largo; y++) {
                 if (this.grafoUtilizable[x][nodo] > 0) {
-                    var ñ= Math.trunc((Math.random())*20);
+                    var ñ = Math.trunc((Math.random()) * 20);
                     this.grafoUtilizable[x][nodo] = ñ;
                 }
             }
         }
         for (var z = 0; z < this.largo; z++) {
             if (this.grafoUtilizable[nodo][z] > 0) {
-                ñ= Math.trunc((Math.random())*20);
+                ñ = Math.trunc((Math.random()) * 20);
                 this.grafoUtilizable[nodo][z] = ñ;
             }
         }
@@ -211,7 +213,7 @@ class Generador {
             }
             this.listaAdy.push(this.temp);
         }
-        console.log(this.listaAdy);
+        return this.listaAdy;
     }
 
     printAllPaths(s, d) {
@@ -284,9 +286,13 @@ var givenG = [];
 var newG = [];
 var inPoint;
 var finPoint;
-let listPlaces= ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
+let listPlaces = ["Siquirres", "Pococí", "Guatuso", "San Francisco", "Desamparados", "Xetulul", "Xocomil", "Paten",
     "Coronado", "Tibás", "Helsinki", "Praga", "Shanghai", "Osaka", "Calgari", "Porto"];
 let codigo;
+var nombresFranco = [];
+var nombres = [];
+var harto=0;
+var rutaDef;
 
 
 /**
@@ -332,11 +338,8 @@ document.getElementById("totalPackages").innerHTML = "Numero de paquetes solicit
  */
 var availableCenters = [];
 
-/**
- * Función que se encarga de actualizar el label donde se encuentra el historial de todos los paquetes.
- * @constructor
- */
-function UpdateReg() {
+
+updateReg = function () {
     document.getElementById("totalPackages").innerHTML = "Numero de paquetes solicitados: " + reqPack + "<br>" +
         "Numero de paquetes entregados: " + deliPack + "<br>" + "Número de paquetes pendientes: " + pendPack;
 }
@@ -481,8 +484,8 @@ var btnAbrirPopup = document.getElementById('btn-abrir-popup'),
      * @type {HTMLElement}
      */
     btnUltimate = document.getElementById('btnUltimate'),
-    btnUltimate2=document.getElementById('btnUltimate2'),
-    btnEliminarN=document.getElementById('btnEliminarN');
+    btnUltimate2 = document.getElementById('btnUltimate2'),
+    btnEliminarN = document.getElementById('btnEliminarN');
 
 /**
  * //Función que hace visible la ventana emergente donde se solicitan los puntos de inicio y final.
@@ -512,11 +515,10 @@ function addPackages() {
  * @param x Array con las listas disponibles.
  */
 function addRoutes(x) {
-    for (var i in x) {
-        let newOption = new Option(x[i], 'i');
+        let newOption = new Option(x, harto);
         const select = document.getElementById('opciones');
         select.add(newOption, toString());
-    }
+       harto++;
 }
 
 /**
@@ -535,8 +537,8 @@ function addAvailableCenter(punto) {
  * Función que sirve para no se acumulen las mismas opciones en la ventana para seleccionar las rutas
  * @param selectBox Rutas disponibles para la nueva entrega.
  */
-function deleteRoutes(selectBox) {
-    var x = selectBox.length;
+function deleteRoutes() {
+    var x = 2
     while (x > 0) {
         const select = document.getElementById('opciones');
         select.remove(0);
@@ -569,6 +571,7 @@ function deleteAvailableCenters(punto) {
         x--;
     }
 }
+
 /**
  * Función que se encarga de cerrar la ventana donde se seleccionan los puntos de inicio y final.
  */
@@ -589,7 +592,7 @@ btnCerrarPopup2.addEventListener('click', function (e) {
     popup2.classList.remove('active');
     document.getElementById("iInitalPoint").value = "";
     document.getElementById("iFinalPoint").value = "";
-    deleteRoutes(routes);
+    deleteRoutes();
     isInMenu = false;
 });
 /**
@@ -637,22 +640,76 @@ btnCerrarPopupUltimate.addEventListener('click', function (e) {
  * Con esta función el botón se encarga de mostrar la ventana de rutas disponibles.
  */
 btnAvailableR.addEventListener('click', function () {
-    grafito.newgraph();
-    grafito.getListaAdy();
-    var pos1;
-    var pos2;
-    for (var x in listPlaces) {
-        if (inPoint === listPlaces[x]) {
-            pos1 = x
+    var cantidadAl = Math.trunc(Math.random() * grafito.largo - 3) + 1
+    var temp = [];
+    temp.push(inPoint);
+    var temp2 = "";
+    temp2 += inPoint + "-";
+    var cRepet = [];
+    cRepet.push(inPoint)
+    cRepet.push(finPoint)
+    var x = 0;
+    while (x < cantidadAl) {
+        y = Math.trunc(Math.random() * grafito.largo - 1);
+        var comprobar = true;
+        for (var w = 0; w < cRepet.length; w++) {
+            if (listPlaces[y] === cRepet[w]) {
+                comprobar = false;
+                break;
+            }
+        }
+        if (comprobar) {
+            if (listPlaces[y] !== inPoint || listPlaces[y] !== finPoint) {
+                temp.push(listPlaces[y]);
+                temp2 += listPlaces[y] + "-";
+                cRepet.push(listPlaces[y]);
+                x++;
+            }
         }
     }
-    for (var y in listPlaces) {
-        if (finPoint === listPlaces[x]) {
-            pos2 = x
+
+    temp.push(finPoint)
+    temp2 += finPoint;
+    nombresFranco.push(temp);
+    nombres.push(temp2);
+    cantidadAl = Math.trunc(Math.random() * grafito.largo - 1) + 1
+    temp = [];
+    temp.push(inPoint);
+    temp2 = "";
+    temp2 += inPoint + "-"
+    x = 0;
+    cRepet=[];
+    cRepet.push(inPoint)
+    cRepet.push(finPoint)
+    while (x < cantidadAl) {
+        y = Math.trunc(Math.random() * grafito.largo - 1);
+        console.log(listPlaces[y]);
+        console.log(finPoint);
+        console.log(inPoint);
+        comprobar = true;
+        for ( w = 0; w < cRepet.length; w++) {
+            if (listPlaces[y] === cRepet[w]) {
+                comprobar = false;
+                break;
+            }
+        }
+        if (comprobar) {
+            if (listPlaces[y] !== inPoint || listPlaces[y] !== finPoint) {
+                temp.push(listPlaces[y]);
+                temp2 += listPlaces[y] + "-";
+                cRepet.push(listPlaces[y]);
+                x++;
+            }
         }
     }
-    printAllPaths(pos1, pos2, grafito.largo);
-    console.log(result);
+    temp.push(finPoint)
+    temp2 += finPoint;
+    nombresFranco.push(temp);
+    nombres.push(temp2);
+    console.log(nombres);
+    addRoutes(nombres[0]);
+    addRoutes(nombres[1]);
+
     overlay1.classList.remove('active');
     popup.classList.remove('active');
     overlay2.classList.add('active');
@@ -666,18 +723,106 @@ btnAvailableR.addEventListener('click', function () {
  * Con esta función al presionar el botón es posible realizar el pedido
  */
 btnSubmit.addEventListener('click', function () {
+
     overlay2.classList.remove('active');
     popup2.classList.remove('active');
     document.getElementById("iInitalPoint").value = "";
     document.getElementById("iFinalPoint").value = "";
-    deleteRoutes(routes);
-    isInMenu = true;
+    deleteRoutes();
+    isInMenu = false;
     reqPack++;
+    pendPack++;
     hexadecimal();
-    UpdateReg();
-    document.getElementById("lCodigo").innerHTML="El código del paquete creado fue: "+codigo;
-    paquetito=new Package(codigo,"Pendiente de entrega");
+    updateReg();
+    document.getElementById("lCodigo").innerHTML = "El código del paquete creado fue: " + codigo;
+    paquetito = new Package(codigo, "Pendiente de entrega");
     allPack.push(paquetito)
+
+    droneActive[numDronesActivos++] = true;
+
+    if (droneActive[0]) {
+        drone0.hasFinished = false;
+        drone0.package = codigo;
+        console.log('el dron tiene el código: ' + drone0.package)
+        //drone0.path = 
+
+    }
+
+    if (droneActive[1]) {
+        drone1.hasFinished = false;
+        drone1.package = codigo;
+        console.log('el dron tiene el código: ' + drone1.package)
+
+
+    }
+
+    if (droneActive[2]) {
+        drone2.hasFinished = false;
+        drone2.package = codigo;
+        console.log('el dron tiene el código: ' + drone2.package)
+
+
+    }
+
+    if (droneActive[3]) {
+        drone3.hasFinished = false;
+        drone3.package = codigo;
+        console.log('el dron tiene el código: ' + drone3.package)
+
+
+    }
+
+    if (droneActive[4]) {
+        drone4.hasFinished = false;
+        drone4.package = codigo;
+        console.log('el dron tiene el código: ' + drone4.package)
+
+
+    }
+
+    if (droneActive[5]) {
+        drone5.hasFinished = false;
+        drone5.package = codigo;
+        console.log('el dron tiene el código: ' + drone5.package)
+
+
+    }
+
+    if (droneActive[6]) {
+        drone6.hasFinished = false;
+        drone6.package = codigo;
+        console.log('el dron tiene el código: ' + drone6.package)
+
+
+    }
+
+    if (droneActive[7]) {
+        drone7.hasFinished = false;
+        drone7.package = codigo;
+        console.log('el dron tiene el código: ' + drone7.package)
+
+
+    }
+
+    if (droneActive[8]) {
+        drone8.hasFinished = false;
+        drone8.package = codigo;
+        console.log('el dron tiene el código: ' + drone8.package)
+
+
+    }
+
+    if (droneActive[9]) {
+        drone9.hasFinished = false;
+        drone9.package = codigo;
+        console.log('el dron tiene el código: ' + drone9.package)
+
+
+    }
+    rutaDef = nombresFranco[harto];
+    console.log('the drone has been set! Paquete: ', codigo);
+    deleteRoutes();
+
 
 });
 /**
@@ -692,12 +837,18 @@ btnAbrirPopup3.addEventListener('click', function () {
     isInMenu = true;
 });
 btnEliminarN.addEventListener('click', function () {
-    grafito.largo-1;
-    if(grafito.largo>2) {
+
+    grafito.largo - 1;
+    if (grafito.largo > 2) {
         grafito.eliminarCentroUnico(grafito.largo);
+        nodeList[nodeList.length - 1].isCenter = false;
+        nodeList[nodeList.length - 1].centerName = false;
+        nodeList.pop();
+
     }
     console.log(availableCenters);
 });
+
 /**
  * Clase que representa a un paquete
  */
@@ -751,7 +902,9 @@ class Package {
 function leerSelectedR() {
     let select = document.getElementById('opciones');
     let text = select.options[select.selectedIndex].text;
+    let value= select.options[select.selectedIndex].value;
     console.log(text); // English
+    console.log(value); // English
 }
 
 /**
@@ -769,7 +922,7 @@ function leerSelectedP() {
 function leerSelectedIn() {
     let select = document.getElementById('iInitalPoint');
     let text = select.options[select.selectedIndex].text;
-    inPoint=text;
+    inPoint = text;
 
 }
 
@@ -779,9 +932,10 @@ function leerSelectedIn() {
 function leerSelectedFin() {
     let select = document.getElementById('iFinalPoint');
     let text = select.options[select.selectedIndex].text;
-    finPoint=text;
+    finPoint = text;
 
 }
+
 /**
  * Función que lee el centro que quiere ser modificado
  */
@@ -790,6 +944,7 @@ function leerMododSelected() {
     let text = select.options[select.selectedIndex].text;
     vModOdSelected = text;
 }
+
 /**
  * Función que se encarga de mostrar el estado del pedido que se está solicitando visualizar.
  * @param x Código del pedido
@@ -819,20 +974,20 @@ btnPaquete.addEventListener('click', function () {
  * @param nombre Nombre del nodo seleccionado
  */
 function showWeight(nombre) {
-    console.log(grafito.largo);
+    //console.log(grafito.largo);
     popup4.classList.add('active');
     if (nombre.isCenter) {
         availableCenters[nombre.id];
-        let textResult="";
-        for(var x=0;x<grafito.largo;x++){
+        let textResult = "";
+        for (var x = 0; x < grafito.largo; x++) {
 
-                if(availableCenters[nombre.id].weightCen[x]!==0) {
-                    textResult += listPlaces[x] + " " +"("+ availableCenters[nombre.id].weightCen[x]+")" + " ";
-                }
+            if (availableCenters[nombre.id].weightCen[x] !== 0) {
+                textResult += listPlaces[x] + " " + "(" + availableCenters[nombre.id].weightCen[x] + ")" + ", ";
             }
+        }
 
         document.getElementById("conCenters").innerHTML = "El centro de distribución " +
-            listPlaces[nombre.id] + " está conectado con los siguientes centros: "+textResult;
+            listPlaces[nombre.id] + " está conectado con los siguientes centros: " + textResult;
     } else {
         document.getElementById("conCenters").innerHTML = "El centro de distribución " +
             "no está activo en este momento";
@@ -891,7 +1046,7 @@ btnSetCentros.addEventListener('click', function (e) {
         popupCentros.classList.remove('active');
         //Sets the center name by the Entry we made
         curNodeSel.id = idNum;
-        curNodeSel.centerName =  listPlaces[idNum]; //document.getElementById("nombreCentro").value;
+        curNodeSel.centerName = listPlaces[idNum]; //document.getElementById("nombreCentro").value;
         console.log('the marker "' + curNodeSel.centerName + '" has been added!')
         //reset for next item
         //document.getElementById("nombreCentro").value = '';
@@ -924,18 +1079,17 @@ btnUltimate.addEventListener('click', function (e) {
     document.getElementById("newWeight").value = "";
     var pos;
 
-    for(var x=0;x<listPlaces.length;x++){
-        if (listPlaces[x]===vModOdSelected){
-            pos=x;
-        }
-        else{
+    for (var x = 0; x < listPlaces.length; x++) {
+        if (listPlaces[x] === vModOdSelected) {
+            pos = x;
+        } else {
         }
     }
-    console.log(pos,newWeight)
-    listPlaces[pos]= newName;
+    console.log(pos, newWeight)
+    listPlaces[pos] = newName;
     console.log(listPlaces[pos])
-    grafito.subirCentro(pos,newWeight)
-    isInMenu = true;
+    grafito.subirCentro(pos, newWeight)
+    isInMenu = false;
     deleteAvailableCenters("modOdSelected");
 });
 btnUltimate2.addEventListener('click', function (e) {
@@ -947,18 +1101,18 @@ btnUltimate2.addEventListener('click', function (e) {
     document.getElementById("newWeight").value = "";
     var pos;
 
-    for(var x=0;x<listPlaces.length;x++){
-        if (listPlaces[x]===vModOdSelected){
-            pos=x;
-        }
-        else{
+    for (var x = 0; x < listPlaces.length; x++) {
+        if (listPlaces[x] === vModOdSelected) {
+            pos = x;
+        } else {
         }
     }
-    listPlaces[pos]= newName;
+    listPlaces[pos] = newName;
     grafito.subirCentro2(pos)
-    isInMenu = true;
+    isInMenu = false;
     deleteAvailableCenters("modOdSelected");
 });
+
 class Center {
     constructor(nombre, posicion, weightCen) {
         this._nombre = nombre;
@@ -1012,21 +1166,24 @@ function addCentersServer(matrix, cont) {
 let grafito = new Generador()
 let random = Math.trunc(Math.random() * 7) + 1
 console.log(grafito.eliminarCentroInicio(15, random));
-function hexadecimal(){
-    var letras=['a','b','c','d','e','f','g','h','i','j','l','n','o','p','q','r','s','t','u','y'];
 
-    var a = Math.trunc(Math.random()*20);
-    var b = Math.trunc(Math.random()*20);
-    var c = Math.trunc(Math.random()*20);
-    var d = Math.trunc(Math.random()*10);
-    var e = Math.trunc(Math.random()*10);
-    var f = Math.trunc(Math.random()*10);
-    codigo= letras[a]+letras[b]+letras[c]+d+e+f;
+function hexadecimal() {
+    // var letras=['a','b','c','d','e','f','g','h','i','j','l','n','o','p','q','r','s','t','u','y'];
+    var letras = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+    var a = Math.trunc(Math.random() * 6);
+    var b = Math.trunc(Math.random() * 6);
+    var c = Math.trunc(Math.random() * 6);
+    var d = Math.trunc(Math.random() * 10);
+    var e = Math.trunc(Math.random() * 10);
+    var f = Math.trunc(Math.random() * 10);
+    codigo = letras[a] + letras[b] + letras[c] + d + e + f;
 }
-function modPackage(code){
-    for(var x=0;x<allPack.length;x++){
-        if(code===allPack[x]){
-            allPack[x].stat="entregado";
+
+function modPackage(code) {
+    for (var x = 0; x < allPack.length; x++) {
+        if (code === allPack[x]) {
+            allPack[x].stat = "entregado";
         }
     }
 }
