@@ -41,7 +41,7 @@ function Map(){
  * @param {boolean} isCenter 
  * @param {number} id 
  */
-function Marker(x, y, isCenter, id){
+function Marker(x, y, isCenter, posNum){
     
     // Position to calculate hitboxes and animations
     this.x = x;
@@ -49,7 +49,8 @@ function Marker(x, y, isCenter, id){
     this.initialY = y;
 
     // Node data for Distribution Centers
-    this.id = id;
+    this.posNum = posNum;
+    this.id = 16;
     this.isCenter = isCenter;
     this.centerName = '';
     this.centerConnections = [];
@@ -71,7 +72,6 @@ function Marker(x, y, isCenter, id){
     this.deleteCenter = function(){
 
         this.isCenter = false;
-        nodeList.
     }
     
     /**
@@ -145,19 +145,19 @@ function Drone(startPoint, path){
     this.img = new Image();
     this.x = startPoint.x;
     this.y = startPoint.initialY;
-    console.log('the drone is in ' + this.x, this.y);
+    //console.log('the drone is in ' + this.x, this.y);
     
     // Calcula la posición del nodo por llegar
     this.endX = this.path[1].x;
     this.endY = this.path[1].initialY;
-    console.log('the drone goes to ' + this.endX, this.endY);
+    //console.log('the drone goes to ' + this.endX, this.endY);
 
     //Variables for path traversal and speed calculation
     this.dx = (this.endX - this.x)/100;
     this.dy = (this.y - this.endY)/100;
 
-    console.log('x speed: ' + this.dx);
-    console.log('y speed: ' + this.dy);
+    //console.log('x speed: ' + this.dx);
+    //console.log('y speed: ' + this.dy);
 
     this.hasFinished = false;
 
@@ -217,36 +217,67 @@ function recalculateRoute(droneSelf){
     
         drones.hasFinished = false;
         drones = new Drone(nodeList[0], nodeList);
-        console.log('the route has been recalculated!')
+        //console.log('the route has been recalculated!')
     }
     else{
 
         drones.hasFinished = true;
+        reqPack += 1;
+        deliPack += 1;
+        UpdateReg();
         console.log('the route has been finished!');
     }    
 }
 
 var pinArray = [];
 var idNum = 0
+var posNum = 0
 
 for(var i = 0; i < 4; i++){
 
     for(var j = 0; j < 4; j++){
 
-        pinArray.push(new Marker(((200 * j) + 75)/2, ((200 * i) + 75)/2, false, idNum));
-        
-        if(idNum === 0 || idNum === 2 || idNum === 7 || idNum === 14){
-            
-            pinArray[idNum].isCenter = true;
-            pinArray[idNum].centerName = 'test ' + idNum;
-            nodeList.push(pinArray[idNum]);
-        }
-
-        idNum++;
+        pinArray.push(new Marker(((200 * j) + 75)/2, ((200 * i) + 75)/2, false, posNum));
+        posNum++;
     }
 }
 
-var drones = new Drone(nodeList[0], nodeList);
+for(var i = 0; i < availableCenters.length; i++){
+
+    var randomCenter = Math.floor(Math.random()*15);
+    var repeats = false;
+    console.log(randomCenter);
+
+    for(var j = 0; j < pinArray.length; j++){
+
+        if(pinArray[j].id != 16 && pinArray[j].id === randomCenter){
+
+            repeats = true
+            console.log(pinArray[j])
+            break;
+        }
+        else{
+
+        }
+    }
+
+    if(!repeats){
+
+        pinArray[randomCenter].isCenter = true;
+        pinArray[randomCenter].centerName = availableCenters[i].nombre;
+        pinArray[randomCenter].id = idNum;
+        nodeList.push(pinArray[randomCenter]);
+
+        console.log(nodeList);
+
+        idNum++
+    }
+    else{
+        i--;
+    }
+}
+
+//var drones = new Drone(nodeList[0], nodeList);
 var map = new Map();
 
 /**
@@ -268,8 +299,8 @@ function mapRendering(){
     }
 
     //Draws the drones up
-    drones.moveToCenter();
-    drones.draw();
+    //drones.moveToCenter();
+    //drones.draw();
 }
 
 //checks some inputs
