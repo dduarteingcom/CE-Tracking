@@ -300,6 +300,7 @@ var rutaDef;
  * @type {*[]}
  */
 let allPack = [];
+let eAllPack = [];
 let selPack;
 /**
  * //Variable que almacena el nombre del valor al que le deseamos realizar cambios.
@@ -646,8 +647,6 @@ btnAvailableR.addEventListener('click', function () {
     var temp2 = "";
     temp2 += inPoint + "-";
     var cRepet = [];
-    cRepet.push(inPoint)
-    cRepet.push(finPoint)
     var x = 0;
     while (x < cantidadAl) {
         y = Math.trunc(Math.random() * grafito.largo - 1);
@@ -748,7 +747,7 @@ btnSubmit.addEventListener('click', function () {
         drone0.hasFinished = false;
         drone0.package = codigo;
         console.log('el dron tiene el código: ' + drone0.package)
-        //drone0.path = 
+        //drone0.path =
 
     }
 
@@ -918,6 +917,7 @@ function leerSelectedP() {
     let select = document.getElementById('selectPackage');
     let text = select.options[select.selectedIndex].text;
     selPack = text;
+    alert(selPack)
 }
 
 /**
@@ -955,13 +955,15 @@ function leerMododSelected() {
  */
 function showStat(x) {
     var cont = 0;
-    while (cont !== allPack.length) {
-        if (x === allPack[cont].code) {
-            document.getElementById("statusPackage").innerHTML = "El paquete " + allPack[cont].code +
-                " Se encuentra en el siguiente estado: " + allPack[cont].stat;
+    while (cont !== eAllPack.length) {
+        if (x === eAllPack[cont].code) {
+            document.getElementById("statusPackage").innerHTML = "El paquete " + eAllPack[cont].code +
+                " Se encuentra en el siguiente estado: " + "entregado"
             break
         } else {
             cont++;
+            document.getElementById("statusPackage").innerHTML = "El paquete " + selPack +
+                " Se encuentra en el siguiente estado: " + "entregado"
         }
     }
 }
@@ -971,6 +973,7 @@ function showStat(x) {
  */
 btnPaquete.addEventListener('click', function () {
     showStat(selPack);
+    alert("a");
 });
 
 /**
@@ -1185,11 +1188,8 @@ function hexadecimal() {
 }
 
 function modPackage(code) {
-    for (var x = 0; x < allPack.length; x++) {
-        if (code === allPack[x]) {
-            allPack[x].stat = "entregado";
-        }
-    }
+    var paquetito = new Package(code,"entregado");
+    eAllPack.push(paquetito);
 }
 function addCosts(x){
 
