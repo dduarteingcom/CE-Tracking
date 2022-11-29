@@ -67,6 +67,8 @@ function Marker(x, y, isCenter, posNum){
         this.isCenter = true;
         console.log('this is nodeList: ', nodeList);
         setUpCentros(this);
+        droneRoute1.push(this);
+        droneRoute2.push(this);
         nodeList.push(this);
     }
 
@@ -174,7 +176,7 @@ function Marker(x, y, isCenter, posNum){
             ctx.beginPath();
             ctx.moveTo(this.x + 75/2, this.y + 75/2);
             ctx.lineTo(this.endX + 75/2, this.endY + 75/2);
-            ctx.strokeStyle = "rgba(59, 51, 200, 1)"
+            ctx.strokeStyle = "rgba(200, 59, 51, 1)"
             ctx.lineWidth = 10;
             ctx.stroke();
 
@@ -236,6 +238,7 @@ function Marker(x, y, isCenter, posNum){
             deliPack += 1;
             numDronesActivos -= 1;
             UpdateReg();
+            modPackage(this.package);
             console.log('the route has been finished!');
         }    
     }
@@ -247,6 +250,8 @@ function Marker(x, y, isCenter, posNum){
  */
 
 var pinArray = [];
+var droneRoute1 = [];
+var droneRoute2 = [];
 var idNum = 0
 var posNum = 0
 
@@ -285,6 +290,8 @@ for(var i = 0; i < availableCenters.length; i++){
         pinArray[randomCenter].centerName = availableCenters[i].nombre;
         pinArray[randomCenter].id = idNum;
         nodeList.push(pinArray[randomCenter]);
+        droneRoute1.push(pinArray[randomCenter]);
+        droneRoute2.push(pinArray[randomCenter]);
 
         // console.log(availableCenters);
         // console.log(nodeList);
@@ -300,11 +307,10 @@ for(var i = 0; i < availableCenters.length; i++){
 //var drones = new Drone(nodeList[0], nodeList);
 var map = new Map();
 
-var droneRoute1 = nodeList;
 
 let drone0 = new Drone(droneRoute1[0], droneRoute1);
 drone0.hasFinished = true;
-let drone1 = new Drone(droneRoute1[0], droneRoute1);
+let drone1 = new Drone(droneRoute2[0], droneRoute2);
 drone1.hasFinished = true;
 var drone2 = new Drone(droneRoute1[0], droneRoute1);
 drone2.hasFinished = true;

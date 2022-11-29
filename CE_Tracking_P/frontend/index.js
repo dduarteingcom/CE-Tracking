@@ -668,54 +668,85 @@ btnSubmit.addEventListener('click', function () {
 
     if (droneActive[0]){
         drone0.hasFinished = false;
+        drone0.package = codigo;
+        console.log('el dron tiene el código: ' + drone0.package)
         //drone0.path = 
         
     }
 
     if (droneActive[1]){
         drone1.hasFinished = false;
+        drone1.package = codigo;
+        console.log('el dron tiene el código: ' + drone1.package)
+
         
     }
 
     if (droneActive[2]){
         drone2.hasFinished = false;
+        drone2.package = codigo;
+        console.log('el dron tiene el código: ' + drone2.package)
+
         
     }
 
     if (droneActive[3]){
         drone3.hasFinished = false;
+        drone3.package = codigo;
+        console.log('el dron tiene el código: ' + drone3.package)
+
         
     }
 
     if (droneActive[4]){
         drone4.hasFinished = false;
+        drone4.package = codigo;
+        console.log('el dron tiene el código: ' + drone4.package)
+
         
     }
 
     if (droneActive[5]){
         drone5.hasFinished = false;
+        drone5.package = codigo;
+        console.log('el dron tiene el código: ' + drone5.package)
+
         
     }
 
     if (droneActive[6]){
         drone6.hasFinished = false;
+        drone6.package = codigo;
+        console.log('el dron tiene el código: ' + drone6.package)
+
         
     }
 
     if (droneActive[7]){
         drone7.hasFinished = false;
+        drone7.package = codigo;
+        console.log('el dron tiene el código: ' + drone7.package)
+
         
     }
 
     if (droneActive[8]){
         drone8.hasFinished = false;
+        drone8.package = codigo;
+        console.log('el dron tiene el código: ' + drone8.package)
+
         
     }
 
     if (droneActive[9]){
         drone9.hasFinished = false;
+        drone9.package = codigo;
+        console.log('el dron tiene el código: ' + drone9.package)
+
         
     }
+
+    console.log('the drone has been set! Paquete: ', codigo);
 
 });
 /**
@@ -868,7 +899,7 @@ function showWeight(nombre) {
         for(var x=0;x<grafito.largo;x++){
 
                 if(availableCenters[nombre.id].weightCen[x]!==0) {
-                    textResult += listPlaces[x] + " " +"("+ availableCenters[nombre.id].weightCen[x]+")" + " ";
+                    textResult += listPlaces[x] + " " +"("+ availableCenters[nombre.id].weightCen[x]+")" + ", ";
                 }
             }
 
@@ -1054,11 +1085,12 @@ let grafito = new Generador()
 let random = Math.trunc(Math.random() * 7) + 1
 console.log(grafito.eliminarCentroInicio(15, random));
 function hexadecimal(){
-    var letras=['a','b','c','d','e','f','g','h','i','j','l','n','o','p','q','r','s','t','u','y'];
+    // var letras=['a','b','c','d','e','f','g','h','i','j','l','n','o','p','q','r','s','t','u','y'];
+    var letras=['A','B','C','D','E','F'];
 
-    var a = Math.trunc(Math.random()*20);
-    var b = Math.trunc(Math.random()*20);
-    var c = Math.trunc(Math.random()*20);
+    var a = Math.trunc(Math.random()*6);
+    var b = Math.trunc(Math.random()*6);
+    var c = Math.trunc(Math.random()*6);
     var d = Math.trunc(Math.random()*10);
     var e = Math.trunc(Math.random()*10);
     var f = Math.trunc(Math.random()*10);
