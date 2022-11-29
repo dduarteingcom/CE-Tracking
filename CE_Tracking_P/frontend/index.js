@@ -654,8 +654,10 @@ btnAbrirPopup3.addEventListener('click', function () {
     isInMenu = true;
 });
 btnEliminarN.addEventListener('click', function () {
-    grafito.eliminarCentroUnico(grafito.largo-=1);
-
+    if(grafito.largo>2) {
+        grafito.eliminarCentroUnico(grafito.largo -= 1);
+    }
+    console.log(availableCenters);
 });
 /**
  * Clase que representa a un paquete
@@ -787,8 +789,13 @@ btnPaquete.addEventListener('click', function () {
 function showWeight(nombre) {
     popup4.classList.add('active');
     if (nombre.isCenter) {
+        availableCenters[nombre.id];
+        let textResult;
+        for(var x=0;x<grafito.largo;x++){
+            textResult+= listPlaces[x]+" "+availableCenters[nombre.id].weightCen[x]+" ";
+        }
         document.getElementById("conCenters").innerHTML = "El centro de distribución " +
-            nombre.centerName + " está conectado con los siguientes centros: ";
+            nombre.centerName + " está conectado con los siguientes centros: "+textResult;
     } else {
         document.getElementById("conCenters").innerHTML = "El centro de distribución " +
             "no está activo en este momento";
@@ -846,13 +853,17 @@ btnSetCentros.addEventListener('click', function (e) {
         overlayCentros.classList.remove('active');
         popupCentros.classList.remove('active');
         //Sets the center name by the Entry we made
-        curNodeSel.centerName = document.getElementById("nombreCentro").value;
+        curNodeSel.id = idNum;
+        curNodeSel.centerName =  listPlaces[idNum]; //document.getElementById("nombreCentro").value;
         console.log('the marker "' + curNodeSel.centerName + '" has been added!')
         //reset for next item
-        document.getElementById("nombreCentro").value = '';
-        isInMenu = false;
+        //document.getElementById("nombreCentro").value = '';
+        idNum++
         grafito.addCentro(grafito.largo + 1);
+        console.log(availableCenters);
+        console.log(nodeList);
     }
+    isInMenu = false;
 });
 /**
  * Función que al presionar el botón se abre la ventana emergente donde se modifica el centro de distribución.
