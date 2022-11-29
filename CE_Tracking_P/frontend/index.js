@@ -641,16 +641,18 @@ btnAvailableR.addEventListener('click', function () {
     grafito.getListaAdy();
     var pos1;
     var pos2;
-    for(var x in listPlaces){
-        if(inPoint===listPlaces[x]){
-            pos1=x
+    for (var x in listPlaces) {
+        if (inPoint === listPlaces[x]) {
+            pos1 = x
         }
     }
-    for( var y in listPlaces){
-        if(finPoint===listPlaces[x]){
-            pos2=x
+    for (var y in listPlaces) {
+        if (finPoint === listPlaces[x]) {
+            pos2 = x
         }
     }
+    printAllPaths(pos1, pos2, grafito.largo);
+    console.log(result);
     overlay1.classList.remove('active');
     popup.classList.remove('active');
     overlay2.classList.add('active');

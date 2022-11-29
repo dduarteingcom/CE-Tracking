@@ -3,6 +3,7 @@ let  v;
 let adjList;
 // Prints all paths from
 // 's' to 'd'
+let result=[];
 function printAllPaths(s,d, c)
 {
     v = c;
@@ -13,7 +14,7 @@ function printAllPaths(s,d, c)
 
     // add source to path[]
     pathList.push(s);
-
+    
     // Call recursive utility
     printAllPathsUtil(s, d, isVisited, pathList);
 }
@@ -33,7 +34,6 @@ function printAllPathsUtil(u,d,isVisited,localPathList)
         // traverse more till depth
         return;
     }
-
     // Mark the current node
     isVisited[u] = true;
     adjList= grafito.listaAdy;
@@ -53,10 +53,10 @@ function printAllPathsUtil(u,d,isVisited,localPathList)
             (adjList[u][i]),1);
         }
     }
-
     // Mark the current node
     isVisited[u] = false;
 }
+
 
 
 
